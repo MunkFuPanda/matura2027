@@ -1,6 +1,6 @@
 # WMC Spitzer
 
-
+Diese Seite verkauft Waffenskins aus dem Computerspiel Valorant.
 
 ## Getting started
 
