@@ -33,24 +33,6 @@ body {
     color: white !important;
 }
 
-.product-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.product-item {
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #333;
-}
-
-.product-image {
-    width: 120px;
-    height: auto;
-}
-
 .product-details h5 {
     margin-bottom: 5px;
 }
