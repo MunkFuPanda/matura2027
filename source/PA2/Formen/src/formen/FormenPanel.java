@@ -58,4 +58,16 @@ public class FormenPanel extends JPanel {
 	public void setColor(Color color) {
 		selectedColor = color;
 	}
+
+	public void addDreieck(Point point) {
+	}
+
+	public void addEllipse(Point point) {
+	}
+
+	public void addPolygon(Point point) {
+	}
+
+	public void addSechseck(Point point) {
+	}
 }
