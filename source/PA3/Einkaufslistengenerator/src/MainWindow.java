@@ -1,8 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class MainWindow extends JFrame {
     private JComboBox languageBox;
@@ -20,6 +23,9 @@ public class MainWindow extends JFrame {
     private JMenuItem loadItem;
     private JMenuItem saveItem;
 
+    private HashSet<Locale> languages = new HashSet<>(Arrays.asList(Locale.ENGLISH, Locale.GERMAN));
+    private final HashMap<Locale, HashMap<String, HashSet<String>>> categories = new HashMap<>();
+
     private static ResourceBundle bundle;
 
     public MainWindow() throws HeadlessException {
@@ -28,25 +34,59 @@ public class MainWindow extends JFrame {
         setTitle("Einkaufsliste");
         setSize(1200, 800);
 
-        try {
-            bundle = ResourceBundle.getBundle("einkaufsliste");
-        } catch (MissingResourceException e) {
-            System.err.println(e);
+        if (languages.stream().map(Locale::toString).collect(Collectors.toSet()).contains(getLocale().toString())) {
+            setLocale(Locale.ENGLISH);
         }
 
-        createMenuBar();
+        languages.forEach(language -> languageBox.addItem(language));
+        languageBox.addActionListener(e -> updateUI());
 
-        languageBox.addItem(Locale.GERMAN);
-        languageBox.addItem(Locale.ENGLISH);
-        languageBox.addActionListener(e -> {
-            Locale locale = (Locale) languageBox.getSelectedItem();
-            assert locale != null;
-            bundle = ResourceBundle.getBundle("einkaufsliste", locale);
-            updateUI();
+        bundle = ResourceBundle.getBundle("einkaufsliste", getLocale());
+
+        typeBox.addActionListener(e -> {
+            if (!(typeBox.getItemCount() == 0)) {
+                switchFoods();
+            }
         });
+
+        createMenuBar();
+        updateUI();
+    }
+
+    private void loadItems() {
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader("resources/" + bundle.getString("productsFile")));
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+
+        String line;
+        while (true) {
+            try {
+                if (!((line = reader.readLine()) != null)) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            String[] words = line.split(";");
+            categories.computeIfAbsent((Locale) languageBox.getSelectedItem(), k -> new HashMap<>()).computeIfAbsent(words[0], k -> new HashSet<>()).add(words[1]);
+        }
+    }
+
+    private void switchFoods() {
+        Locale locale = (Locale) languageBox.getSelectedItem();
+        assert locale != null;
+
+        HashSet<String> foods = categories.get(locale).get(typeBox.getSelectedItem().toString());
+        foodBox.removeAllItems();
+        foodBox.setModel(new DefaultComboBoxModel<>(foods.toArray(new String[0])));
     }
 
     private void updateUI() {
+        Locale locale = (Locale) languageBox.getSelectedItem();
+        assert locale != null;
+        bundle = ResourceBundle.getBundle("einkaufsliste", locale);
+
         setTitle(bundle.getString("titleText"));
         addButton.setText(bundle.getString("addButtonText"));
         deleteButton.setText(bundle.getString("deleteButtonText"));
@@ -54,11 +94,18 @@ public class MainWindow extends JFrame {
         loadItem.setText(bundle.getString("menuLoadText"));
         saveItem.setText(bundle.getString("menuSaveText"));
         menu.setText(bundle.getString("menuText"));
+
+        if (!categories.containsKey(locale)) {
+            loadItems();
+        }
+
+        HashMap<String, HashSet<String>> category = categories.get(locale);
+        typeBox.removeAllItems();
+        category.keySet().forEach(k -> typeBox.addItem(k));
+        typeBox.setSelectedIndex(0);
     }
 
     public static void main(String[] args) {
-        Locale.setDefault(Locale.GERMANY);
-
         new MainWindow().setVisible(true);
     }
 
