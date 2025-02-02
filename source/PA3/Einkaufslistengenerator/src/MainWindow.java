@@ -25,7 +25,7 @@ public class MainWindow extends JFrame {
     private HashSet<Locale> languages = new HashSet<>(Arrays.asList(Locale.ENGLISH, Locale.GERMAN));
     private final HashMap<Locale, HashMap<String, HashSet<String>>> categories = new HashMap<>();
 
-    private final HashMap<String, Integer> shoppingList = new HashMap<>(); // <food, quantity>
+    private shoppingList shoppingList = new shoppingList();
 
     private DefaultTableModel tableModel;
 
@@ -60,7 +60,7 @@ public class MainWindow extends JFrame {
                 food = foodText.getText().trim();
             }
 
-            shoppingList.put(food, shoppingList.getOrDefault(food, 0) + quantity);
+            shoppingList.shoppingList.put(food, shoppingList.shoppingList.getOrDefault(food, 0) + quantity);
             foodText.setText("");
             quantitySlider.setValue(1);
 
@@ -70,7 +70,7 @@ public class MainWindow extends JFrame {
         deleteButton.addActionListener(e -> {
             for (Integer x : shoppingTable.getSelectedRows()) {
                 String food = tableModel.getValueAt(x, 0).toString();
-                shoppingList.remove(food);
+                shoppingList.shoppingList.remove(food);
             }
 
             updateTable();
@@ -78,49 +78,18 @@ public class MainWindow extends JFrame {
 
         createMenuBar();
         newItem.addActionListener(e -> {
-            shoppingList.clear();
+            shoppingList.shoppingList.clear();
             updateTable();
         });
 
         loadItem.addActionListener(e -> {
-            JFileChooser chooser = new JFileChooser();
-            int returnVal = chooser.showOpenDialog(main);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                File file = chooser.getSelectedFile();
-                try {
-                    BufferedReader reader = new BufferedReader(new FileReader(file));
-                    String line;
-                    while (true) {
-                        if ((line = reader.readLine()) == null) break;
-                        String[] words = line.split(";");
-                        shoppingList.put(words[0], Integer.parseInt(words[1]));
-                    }
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
+            shoppingList.shoppingList = shoppingList.loadFromXML();
 
             updateTable();
         });
 
         saveItem.addActionListener(e -> {
-            JFileChooser chooser = new JFileChooser();
-            int returnVal = chooser.showSaveDialog(main);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                File file = chooser.getSelectedFile();
-                try {
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-                    for (Map.Entry<String, Integer> entry : shoppingList.entrySet()) {
-                        writer.write(entry.getKey() + ";" + entry.getValue() + "\n");
-                    }
-
-                    writer.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
+            shoppingList.saveToXML(shoppingList.shoppingList);
         });
 
         updateUI();
@@ -128,7 +97,7 @@ public class MainWindow extends JFrame {
 
     private void updateTable() {
         tableModel.setRowCount(0);
-        for (Map.Entry<String, Integer> entry : shoppingList.entrySet()) {
+        for (Map.Entry<String, Integer> entry : shoppingList.shoppingList.entrySet()) {
             tableModel.addRow(new Object[]{entry.getKey(), entry.getValue()});
         }
     }
