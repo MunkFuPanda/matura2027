@@ -1,9 +1,8 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -12,7 +11,7 @@ public class MainWindow extends JFrame {
     private JComboBox typeBox;
     private JComboBox foodBox;
     private JPanel main;
-    private JSlider quantity;
+    private JSlider quantitySlider;
     private JTable shoppingTable;
     private JButton addButton;
     private JTextArea foodText;
@@ -25,6 +24,10 @@ public class MainWindow extends JFrame {
 
     private HashSet<Locale> languages = new HashSet<>(Arrays.asList(Locale.ENGLISH, Locale.GERMAN));
     private final HashMap<Locale, HashMap<String, HashSet<String>>> categories = new HashMap<>();
+
+    private final HashMap<String, Integer> shoppingList = new HashMap<>(); // <food, quantity>
+
+    private DefaultTableModel tableModel;
 
     private static ResourceBundle bundle;
 
@@ -49,8 +52,85 @@ public class MainWindow extends JFrame {
             }
         });
 
+        addButton.addActionListener(e -> {
+            String food = foodBox.getSelectedItem().toString();
+            int quantity = quantitySlider.getValue();
+
+            if (!foodText.getText().isEmpty()) {
+                food = foodText.getText().trim();
+            }
+
+            shoppingList.put(food, shoppingList.getOrDefault(food, 0) + quantity);
+            foodText.setText("");
+            quantitySlider.setValue(1);
+
+            updateTable();
+        });
+
+        deleteButton.addActionListener(e -> {
+            for (Integer x : shoppingTable.getSelectedRows()) {
+                String food = tableModel.getValueAt(x, 0).toString();
+                shoppingList.remove(food);
+            }
+
+            updateTable();
+        });
+
         createMenuBar();
+        newItem.addActionListener(e -> {
+            shoppingList.clear();
+            updateTable();
+        });
+
+        loadItem.addActionListener(e -> {
+            JFileChooser chooser = new JFileChooser();
+            int returnVal = chooser.showOpenDialog(main);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = chooser.getSelectedFile();
+                try {
+                    BufferedReader reader = new BufferedReader(new FileReader(file));
+                    String line;
+                    while (true) {
+                        if ((line = reader.readLine()) == null) break;
+                        String[] words = line.split(";");
+                        shoppingList.put(words[0], Integer.parseInt(words[1]));
+                    }
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            updateTable();
+        });
+
+        saveItem.addActionListener(e -> {
+            JFileChooser chooser = new JFileChooser();
+            int returnVal = chooser.showSaveDialog(main);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = chooser.getSelectedFile();
+                try {
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+                    for (Map.Entry<String, Integer> entry : shoppingList.entrySet()) {
+                        writer.write(entry.getKey() + ";" + entry.getValue() + "\n");
+                    }
+
+                    writer.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
         updateUI();
+    }
+
+    private void updateTable() {
+        tableModel.setRowCount(0);
+        for (Map.Entry<String, Integer> entry : shoppingList.entrySet()) {
+            tableModel.addRow(new Object[]{entry.getKey(), entry.getValue()});
+        }
     }
 
     private void loadItems() {
@@ -103,6 +183,19 @@ public class MainWindow extends JFrame {
         typeBox.removeAllItems();
         category.keySet().forEach(k -> typeBox.addItem(k));
         typeBox.setSelectedIndex(0);
+
+        tableModel = new DefaultTableModel(new String[]{bundle.getString("productColumnHeader"), bundle.getString("quantityColumnHeader")}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        shoppingTable.setModel(tableModel);
+        TableColumnModel columnModel = shoppingTable.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(200);
+        columnModel.getColumn(1).setPreferredWidth(50);
+        updateTable();
     }
 
     public static void main(String[] args) {
