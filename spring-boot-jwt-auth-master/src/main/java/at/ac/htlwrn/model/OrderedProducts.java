@@ -3,23 +3,23 @@ package at.ac.htlwrn.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "OrderedProducts")
+@Table
 public class OrderedProducts {
 
     @Id
     @GeneratedValue
-    @Column(name = "Id")
+    @Column
     private long Id;
 
     @ManyToOne
-    @JoinColumn(name = "orderId")
+    @JoinColumn
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "productId")
+    @JoinColumn
     private Product product;
 
-    @Column(name = "quantity")
+    @Column
     private int quantity;
 
     public Order getOrder() {

@@ -4,35 +4,35 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "PurchaseOrder")
+@Table
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @Column(name = "salutation", nullable = false)
+    @Column(nullable = false)
     private String salutation;
 
-    @Column(name = "firstName")
+    @Column
     private String firstName;
 
-    @Column(name = "lastName", nullable = false)
+    @Column(nullable = false)
     private String lastName;
 
-    @Column(name = "address", nullable = false)
+    @Column(nullable = false)
     private String address;
 
-    @Column(name = "date", nullable = false)
+    @Column(nullable = false)
     private String date;
 
-    @Column(name = "orderPrice", nullable = false)
+    @Column(nullable = false)
     private double orderPrice;
 
-    @Column(name = "doneDate")
+    @Column
     private String doneDate;
 
-    @Column(name = "cancelledDate")
+    @Column
     private String cancelledDate;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)

@@ -4,26 +4,26 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "Product")
+@Table
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productId;
 
-    @Column(name = "productName", nullable = false)
+    @Column(nullable = false)
     private String productName;
 
-    @Column(name = "price", nullable = false)
+    @Column(nullable = false)
     private double price;
 
-    @Column(name = "imageName", nullable = false)
+    @Column(nullable = false)
     private String imageName;
 
-    @Column(name = "validFrom", nullable = false)
+    @Column(nullable = false)
     private String validFrom;
 
-    @Column(name = "validUntil")
+    @Column
     private String validUntil;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -53,11 +53,11 @@ public class Product {
         this.price = price;
     }
 
-    public String getImgName() {
+    public String getImageName() {
         return imageName;
     }
 
-    public void setImgName(String imgName) {
+    public void setImageName(String imgName) {
         this.imageName = imgName;
     }
 
