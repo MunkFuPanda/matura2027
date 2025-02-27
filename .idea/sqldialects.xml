@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/Datenbanken/president_create_table.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Datenbanken/school_create.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Datenbanken/sf-create.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Datenbanken/sf-insert.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/UE16/Abgabe.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/UE17/Abgabe.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/UE18/Abgabe.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/UE5/Abgabe.sql" dialect="TSQL" />
+    <file url="PROJECT" dialect="TSQL" />
+  </component>
+</project>

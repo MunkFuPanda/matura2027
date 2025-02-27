@@ -1,0 +1,7 @@
+Erstellen Sie die Tabellen für die Schulungsfirma laut Kapitel 8.12 Seite 85 und laden Sie die Datei<nachname>.sql hoch.
+
+    Erstellen Sie mittels create table die notwendigen Tabellen
+    Fügen Sie die drop tables Kommandos ebenfalls ein
+    Fügen Sie Primary Keys und Foreign Keys ein
+    Fügen Sie 3 sinnvolle Constraints (not null zählt hier nicht dazu!) hinzu
+    Achten Sie auf die richtige Reihenfolge
