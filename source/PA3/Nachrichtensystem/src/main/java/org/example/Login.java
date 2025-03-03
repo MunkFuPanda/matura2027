@@ -1,8 +1,8 @@
 package org.example;
 
-import org.example.DatabaseConnection;
-
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,31 +10,30 @@ import java.sql.SQLException;
 
 public class Login {
     private String currentUser;
+    private JTextField usernameField;
+    private JPanel panel1;
+    private JTextField passwordField;
+    private JButton loginButton;
+
+    public Login() {
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                authenticateUser();
+            }
+        });
+    }
 
     public String authenticateUser() {
-        while (true) {
-            JTextField usernameField = new JTextField();
-            JPasswordField passwordField = new JPasswordField();
-            Object[] message = {
-                    "Benutzername:", usernameField,
-                    "Passwort:", passwordField
-            };
-
-            int option = JOptionPane.showConfirmDialog(null, message, "Login", JOptionPane.OK_CANCEL_OPTION);
-            if (option != JOptionPane.OK_OPTION) {
-                System.exit(0);
-            }
-
-            String username = usernameField.getText();
-            String password = new String(passwordField.getPassword());
-
-            if (validateUser(username, password)) {
-                this.currentUser = username;
-                return username;
-            } else {
-                JOptionPane.showMessageDialog(null, "Falsche Anmeldeinformationen!", "Fehler", JOptionPane.ERROR_MESSAGE);
-            }
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        if (validateUser(username, password)) {
+            this.currentUser = username;
+            return username;
+        } else {
+            JOptionPane.showMessageDialog(null, "Falsche Anmeldeinformationen!", "Fehler", JOptionPane.ERROR_MESSAGE);
         }
+        return getCurrentUser();
     }
 
     private boolean validateUser(String username, String password) {

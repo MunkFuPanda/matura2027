@@ -7,10 +7,15 @@ public class MainWindow extends JFrame {
     private JTable inboxTable;
     private JTable sentTable;
     private String currentUser;
+    private JTabbedPane tabbedPane1;
+    private JPanel panel1;
+    private JPanel newMessagePanel;
+    private JPanel sentMessagePanel;
+    private JPanel inboxMessagePanel;
 
     public MainWindow(String currentUser) {
         this.currentUser = currentUser;
-        setTitle("NegaSystem - Eingeloggt als: " + currentUser);
+        setTitle("MegaSystem - Eingeloggt als: " + currentUser);
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
