@@ -12,6 +12,11 @@ public class MainWindow extends JFrame {
     private JPanel newMessagePanel;
     private JPanel sentMessagePanel;
     private JPanel inboxMessagePanel;
+    private JButton dispatchMailButton;
+    private JTextArea newMessageText;
+    private JTextField recieverUserName;
+    private JTextField newMessageTitel;
+    private JTable inboxMessageTable;
 
     public MainWindow(String currentUser) {
         this.currentUser = currentUser;
@@ -50,12 +55,22 @@ public class MainWindow extends JFrame {
     }
 
     public static void main(String[] args) {
-        Login login = new Login();
-        String user = login.authenticateUser();
-
         SwingUtilities.invokeLater(() -> {
-            MainWindow mv = new MainWindow(user);
-            mv.setVisible(true);
+            JFrame frame = new JFrame("Login");
+            Login login = new Login();
+            frame.setContentPane(login.panel1);
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+
+            // Benutzername abfragen, nachdem der Login erfolgreich war
+            if (login.getCurrentUser() != null) {
+                frame.dispose(); // Schließt das Login-Fenster
+                MainWindow mv = new MainWindow(login.getCurrentUser());
+                mv.setVisible(true);
+            }
         });
     }
+
 }
+
