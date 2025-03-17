@@ -42,18 +42,32 @@ where not exists (select *
                   from studentgrade
                   where studentgrade.studentid = person.personid);
 
--- 5.
-
--- ich sehe keinen Sinn hinter dieser View, da sie mir nicht erlaubt Rückschlüsse zu ziehen, wer welche kurse hält.
-with all_courses as (select d.name                                              as departmentname,
+-- 5a.
+go
+drop view if exists courseamount;
+go
+create view courseamount as
+(
+select d.departmentid,
+       d.name                                              as department,
        count(c.courseid)                                   as anzahl_alle_kurse,
        count(case when oc.courseid is not null then 1 end) as anzahl_online_courses,
-       count(case when os.courseid is not null then 1 end)     as anzahl_onsite_courses
+       count(case when os.courseid is not null then 1 end) as anzahl_onsite_courses
 from department d
-         inner join course c on d.departmentid = c.departmentid
+         join course c on d.departmentid = c.departmentid
          left join onlinecourse oc on c.courseid = oc.courseid
          left join onsitecourse os on c.courseid = os.courseid
-group by d.name) select * from all_courses
+group by d.departmentid, d.name)
+go
+
+-- 5b.
+select p.firstname, p.lastname
+from course c
+         join courseinstructor ci on ci.courseid = c.courseid
+         join person p on p.personid = ci.personid
+where 2 <= (select anzahl_online_courses
+            from courseamount ca
+            where c.departmentid = ca.departmentid);
 
 -- 5c.
 -- jede Spalte muss einen namen haben
