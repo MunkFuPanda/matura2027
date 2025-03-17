@@ -1,40 +1,48 @@
 package org.example;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
-public class SudokuBlock extends JPanel {
-    private static final int BLOCK_SIZE = 3;
-    private JTextField[][] fields = new JTextField[BLOCK_SIZE][BLOCK_SIZE];
+public class SudokuBlock {
+    private JPanel main;
+    private JButton button1;
+    private JButton button2;
+    private JButton button3;
+    private JButton button4;
+    private JButton button5;
+    private JButton button6;
+    private JButton button7;
+    private JButton button8;
+    private JButton button9;
 
-    public SudokuBlock() {
-        setLayout(new GridLayout(BLOCK_SIZE, BLOCK_SIZE));
-        setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-        for (int i = 0; i < BLOCK_SIZE; i++) {
-            for (int j = 0; j < BLOCK_SIZE; j++) {
-                fields[i][j] = new JTextField();
-                fields[i][j].setHorizontalAlignment(JTextField.CENTER);
-                fields[i][j].setFont(new Font("Arial", Font.BOLD, 20));
-
-                // Klick-Event zur Zahleneingabe
-                fields[i][j].addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        String input = JOptionPane.showInputDialog("Gib eine Zahl (1-9) ein:");
-                        if (input != null && input.matches("[1-9]")) {
-                            ((JTextField) e.getSource()).setText(input);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Ungültige Eingabe!");
-                        }
-                    }
-                });
-
-                add(fields[i][j]);
-            }
+    private ArrayList<JButton> buttons = new ArrayList<>() {
+        {
+            add(button1);
+            add(button2);
+            add(button3);
+            add(button4);
+            add(button5);
+            add(button6);
+            add(button7);
+            add(button8);
+            add(button9);
         }
-    }
-}
+    };
 
+
+    public void setButton(int x, int y, int value) {
+        int localRow = y % 3; // Y-Position innerhalb des Blocks
+        int localCol = x % 3; // X-Position innerhalb des Blocks
+        int localIndex = localRow * 3 + localCol; // 1D-Index für die Zelle im Block
+        buttons.get(localIndex).setText(String.valueOf(value));
+    }
+
+    public int getButton(int x, int y) {
+        int localRow = y % 3; // Y-Position innerhalb des Blocks
+        int localCol = x % 3; // X-Position innerhalb des Blocks
+        int localIndex = localRow * 3 + localCol; // 1D-Index für die Zelle im Block
+        return Integer.parseInt(buttons.get(localIndex).getText());
+    }
+
+
+}
