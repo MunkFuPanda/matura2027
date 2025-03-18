@@ -35,7 +35,7 @@ with avg_grades as (select personid, avg(grade) as avg_grade
                     having avg(grade) is not null)
 select personid, avg_grade
 from avg_grades
-where avg_grade > (select avg(avg_grade)
+where avg_grade < (select avg(avg_grade)
                    from avg_grades);
 
 -- 4.
