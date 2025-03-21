@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Fri Mar 21 23:17:52 CET 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-0195-bac8-bc4b-00000e981df0 
+on database directory C:\_projs\lernen\localMailProgramm\src\main\resources\derby with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868 
+Loaded from file:/C:/Users/Gregor/.m2/repository/org/apache/derby/derby/10.17.1.0/derby-10.17.1.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=23.0.2+7-58
+user.dir=C:\_projs\lernen\localMailProgramm
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
