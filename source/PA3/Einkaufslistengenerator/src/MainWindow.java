@@ -37,6 +37,9 @@ public class MainWindow extends JFrame {
         setTitle("Einkaufsliste");
         setSize(1200, 800);
 
+        // Set default locale to English
+        Locale.setDefault(Locale.ENGLISH);
+
         if (languages.stream().map(Locale::toString).collect(Collectors.toSet()).contains(getLocale().toString())) {
             setLocale(Locale.ENGLISH);
         }
@@ -44,7 +47,8 @@ public class MainWindow extends JFrame {
         languages.forEach(language -> languageBox.addItem(language));
         languageBox.addActionListener(e -> updateUI());
 
-        bundle = ResourceBundle.getBundle("einkaufsliste", getLocale());
+        // Load the resource bundle with the default locale
+        bundle = ResourceBundle.getBundle("einkaufsliste", Locale.getDefault());
 
         typeBox.addActionListener(e -> {
             if (!(typeBox.getItemCount() == 0)) {
@@ -60,7 +64,7 @@ public class MainWindow extends JFrame {
                 food = foodText.getText().trim();
             }
 
-            shoppingList.shoppingList.put(food, shoppingList.shoppingList.getOrDefault(food, 0) + quantity);
+            shoppingList.shoppingList.put(food, Integer.valueOf(shoppingList.shoppingList.getOrDefault(food, Integer.valueOf(0)) + quantity));
             foodText.setText("");
             quantitySlider.setValue(1);
 
@@ -68,7 +72,7 @@ public class MainWindow extends JFrame {
         });
 
         deleteButton.addActionListener(e -> {
-            for (Integer x : shoppingTable.getSelectedRows()) {
+            for (int x : shoppingTable.getSelectedRows()) {
                 String food = tableModel.getValueAt(x, 0).toString();
                 shoppingList.shoppingList.remove(food);
             }
