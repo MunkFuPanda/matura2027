@@ -220,6 +220,7 @@ public class mainWindow extends JFrame{
     }
 
     public static void main(String[] args) {
+        //schermann ich liebe dich
         mainWindow mainWindow = new mainWindow();
     }
 }
