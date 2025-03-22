@@ -1,20 +1,16 @@
 package einkaufsliste;
 
 import jakarta.xml.bind.JAXBException;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class mainWindow extends JFrame{
@@ -150,7 +146,10 @@ public class mainWindow extends JFrame{
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.addRow(new Object[]{comboBox2.getSelectedItem(), slider1.getValue()});
+                int selectedRow = table1.getSelectedRow();
+                if (selectedRow != -1) {
+                    model.removeRow(selectedRow);
+                }
             }
         });
 
@@ -209,30 +208,13 @@ public class mainWindow extends JFrame{
         mi4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser fc = new JFileChooser();
-                fc.showSaveDialog(mainWindow.this);
-                File f = fc.getSelectedFile();
-                    try {
-                        f.createNewFile();
-                        System.out.print("File created successfully!");
-                        List<String> lines = new ArrayList<>();
-                        for (int i = 0; i < model.getRowCount(); i++) {
-                            String produkt = (String) model.getValueAt(i, 0);
-                            int anzahl = (int) model.getValueAt(i, 1);
-                            lines.add(produkt + " " + anzahl);
-                        }
-                        Path file = f.toPath();
-                        Files.write(file, lines, StandardCharsets.UTF_8);
-                    } catch (IOException ee) {
-                        ee.printStackTrace();
-                    }
+                try {
+                    table1.print();
+                } catch (PrinterException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
-
-
-
-
-
 
 
     }
