@@ -13,7 +13,7 @@ public class Main {
             /** Schritt 1: JDBC-Treiber registrieren */
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
             /** Schritt 2: Connection zum Datenbanksystem herstellen */
-            con = DriverManager.getConnection("jdbc:derby:db/derby");
+            con = DriverManager.getConnection("jdbc:derby:db/derby;create=true");
             /** Schritt 3: Statement erzeugen */
             stmt = con.createStatement();
             /** Schritt 4: Statement direkt ausfuehren */
