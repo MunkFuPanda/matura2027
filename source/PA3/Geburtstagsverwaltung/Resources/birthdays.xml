@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Birthdaylist>
+    <Product Name="tewtert">
+        <date>2001-09-11T15:46:52.594+02:00</date>
+    </Product>
+    <Product Name="test">
+        <date>2025-03-18T15:24:26.645+01:00</date>
+    </Product>
+    <Product Name="hallo">
+        <date>2025-03-22T15:31:36.681+01:00</date>
+    </Product>
+    <Product Name="123">
+        <date>2025-03-22T15:31:54.040+01:00</date>
+    </Product>
+</Birthdaylist>
