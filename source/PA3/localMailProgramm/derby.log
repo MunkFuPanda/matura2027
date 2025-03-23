@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Fri Mar 21 23:17:52 CET 2025:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-0195-bac8-bc4b-00000e981df0 
-on database directory C:\_projs\lernen\localMailProgramm\src\main\resources\derby with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868 
-Loaded from file:/C:/Users/Gregor/.m2/repository/org/apache/derby/derby/10.17.1.0/derby-10.17.1.0.jar
+Sun Mar 23 13:53:34 CET 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0195-c310-d0dd-00001f0958e0 
+on database directory C:\Users\Philias\Desktop\POS3\source\PA3\localMailProgramm\mail_db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@76ed5528 
+Loaded from file:/C:/Users/Philias/.m2/repository/org/apache/derby/derby/10.16.1.1/derby-10.16.1.1.jar
 java.vendor=Oracle Corporation
-java.runtime.version=23.0.2+7-58
-user.dir=C:\_projs\lernen\localMailProgramm
+java.runtime.version=22.0.2+9-70
+user.dir=C:\Users\Philias\Desktop\POS3\source\PA3\localMailProgramm
 os.name=Windows 11
 os.arch=amd64
 os.version=10.0
