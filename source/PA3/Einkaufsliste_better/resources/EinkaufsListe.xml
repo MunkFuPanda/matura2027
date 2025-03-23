@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<liste>
+    <einkaufsliste>
+        <item>aubergine</item>
+        <quantity>2</quantity>
+    </einkaufsliste>
+    <einkaufsliste>
+        <item>erdnussbutter</item>
+        <quantity>8</quantity>
+    </einkaufsliste>
+    <einkaufsliste>
+        <item>forellenfilet</item>
+        <quantity>5</quantity>
+    </einkaufsliste>
+    <einkaufsliste>
+        <item>maismehl</item>
+        <quantity>4</quantity>
+    </einkaufsliste>
+</liste>
