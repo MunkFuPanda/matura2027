@@ -19,6 +19,7 @@ public class birthday_dialog extends JDialog {
 
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
+                JDateChooser1.setSize(300, 300);
                 try {
                     Birthday birthday = new Birthday(textField1.getText(), JDateChooser1.getDate());
                     mainWindow.addBirthday(birthday);

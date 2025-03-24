@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Sun Mar 23 15:33:36 CET 2025:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0195-c36c-68b8-00001e549380 
+Mon Mar 24 07:25:20 CET 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): instance a816c00e-0195-c6d3-bbb8-00001dc27380 
 on database directory C:\Users\Philias\Desktop\POS3\source\PA3\Sudoku\sudoku_db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@76ed5528 
-Loaded from file:/C:/Users/Philias/.m2/repository/org/apache/derby/derby/10.16.1.1/derby-10.16.1.1.jar
+Loaded from file:/C:/Users/Philias/Desktop/POS3/source/PA3/Sudoku/lib/derby-10.16.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=22.0.2+9-70
 user.dir=C:\Users\Philias\Desktop\POS3\source\PA3\Sudoku
