@@ -22,4 +22,6 @@ public interface OrderDao extends CrudRepository<Order, Long> {
     Optional<Order> findById(Long id);
 
     List<Order> findAll();
+
+    Optional<Order> findByLastName(String lastName);
 }
