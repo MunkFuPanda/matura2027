@@ -19,7 +19,11 @@ public class FileManager extends JFrame{
     private JLabel label;
     private JTextField input_field;
     private JButton button_submit;
+    private JComboBox combobox;
     private File dir;
+    private JMenuBar menuBar;
+    private JMenu menue;
+    private JMenuItem select;
 
     private DefaultTreeModel treeModel;
     private DefaultMutableTreeNode treeRoot;
@@ -31,7 +35,20 @@ public class FileManager extends JFrame{
         setContentPane(main);
         setSize(800, 400);
         setVisible(true);
+        fillComboBox();
+        menuBar = new JMenuBar();
+        menue = new JMenu();
+        select = new JMenuItem();
+        menue.add(select);
+        menue.add(menue);
         dir = chosenDir();
+
+        select.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FileManager();
+            }
+        });
 
         button_submit.addActionListener(new ActionListener() {
             @Override
@@ -52,20 +69,37 @@ public class FileManager extends JFrame{
         setVisible(true);
     }
 
-    private void buildTree(File directory, DefaultMutableTreeNode parentNode) {
-        // Ordner hinzufügen
+    private boolean buildTree(File directory, DefaultMutableTreeNode parentNode) {
+        boolean hatPassendeDateien = false;
+
+        // temp node
+        DefaultMutableTreeNode dirNode = new DefaultMutableTreeNode(directory.getName());
+
+        // Zuerst rekursiv dirs laden
         for (File subDir : getSubDirectorys(directory)) {
-            DefaultMutableTreeNode dirNode = new DefaultMutableTreeNode(subDir.getName());
-            parentNode.add(dirNode);
-            buildTree(subDir, dirNode); // rekursiv für Unterordner
+            DefaultMutableTreeNode subDirNode = new DefaultMutableTreeNode(subDir.getName());
+            boolean unterOrdnerHatDateien = buildTree(subDir, subDirNode);
+            if (unterOrdnerHatDateien) {
+                dirNode.add(subDirNode);
+                hatPassendeDateien = true;
+            }
         }
 
-        // Dateien hinzufügen
-        for (String fileName : getFiles(directory, fileTypes)) {
-            DefaultMutableTreeNode fileNode = new DefaultMutableTreeNode(fileName);
-            parentNode.add(fileNode);
+        // Dateien in Ordner prüfen
+        List<String> dateien = getFiles(directory, fileTypes);
+        for (String fileName : dateien) {
+            dirNode.add(new DefaultMutableTreeNode(fileName));
+            hatPassendeDateien = true;
         }
+
+        // Nur wenn etwas drin ist zum tree hinzufügen
+        if (hatPassendeDateien) {
+            parentNode.add(dirNode);
+        }
+
+        return hatPassendeDateien;
     }
+
 
     private List<File> getSubDirectorys(File directory) {
         LinkedList<File> res = new LinkedList<>();
@@ -101,9 +135,14 @@ public class FileManager extends JFrame{
     }
 
     private void setFileTypes() {
-        String inputText = input_field.getText();
+        String inputText = ((String) combobox.getSelectedItem()).toString();
         String[] fileTypesArr = inputText.split(",");
         fileTypes = new ArrayList<>(Arrays.stream(fileTypesArr).toList());
+    }
+
+    private void fillComboBox() {
+        combobox.addItem("java");
+        combobox.addItem("txt");
     }
 
 
