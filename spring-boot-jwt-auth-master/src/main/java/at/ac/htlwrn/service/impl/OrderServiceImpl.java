@@ -106,7 +106,7 @@ public class OrderServiceImpl implements OrderService {
             logger.warn("Order with id " + orderId + " does not exist");
         }
 
-        return null;
+        return order;
     }
 
     public Order finishOrder(Long orderId) {
@@ -121,6 +121,6 @@ public class OrderServiceImpl implements OrderService {
             logger.warn("Order with id " + orderId + " does not exist");
         }
 
-        return null;
+        return order;
     }
 }
