@@ -34,7 +34,7 @@ public class MainWindow extends JFrame {
         try {
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
             System.setProperty("derby.language.sequence.preallocator", "1");
-            con = DriverManager.getConnection("jdbc:derby:C:/Users/Lenny/Documents/Lenny/Schule/Klasse 3/POS/Übungen/Swing Airlines/Airlines/Airlines");
+            con = DriverManager.getConnection("jdbc:derby:Airlines/Airlines");
         } catch (Exception e) {
             e.printStackTrace();
         }
