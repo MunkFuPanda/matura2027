@@ -1,8 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.*;
 
 public class MainWindow extends JFrame {
     private static MainWindow instance;
@@ -17,7 +16,6 @@ public class MainWindow extends JFrame {
     private JPanel mapPanel;
 
     private final Connection con;
-    private ArrayList<Airport> seenAirports = new ArrayList<>();
 
     private MainWindow() {
         // Initialize the main window
@@ -58,69 +56,92 @@ public class MainWindow extends JFrame {
     }
 
     private Airport createRoute(Airport startAirport, Airport endAirport) {
+        // Reset parent pointers
         startAirport.setParent(null);
         endAirport.setParent(null);
 
-        try {
-            PreparedStatement stmt = con.prepareStatement("select * from route where airport1 = ? and airport2 = ?");
-            stmt.setInt(1, startAirport.getId());
-            stmt.setInt(2, endAirport.getId());
+        // Dijkstra's algorithm
+        HashMap<Integer, Airport> airportMap = new HashMap<>();
+        HashMap<Integer, Double> distances = new HashMap<>();
+        HashMap<Integer, Airport> parents = new HashMap<>();
+        PriorityQueue<AirportDistance> queue = new PriorityQueue<>(Comparator.comparingDouble(ad -> ad.distance));
 
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                endAirport.setParent(startAirport);
-                seenAirports.clear();
-                seenAirports.add(startAirport);
-                return endAirport;
-            } else { // no direct route found
-                System.out.println("No direct route found from " + startAirport.getName() + " to " + endAirport.getName());
-                if (findIndirectRoute(startAirport, endAirport)) {
-                    return endAirport;
-                } else {
-                    JOptionPane.showMessageDialog(this, "No route found from " + startAirport.getName() + " to " + endAirport.getName(), "Error", JOptionPane.ERROR_MESSAGE);
+        // Initialize
+        airportMap.put(startAirport.getId(), startAirport);
+        distances.put(startAirport.getId(), 0.0);
+        queue.add(new AirportDistance(startAirport, 0.0));
+
+        while (!queue.isEmpty()) {
+            AirportDistance current = queue.poll();
+            Airport currAirport = current.airport;
+            double currDist = current.distance;
+
+            if (currAirport.getId() == endAirport.getId()) {
+                // Reconstruct path by setting parents
+                Airport step = endAirport;
+                while (parents.containsKey(step.getId())) {
+                    step.setParent(parents.get(step.getId()));
+                    step = step.getParent();
                 }
+                return endAirport;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+            // Get all neighbors (direct connections)
+            try {
+                PreparedStatement stmt = con.prepareStatement("select airport2, a.latitude, a.longitude, a.iata, a.name, a.id " + "from route r join airport a on r.airport2 = a.id where r.airport1 = ?");
+                stmt.setInt(1, currAirport.getId());
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    int neighborId = rs.getInt("airport2");
+                    if (!airportMap.containsKey(neighborId)) {
+                        Airport neighbor = Airport.getAirport(rs.getInt("id"), rs.getDouble("latitude"), rs.getDouble("longitude"), rs.getString("IATA"), rs.getString("name"));
+                        airportMap.put(neighborId, neighbor);
+                    }
+                    Airport neighbor = airportMap.get(neighborId);
+
+                    // Calculate distance (use Haversine or simple Euclidean)
+                    double edgeWeight = distanceBetween(currAirport, neighbor);
+                    double newDist = currDist + edgeWeight;
+
+                    if (!distances.containsKey(neighborId) || newDist < distances.get(neighborId)) {
+                        distances.put(neighborId, newDist);
+                        parents.put(neighborId, currAirport);
+                        queue.add(new AirportDistance(neighbor, newDist));
+                    }
+                }
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
+        JOptionPane.showMessageDialog(this, "No route found from " + startAirport.getName() + " to " + endAirport.getName(), "Error", JOptionPane.ERROR_MESSAGE);
         return null;
     }
 
-    private boolean findIndirectRoute(Airport startAirport, Airport endAirport) {
-        System.out.println("Searching for indirect route from " + startAirport.getName() + " to " + endAirport.getName());
-        try {
-            PreparedStatement stmt = con.prepareStatement("select airport.* from route left join airport on airport2 = airport.id where airport1 = ?");
-            stmt.setInt(1, startAirport.getId());
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Airport nextAirport = Airport.getAirport(rs.getInt("id"), rs.getDouble("latitude"), rs.getDouble("longitude"), rs.getString("IATA"), rs.getString("name"));
-                nextAirport.setParent(startAirport);
-                seenAirports.add(nextAirport);
-            }
-            rs.close();
+    // Helper class for priority queue
+    private static class AirportDistance {
+        Airport airport;
+        double distance;
 
-            for (Airport airport : seenAirports) {
-                if (airport.getIata().equals(endAirport.getIata())) {
-                    System.out.println("Found indirect route from " + startAirport.getName() + " to " + endAirport.getName() + " via " + airport.getName());
-                    return true;
-                }
-            }
-
-            for (Airport e : seenAirports) {
-                if (!seenAirports.contains(e)) {
-                    if (findIndirectRoute(e, endAirport)) {
-                        System.out.println("Found2 indirect route from " + startAirport.getName() + " to " + endAirport.getName() + " via " + e.getName());
-                        return true;
-                    }
-                }
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        AirportDistance(Airport airport, double distance) {
+            this.airport = airport;
+            this.distance = distance;
         }
+    }
 
-        return false;
+    // Calculate distance between two airports (Haversine formula)
+    private double distanceBetween(Airport a1, Airport a2) {
+        double lat1 = Math.toRadians(a1.getLat());
+        double lon1 = Math.toRadians(a1.getLng());
+        double lat2 = Math.toRadians(a2.getLat());
+        double lon2 = Math.toRadians(a2.getLng());
+        double dlat = lat2 - lat1;
+        double dlon = lon2 - lon1;
+        double aa = Math.sin(dlat / 2) * Math.sin(dlat / 2) + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dlon / 2) * Math.sin(dlon / 2);
+        double c = 2 * Math.atan2(Math.sqrt(aa), Math.sqrt(1 - aa));
+        double R = 6371.0; // Earth radius in km
+        return R * c;
     }
 
     private Connection connectToDatabase() {
