@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sun Jun 01 21:11:30 CEST 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-0197-2ce7-fb12-00003bfe5860 
+on database directory /home/markus/POS3/source/PA4/Airlines/Airlines with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@18b4aac2 
+Loaded from file:/home/markus/.m2/repository/org/apache/derby/derby/10.17.1.0/derby-10.17.1.0.jar
+java.vendor=Eclipse Adoptium
+java.runtime.version=24.0.1+9
+user.dir=/home/markus/POS3/source/PA4/Airlines
+os.name=Linux
+os.arch=amd64
+os.version=6.14.7-arch2-1
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
