@@ -18,3 +18,8 @@ If you think your implementation of one of the missing assignments is decent eno
 
 ~ ein anonymer Autor
 
+### 2. 6. 2025, 10:19
+
+> Die finale Java-Arbeit – ein Verbrechen gegen die Menschlichkeit. Unter der klanglosen Stimmbeschallung von Herrn Scherrmann, bei der selbst das Licht langsamer wird, wurden wir Zeugen eines pädagogischen Massakers. Was als „abschließende praktische Arbeit“ angekündigt wurde, entpuppte sich als intellektuelles Survival-Training olympischen Ausmaßes, inszeniert in der tödlichen Kampfarena namens IntelliJ. Die Aufgabenstellung? Ein kunstvoll verkleideter Albtraum in der Syntax antiker Flüche, durchzogen von Klassen, deren Existenzberechtigung selbst der Compiler nicht mehr nachvollziehen konnte. Die Spreu wurde mit chirurgischer Präzision vom Weizen getrennt, anschließend getoastet, gewogen und mit einem bitter-ironischen „Compile successful“ versehen. Was bleibt, ist die vage Hoffnung, dass auch der pure Wahnsinn irgendwie bewertet werden kann. Scherrmann dazu: „Das ist einfach.“ Wahrscheinlich glaubt er auch, Fehlermeldungen seien höfliche Einladungen zu einer Schatzsuche – und Bugs nur charmante kleine Geheimnisse, die darauf warten, entdeckt zu werden.
+
+~ ein anonymer Autor
