@@ -1,0 +1,6 @@
+Erstellen Sie eine Datenbank für ltp aus dem Kapitel 8.11 im Skriptum (siehe Seite 83) und laden Sie die Datei <nachname>.sql hoch.
+
+    Legen Sie eine neue Datenbank ltp an
+    Erstellen Sie die notwendigen Tabellen
+    Fügen Sie Primary Keys und Foreign Keys ein
+    Fügen Sie die DROP TABLE-Kommandos ein
