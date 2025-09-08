@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Counter": {
+      "commandName": "Project",
+      "commandLineArgs": "10 100"
+    }
+  }
+}
