@@ -1,0 +1,129 @@
+SV;St. Veit an der Glan
+KR;Krems-Land
+P;St. Pölten
+BD;Diplomatisches Korps im Burgenland, Bundesbusdienst
+GF;Gänserndorf
+BL;Bruck an der Leitha
+GD;Gmünd, Diplomatisches Korps in der Steiermark
+JE;Jennersdorf
+GK;Konsul in der Steiermark
+VK;Völkermarkt, Konsul im Land Vorarlberg
+KO;Korneuburg
+HL;Hollabrunn
+ZT;Zwettl
+OW;Oberwart
+BM;Bruck an der Mur
+E;Eisenstadt
+AM;Amstetten
+BZ;Bludenz
+MI;Mistelbach
+G;Graz
+LF;Lilienfeld
+WU;Wien-Umgebung
+WK;Konsularkorps im Land Wien
+OP;Oberpullendorf
+SE;Steyr-Land, Steyr-Enns
+NK;Neunkirchen, Konsul in Niederösterreich
+KB;Kitzbühel
+DO;Dornbirn
+BH;Bundesheer
+BK;Konsul im Land Burgenland
+FF;Fürstenfeld
+JW;Justizwache
+KU;Kufstein
+V;Land Vorarlberg
+LB;Leibnitz
+PT;Post- und Telegrafenverwaltung
+JO;St. Johann im Pongau
+FK;Feldkirch
+GS;Güssing
+KL;Klagenfurt-Land
+IM;Imst
+FV;Finanzverwaltung
+GB;Gröbming
+TU;Tulln
+KF;Knittelfeld
+HB;Hartberg
+BR;Braunau am Inn
+LI;Liezen
+RE;Reutte
+LE;Leoben
+HE;Hermagor
+ME;Melk
+MA;Mattersburg
+RO;Rohrbach
+SW;Schwechat
+FB;Feldbach
+WZ;Weiz
+PL;St. Pölten-Land
+SB;Scheibbs
+K;Klagenfurt am Wörthersee, Land Kärnten
+WE;Wels
+MZ;Mürzzuschlag
+ND;Neusiedl am See, Diplomatisches Korps in Niederösterreich
+BG;Bundesgendarmerie
+EF;Eferding
+JU;Judenburg
+WT;Waidhofen an der Thaya
+N;Land Niederösterreich
+LN;Leoben
+A;Oberste Organe der Republik
+OD;Diplomatisches Korps in Oberösterreich
+HA;Hallein
+OK;Konsul in Oberösterreich
+HO;Horn
+IL;Innsbruck-Land
+LZ;Lienz
+ST;Land Steiermark
+ZE;Zell am See
+BB;Österreichische Bundesbahnen
+WO;Wolfsberg
+KS;Krems an der Donau
+FE;Feldkirchen
+SK;Konsul im Land Salzburg
+SR;Steyr
+VB;Vöcklabruck
+WD;Diplomatisches Korps in Wien
+TD;Diplomatisches Korps in Tirol
+L;Linz
+ZW;Zollwache
+VL;Villach-Land
+GR;Grieskirchen
+VD;Diplomatisches Korps in Vorarlberg
+SL;Salzburg-Umgebung
+O;Land Oberösterreich
+RA;Radkersburg
+KD;Diplomatisches Korps in Kärnten
+EU;Eisenstadt-Umgebung
+SP;Spittal an der Drau
+W;Stadt Wien, Land Wien
+TA;Tamsweg
+MU;Murau
+PE;Perg
+KK;Konsul im Land Kärnten
+KI;Kirchdorf an der Krems
+UU;Urfahr-Umgebung
+WY;Waidhofen an der Ybbs
+SD;Schärding, Diplomatisches Korps in Salzburg
+GM;Gmunden
+S;Stadt Salzburg, Land Salzburg
+VI;Villach
+WB;Wiener Neustadt-Land
+DL;Deutschlandsberg
+T;Land Tirol
+BN;Baden
+B;Bregenz oder Land Burgenland
+BA;Bad Aussee
+BP;Bundespolizei
+WN;Wiener Neustadt
+TK;Konsul im Land Tirol
+WL;Wels-Land
+FR;Freistadt
+GU;Graz-Umgebung
+RI;Ried im Innkreis
+LL;Linz-Land
+SZ;Schwaz
+MD;Mödling
+VO;Voitsberg
+LA;Landeck
+I;Innsbruck

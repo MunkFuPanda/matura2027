@@ -1,0 +1,58 @@
+FUNCTION_BLOCK power
+
+VAR_INPUT				
+	speed : REAL;
+	acceleration : REAL;
+	distance : REAL;
+END_VAR
+
+VAR_OUTPUT				
+	power : REAL;
+END_VAR
+
+FUZZIFY speed
+	TERM tooSlow := (0, 1) (1, 1) (2, 0); 
+	TERM slow := (1, 0) (2, 1) (3, 1) (4, 0);
+	TERM optimum := (3, 0) (4, 1) (5, 1) (6, 0);
+	TERM fast := (5, 0) (6, 1) (7, 1) (8, 0);
+	TERM tooFast := (7, 0) (8, 1) (10, 1);
+END_FUZZIFY
+
+FUZZIFY acceleration
+	TERM decelerating := (-2, 1) (-1, 1) (0, 0);
+	TERM constant := (-1, 0) (0, 1) (1, 0);
+	TERM accelerating := (0, 0) (1, 1) (2, 1);
+END_FUZZIFY
+
+FUZZIFY distance
+	TERM veryClose := (0, 1) (20, 0);
+	TERM close := (0, 0) (20, 1) (30, 1) (50, 0);
+	TERM distant := (30, 0) (50, 1) (100, 1);
+END_FUZZIFY
+
+DEFUZZIFY power
+	TERM decreaseGreatly := (-5,0) (-3.5,1) (-2,0);
+	TERM decrease := (-3.25,0) (-1.75,1) (-0.25,0);
+	TERM constant := (-1.5,0) (0,1) (1.5,0);
+	TERM increase := (0.25,0) (1.75,1) (3.25,0);
+	TERM increaseGreatly := (2,0) (3.5,1) (5,0);
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+RULEBLOCK No1
+	AND : MIN;			// Use 'min' for 'and' (also implicit use 'max' for 'or' to fulfill DeMorgan's Law)
+	ACT : MIN;			// Use 'min' activation method
+	ACCU : MAX;			// Use 'max' accumulation method
+
+	RULE 1 : IF speed IS tooSlow AND acceleration IS decelerating THEN power IS increaseGreatly;
+	RULE 2 : IF speed IS slow AND acceleration IS decelerating THEN power IS increase; 
+	RULE 3 : IF distance IS close THEN power IS decrease;
+	RULE 4 : IF distance IS distant AND acceleration IS constant THEN power IS increase;
+	RULE 5 : IF distance IS close THEN power IS decrease;
+	RULE 6 : IF distance IS close AND power IS increase OR power IS increaseGreatly THEN power IS decreaseGreatly;
+	RULE 7 : IF speed is tooFast THEN power IS decrease;
+	RULE 8 : IF distance IS veryClose THEN power IS decreaseGreatly;
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK

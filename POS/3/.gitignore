@@ -1,0 +1,10 @@
+# it's probably fine to exclude these, since intellj regenerates them upon
+# startup anyway, and there don't seem to be any important run/runtime/building
+# configurations inside
+**/*.iml
+
+# ignore root .idea file so it doesn't mess with per project configurations
+.idea/
+
+**/out/
+

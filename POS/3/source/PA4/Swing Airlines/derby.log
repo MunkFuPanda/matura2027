@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Mon May 19 10:02:50 CEST 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-0196-e791-2064-00000f31d410 
+on database directory C:\Users\Lenny\Documents\Lenny\Schule\Klasse 3\POS\Übungen\Swing Airlines\Airlines\Airlines with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@76ed5528 
+Loaded from file:/C:/Users/Lenny/Documents/Lenny/Schule/Klasse%203/POS/%c3%9cbungen/Swing%20Airlines/lib/derby-10.17.1.0.jar
+java.vendor=Eclipse Adoptium
+java.runtime.version=21.0.4+7-LTS
+user.dir=C:\Users\Lenny\Documents\Lenny\Schule\Klasse 3\POS\Übungen\Swing Airlines
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

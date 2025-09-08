@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="KlammerChecker">
+  <grid id="27dc6" binding="panel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="600" height="800"/>
+    </constraints>
+    <properties>
+      <maximumSize width="600" height="800"/>
+      <minimumSize width="600" height="800"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="4aa2" class="javax.swing.JTextArea" binding="input">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="300" height="300"/>
+            <preferred-size width="600" height="300"/>
+            <maximum-size width="-1" height="300"/>
+          </grid>
+        </constraints>
+        <properties>
+          <alignmentX value="0.0"/>
+          <alignmentY value="0.0"/>
+          <font size="24"/>
+        </properties>
+      </component>
+      <component id="56cf3" class="javax.swing.JTable" binding="output">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="300"/>
+            <preferred-size width="1200" height="600"/>
+            <maximum-size width="-1" height="600"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font size="24"/>
+          <intercellSpacing width="0" height="0"/>
+          <rowHeight value="35"/>
+          <rowMargin value="0"/>
+        </properties>
+      </component>
+      <component id="9c54d" class="javax.swing.JLabel" binding="label">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="300" height="300"/>
+            <preferred-size width="600" height="300"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font size="24"/>
+          <text value=""/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

@@ -1,0 +1,20 @@
+Sun Jun 05 19:24:55 CEST 2016 : Apache Derby Network Server 10.11.1.2 - (1629631) wurde gestartet und ist bereit, Verbindungen auf Port 1527 zu akzeptieren.
+----------------------------------------------------------------
+Sun Jun 05 19:24:55 CEST 2016:
+Booten von Derby-Version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): Instanz a816c00e-0155-2198-93af-ffffebb5183e
+für Datenbankverzeichnis C:\Users\Wochi-3D\Desktop\Angabe PA4\Airlines mit Class Loader sun.misc.Launcher$AppClassLoader@1497b7b1
+Geladen aus file:/C:/Program%20Files/Java/jdk1.8.0_45/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_45-b18
+user.dir=C:\Program Files\Java\jdk1.8.0_45\db
+os.name=Windows 8
+os.arch=amd64
+os.version=6.2
+derby.system.home=C:\Users\Wochi-3D\Desktop\Angabe PA4
+Datenbank-Class Loader wurde gestartet - derby.database.classpath=''
+----------------------------------------------------------------
+Sun Jun 05 19:25:20 CEST 2016: Derby-Engine wird heruntergefahren
+----------------------------------------------------------------
+Sun Jun 05 19:25:20 CEST 2016:
+Instanz a816c00e-0155-2198-93af-ffffebb5183e im Datenbankverzeichnis C:\Users\Wochi-3D\Desktop\Angabe PA4\Airlines mit Class Loader sun.misc.Launcher$AppClassLoader@1497b7b1 wird heruntergefahren
+----------------------------------------------------------------
