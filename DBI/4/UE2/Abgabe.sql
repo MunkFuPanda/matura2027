@@ -1,156 +1,164 @@
-use Imkerei;
-
---1) Geben Sie die Betriebsnummer und den Namen aller Landwirtschaftsbetriebe an, die als Haupterzeugnis 'Mais' haben 
---   und von der Betriebsform 'GmbH' sind. 
+USE imkerei;
+GO
+--1) Geben Sie die Betriebsnummer und den Namen aller Landwirtschaftsbetriebe an, die als Haupterzeugnis 'Mais' haben
+--   und von der Betriebsform 'GmbH' sind.
 --   Sortieren Sie die Ausgabe aufsteigend nach dem Namen des Landwirtschaftsbetriebes
-
-select betriebsnr, name
-from Landwirtschaftsbetrieb
-where Haupterzeugnis = 'Mais'
-and Betriebsform = 'GmbH'
-order by name asc;
-
-
---2) Geben Sie für alle Typen von Bienenstöcken den durchschnittlichen Honigertrag aus, 
---   wobei nur jene Bienenstöcke berücksichtigt werden sollen, die mehr als 30 Arbeiterinnen vorweisen. 
+SELECT betriebsnr,
+       name
+FROM landwirtschaftsbetrieb
+WHERE haupterzeugnis = 'Mais'
+      AND betriebsform = 'GmbH'
+ORDER BY name ASC;
+--2) Geben Sie fï¿½r alle Typen von Bienenstï¿½cken den durchschnittlichen Honigertrag aus,
+--   wobei nur jene Bienenstï¿½cke berï¿½cksichtigt werden sollen, die mehr als 30 Arbeiterinnen vorweisen.
 --   Sortieren Sie das Ergebnis absteigend nach dem durchschnittlichen Ertrag
-
-select b.Typ, avg(b.Honigertrag) as Durchschnittlicher_Ertrag
-from Bienenstock b
-join Arbeiterin a on b.StockNr = a.arbeitetInStockNr and b.Typ = a.arbeitetInTyp
-group by b.Typ, b.StockNr
-having count(a.Kennzahl) > 30
-order by Durchschnittlicher_Ertrag
-
-
---3) Geben Sie den Namen und das Geburtsdatum aller Imker und Imkerinnen aus, 
---   die keine Hilfsarbeitende haben und für keine Bienenstöcke vom Typ "Magazin" zuständig sind. 
+SELECT bienenstock.typ,
+       AVG(bienenstock.honigertrag) AS durchschnittlicher_ertrag
+FROM bienenstock
+     JOIN arbeiterin ON bienenstock.stocknr = arbeiterin.arbeitetinstocknr
+                        AND bienenstock.typ = arbeiterin.arbeitetintyp
+GROUP BY bienenstock.typ,
+         bienenstock.stocknr
+HAVING COUNT(arbeiterin.kennzahl) > 30
+ORDER BY durchschnittlicher_ertrag
+--3) Geben Sie den Namen und das Geburtsdatum aller Imker und Imkerinnen aus,
+--   die keine Hilfsarbeitende haben und fÃ¼r keine BienenstÃ¶cke vom Typ "Magazin" zustÃ¤ndig sind.
 --   Ordnen Sie die Ergebnisse absteigend nach dem Geburtsdatum.
-
-select i.Name, i.GeborenAm
-from Imker i
-left join Hilfsarbeiter h on h.stelltAn = i.ImkerNr
-left join Bienenstock b on b.zustaendigFuer = i.ImkerNr and b.Typ = 'Magazin'
-where h.ArbeiterNr is null
-and b.StockNr is null
-order by i.GeborenAm desc;
-
-
-
---4) Geben Sie die Imkernummer und Namen des Imkers bzw. der Imkerin an, 
---   der bzw. die durchschnittlich am meisten für angestellte Hilfsarbeitende zahlt.
-
-select i.ImkerNr, i.Name
-from Imker i
-join Hilfsarbeiter h on h.stelltAn = i.ImkerNr
-group by i.ImkerNr, i.name
-order by avg(h.Lohn) desc
-
---5) Geben Sie die Namen und das Geburtsdatum der Imker und Imkerinnen aus, deren Bienen alle Felder bestäuben.
-
-select i.Name, i.GeborenAm
-from Imker i
-where not exists (
-    select f.Feldkennzahl
-    from Feld f
-    where not exists (
-        select b.Feldkennzahl
-        from bestaeubt b
-        join Arbeiterin a on a.Kennzahl = b.Kennzahl
-        join bienenstock s on s.StockNr = a.arbeitetInStockNr and s.Typ = a.arbeitetInTyp
-        where s.zustaendigfuer = i.ImkerNr and b.Feldkennzahl = f.Feldkennzahl and b.Ort = f.Ort
-    )
-)
-
---6) Geben Sie die Namen alle Imkerei-Meister und Meisterinnen und die Namen all derer Lehrlinge aus, 
---   die selber auch einen Lehrling gelehrt haben. Falls keine passenden Lehrlinge existieren, 
---   soll stattdessen in der Spalte für Lehrling "kein Lehrling vorhanden" ausgegeben werden. 
---   Dies gilt natürlich auch für Imker und Imkerinnen, die überhaupt keine Lehrlinge gehabt haben. 
---   Ordnen Sie die Ergebnisse aufsteigend nach den Namen der Meister und Meisterinnen.
-
-
-
-
---7) Geben Sie die Namen aller Imker und ihrer Bienenstock Typen und Stocknummern aus, falls diese Bienenstöcke einen 
+SELECT imker.name,
+       imker.geborenam
+FROM imker
+     LEFT JOIN hilfsarbeiter ON hilfsarbeiter.stelltan = imker.imkernr
+     LEFT JOIN bienenstock ON bienenstock.zustaendigfuer = imker.imkernr
+                              AND bienenstock.typ = 'Magazin'
+WHERE hilfsarbeiter.arbeiternr IS NULL
+      AND bienenstock.stocknr IS NULL
+ORDER BY imker.geborenam DESC;
+--4) Geben Sie die Imkernummer und Namen des Imkers bzw. der Imkerin an,
+--   der bzw. die durchschnittlich am meisten fï¿½r angestellte Hilfsarbeitende zahlt.
+SELECT imker.imkernr,
+       imker.name
+FROM imker
+     JOIN hilfsarbeiter ON hilfsarbeiter.stelltan = imker.imkernr
+GROUP BY imker.imkernr,
+         imker.name
+ORDER BY AVG(hilfsarbeiter.lohn) DESC
+--5) Geben Sie die Namen und das Geburtsdatum der Imker und Imkerinnen aus, deren Bienen alle Felder bestï¿½uben.
+SELECT imker.name,
+       imker.geborenam
+FROM imker
+WHERE NOT EXISTS ( SELECT feld.feldkennzahl
+                   FROM feld
+                   WHERE NOT EXISTS ( SELECT bestaeubt.feldkennzahl
+                                      FROM bestaeubt
+                                           JOIN arbeiterin ON arbeiterin.kennzahl = bestaeubt.kennzahl
+                                           JOIN bienenstock ON bienenstock.stocknr = arbeiterin.arbeitetinstocknr
+                                                               AND bienenstock.typ = arbeiterin.arbeitetintyp
+                                      WHERE bienenstock.zustaendigfuer = imker.imkernr
+                                            AND bestaeubt.feldkennzahl = feld.feldkennzahl
+                                            AND bestaeubt.ort = feld.ort ) )
+--6) Geben Sie die Namen alle Imkerei-Meister und Meisterinnen und die Namen all derer Lehrlinge aus,
+--   die selber auch einen Lehrling gelehrt haben. Falls keine passenden Lehrlinge existieren,
+--   soll stattdessen in der Spalte fï¿½r Lehrling "kein Lehrling vorhanden" ausgegeben werden.
+--   Dies gilt natï¿½rlich auch fï¿½r Imker und Imkerinnen, die ï¿½berhaupt keine Lehrlinge gehabt haben.
+SELECT m.name AS meister_name,
+       COALESCE(l.name, 'kein Lehrling vorhanden') AS lehrling_name
+FROM imker m
+     LEFT JOIN gelerntvon g ON g.meister = m.imkernr
+     LEFT JOIN imker l ON l.imkernr = g.lehrling
+     LEFT JOIN gelerntvon g2 ON g2.meister = g.lehrling
+WHERE g.lehrling IS NULL
+      OR g2.lehrling IS NOT NULL
+ORDER BY m.name ASC;
+--7) Geben Sie die Namen aller Imker und ihrer Bienenstock Typen und Stocknummern aus, falls diese Bienenstï¿½cke einen
 --   Honigertrag von 300kg oder mehr haben und mindestens 3 Brutnester besitzen.
-
-select i.Name, b.Typ, b.StockNr
-from Imker i
-join Bienenstock b on b.zustaendigFuer = i.ImkerNr
-join Brutnest n on n.liegtInStockNr = b.StockNr and n.liegtInTyp = b.typ
-group by i.Name, b.Typ, b.StockNr, b.Honigertrag
-having b.Honigertrag >= 300 and count(n.NestNr) >= 3
-
-
---8) Geben Sie für jedes Feld, gekennzeichnet durch die Feldkennzahl und den Ort, aus von wie vielen Landwirtschaftsbetrieb 
---   es verwendet wird, welchen Flächenanteil ein Betrieb im Durchschnitt verwendet und was durchschnittlich für die Bestäubung
---   dieses Feldes an Imker gezahlt wird. Auch soll für jedes Feld angegeben werden wie viele Arbeiterinnen es bestäuben.
-
-select f.Feldkennzahl, f.Ort,
-       count(distinct v.BetriebsNr) as anzahl_betriebe,
-       avg(v.Flaechenanteil) as durchschn_flaechenanteil,
-       avg(bf.Betrag) as durchschn_betrag,
-       count(distinct a.Kennzahl) as anzahl_arbeiterinnen
-from Feld f
-join verwendetVon v on f.Feldkennzahl = v.Feldkennzahl and f.Ort = v.Ort
-join bezahltFuer bf on f.Feldkennzahl = bf.Feldkennzahl and f.Ort = bf.Ort
-join bestaeubt a on f.Feldkennzahl = a.Feldkennzahl and f.Ort = a.Ort
-group by f.Feldkennzahl, f.Ort;
-
-
---9) Geben Sie den Namen eines Imkers bzw. einer Imkerin, einen Ortsnamen und einen Betrag aus, die folgende Bedingung erfüllen:
---   Der Imker oder die Imkerin muss für alle Felder in diesem Ort als Summe genannten Betrag bezahlt bekommen haben 
---   und dieser muss höher sein als den Betrag den jeder andere Imker oder jede andere Imkerin in diesem Ort 
---   bekommen hat ("Betrag" ist hier verstanden als die Summe, die von allen Landwirtschaftsbetriebe die Felder 
+SELECT imker.name,
+       bienenstock.typ,
+       bienenstock.stocknr
+FROM imker
+     JOIN bienenstock ON bienenstock.zustaendigfuer = imker.imkernr
+     JOIN brutnest ON brutnest.liegtinstocknr = bienenstock.stocknr
+                      AND brutnest.liegtintyp = bienenstock.typ
+GROUP BY imker.name,
+         bienenstock.typ,
+         bienenstock.stocknr,
+         bienenstock.honigertrag
+HAVING bienenstock.honigertrag >= 300
+       AND COUNT(n.nestnr) >= 3
+--8) Geben Sie fï¿½r jedes Feld, gekennzeichnet durch die Feldkennzahl und den Ort, aus von wie vielen Landwirtschaftsbetrieb
+--   es verwendet wird, welchen Flï¿½chenanteil ein Betrieb im Durchschnitt verwendet und was durchschnittlich fï¿½r die Bestï¿½ubung
+--   dieses Feldes an Imker gezahlt wird. Auch soll fï¿½r jedes Feld angegeben werden wie viele Arbeiterinnen es bestï¿½uben.
+SELECT feld.feldkennzahl,
+       feld.ort,
+       COUNT(DISTINCT verwendetvon.betriebsnr) AS anzahl_betriebe,
+       AVG(verwendetvon.flaechenanteil) AS durchschn_flaechenanteil,
+       AVG(bestelltfuer.betrag) AS durchschn_betrag,
+       COUNT(DISTINCT bestaeubt.kennzahl) AS anzahl_arbeiterinnen
+FROM feld
+     JOIN verwendetvon ON feld.feldkennzahl = verwendetvon.feldkennzahl
+                          AND feld.ort = verwendetvon.ort
+     JOIN bezahltfuer ON feld.feldkennzahl = bezahltfuer.feldkennzahl
+                         AND feld.ort = bezahltfuer.ort
+     JOIN bestaeubt ON feld.feldkennzahl = bestaeubt.feldkennzahl
+                       AND feld.ort = bestaeubt.ort
+GROUP BY feld.feldkennzahl,
+         feld.ort;
+--9) Geben Sie den Namen eines Imkers bzw. einer Imkerin, einen Ortsnamen und einen Betrag aus, die folgende Bedingung erfï¿½llen:
+--   Der Imker oder die Imkerin muss fï¿½r alle Felder in diesem Ort als Summe genannten Betrag bezahlt bekommen haben
+--   und dieser muss hï¿½her sein als den Betrag den jeder andere Imker oder jede andere Imkerin in diesem Ort
+--   bekommen hat ("Betrag" ist hier verstanden als die Summe, die von allen Landwirtschaftsbetriebe die Felder
 --   dieses Ortes verwenden, bezahlt wird). Ordnen Sie die Ergebnisse absteigend nach dem Betrag.
-
-
---10)Geben Sie alle Bienenstöcke (StockNr und Typ) aus, deren Arbeiterinnen weniger als 10 Felder bestäuben und 
---   die maximal 2 Brutnester besit¬zen, deren Honigertrag aber durchschnittlich oder besser 
---   (im Vergleich zu allen Bienenstöcken) ist. Ordnen Sie die aufsteigend Ergebnisse nach der Stocknummer.
-
-
-
---11)Geben Sie für jede Gattung Biene an, wie viele Arbeiterinnen und Königinnen vorhanden sind, 
---   und wie viele Felder von der Arbeiterinnen der jeweiligen Gattung durchschnittlich bestäubt werden, 
---   zusätzlich dazu auch die minimale und maximal Anzahl Felder die pro Biene der jeweiligen Gattung bestäubt werden.
-
-
-
---12)Geben Sie die Kennzahl und den Ort aller Felder aus, die von allen Landwirtschaftsbetrieben verwendet werden. 
---   (In anderen Worten, es soll keinen Landwirtschaftsbetrieb geben, der von diesen Feldern nicht einen gewissen Anteil 
+SELECT i.name,
+       f.ort,
+       SUM(b.betrag) AS betrag
+FROM imker i
+     JOIN bezahltfuer b ON b.imkernr = i.imkernr
+     JOIN feld f ON f.feldkennzahl = b.feldkennzahl
+                    AND f.ort = b.ort
+GROUP BY i.imkernr,
+         i.name,
+         f.ort
+HAVING SUM(b.betrag) = ( SELECT MAX(betrag_sum)
+                         FROM ( SELECT SUM(b2.betrag) AS betrag_sum
+                                FROM bezahltfuer b2
+                                     JOIN feld f2 ON f2.feldkennzahl = b2.feldkennzahl
+                                                     AND f2.ort = f.ort
+                                WHERE b2.imkernr IS NOT NULL
+                                GROUP BY b2.imkernr,
+                                         f2.ort ) AS betrags )
+ORDER BY betrag DESC;
+--10)Geben Sie alle Bienenstï¿½cke (StockNr und Typ) aus, deren Arbeiterinnen weniger als 10 Felder bestï¿½uben und
+--   die maximal 2 Brutnester besitï¿½zen, deren Honigertrag aber durchschnittlich oder besser
+--   (im Vergleich zu allen Bienenstï¿½cken) ist. Ordnen Sie die aufsteigend Ergebnisse nach der Stocknummer.
+         
+--11)Geben Sie fï¿½r jede Gattung Biene an, wie viele Arbeiterinnen und Kï¿½niginnen vorhanden sind,
+--   und wie viele Felder von der Arbeiterinnen der jeweiligen Gattung durchschnittlich bestï¿½ubt werden,
+--   zusï¿½tzlich dazu auch die minimale und maximal Anzahl Felder die pro Biene der jeweiligen Gattung bestï¿½ubt werden.
+         
+--12)Geben Sie die Kennzahl und den Ort aller Felder aus, die von allen Landwirtschaftsbetrieben verwendet werden.
+--   (In anderen Worten, es soll keinen Landwirtschaftsbetrieb geben, der von diesen Feldern nicht einen gewissen Anteil
 --   verwendet) Ordnen Sie das Ergebnis aufsteigend nach der Kennzahl.
-
-select f.Feldkennzahl, f.Ort
-from Feld f
-where not exists (
-  select l.BetriebsNr
-  from Landwirtschaftsbetrieb l
-  where not exists (
-    select v.BetriebsNr
-    from verwendetVon v
-    where v.Feldkennzahl = f.Feldkennzahl
-      and v.Ort = f.Ort
-      and v.BetriebsNr = l.BetriebsNr
-  )
-)
-order by f.Feldkennzahl;
-
-
-
---13)Geben Sie die Kennzahl und Gattung aller Arbeiterinnen an, die entweder in Bienenstöcken mit mehr als 60 Bienen 
---   (inklusive Königin!) arbeiten, und/oder die in Bienenstöcken mit 5 oder mehr Brutnestern arbeiten. 
---   Es genügt wenn jeweils eine Bedingung erfüllt ist.
-
-
---14)Geben Sie neben dem Namen aller Imker und Imkerinnen auch den Betrag aus, den sie von Landwirtschaftsbetrieben in Summe 
---   ausgezahlt bekommen. Daneben soll auch eine Spalte “Bewertung” ausgegeben werden, die wie folgt definiert ist: 
---   Falls in Summe mehr als 2000 verdient wird, soll hier “hoher Ertrag” stehen 
---   Falls in Summe zwischen 2000 und 1000 verdient wird, soll “mäßiger Ertrag” ausgeben werden. 
---   Und für Summen unter 1000 soll “geringer Ertrag” ausgeben werden.
-
-
-
---15)Geben Sie die Imkernummer und den Namen des ältesten Imkers bzw. der ältesten Imkerin aus, der oder die für zumindest 
---   einen Bienenstock mit einem Brustnest mit einer Größe über 100 cm3 zuständig ist 
+SELECT feld.feldkennzahl,
+       feld.ort
+FROM feld
+WHERE NOT EXISTS ( SELECT landwirtschaftsbetrieb.betriebsnr
+                   FROM landwirtschaftsbetrieb
+                   WHERE NOT EXISTS ( SELECT verwendetvon.betriebsnr
+                                      FROM verwendetvon v,
+                                           landwirtschaftsbetrieb l
+                                      WHERE v.feldkennzahl = feld.feldkennzahl
+                                            AND v.ort = feld.ort
+                                            AND v.betriebsnr = l.betriebsnr ) )
+ORDER BY feld.feldkennzahl;
+--13)Geben Sie die Kennzahl und Gattung aller Arbeiterinnen an, die entweder in Bienenstï¿½cken mit mehr als 60 Bienen
+--   (inklusive Kï¿½nigin!) arbeiten, und/oder die in Bienenstï¿½cken mit 5 oder mehr Brutnestern arbeiten.
+--   Es genï¿½gt wenn jeweils eine Bedingung erfï¿½llt ist.
+         
+--14)Geben Sie neben dem Namen aller Imker und Imkerinnen auch den Betrag aus, den sie von Landwirtschaftsbetrieben in Summe
+--   ausgezahlt bekommen. Daneben soll auch eine Spalte ï¿½Bewertungï¿½ ausgegeben werden, die wie folgt definiert ist:
+--   Falls in Summe mehr als 2000 verdient wird, soll hier ï¿½hoher Ertragï¿½ stehen
+--   Falls in Summe zwischen 2000 und 1000 verdient wird, soll ï¿½mï¿½ï¿½iger Ertragï¿½ ausgeben werden.
+--   Und fï¿½r Summen unter 1000 soll ï¿½geringer Ertragï¿½ ausgeben werden.
+         
+--15)Geben Sie die Imkernummer und den Namen des ï¿½ltesten Imkers bzw. der ï¿½ltesten Imkerin aus, der oder die fï¿½r zumindest
+--   einen Bienenstock mit einem Brustnest mit einer Grï¿½ï¿½e ï¿½ber 100 cm3 zustï¿½ndig ist
 --   und allen Hilfsarbeitenden einen ungeraden Lohn auszahlt.
