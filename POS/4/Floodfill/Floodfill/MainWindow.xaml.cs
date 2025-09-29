@@ -17,7 +17,7 @@ namespace PixelDraw
     {
         private static readonly int imageWidth = 390;
         private static readonly int imageHeigth = 500;
-        
+
 
         public Color Color { get; set; } = Colors.Black;
 
@@ -130,6 +130,10 @@ namespace PixelDraw
 
         #endregion
 
+        private static bool ColorMatch(Color replacementColor, Color targetColor)
+        {
+            return targetColor.Equals(replacementColor);
+        }
 
         private void drawing_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -140,12 +144,49 @@ namespace PixelDraw
 
             Color old = getPixel((int)p.X, (int)p.Y);
             Color _new = Color;
-            if (!old.Equals(_new))
+            if (!ColorMatch(old, _new))
             {
-                setPixelThreaded(Color, p.X, p.Y);  
+
+                Queue<Point> queue = new Queue<Point>(); // Warteschlange der Pixel für die Breitensuche
+                queue.Enqueue(p); // Fügt das Startpixel der Warteschlange hinzu
+
+                while (queue.Count != 0) // So lange die Warteschlange nicht leer ist
+                {
+                    Point point1 = queue.Dequeue(); // Entfernt das erste Pixel aus der Warteschlange
+                    if (!ColorMatch(getPixel(point1.X, point1.Y), old)) // Wenn die Farbe des aktuellen Pixels gleich dem Startpixel ist, wird die nächste Iteration der äußeren while-Schleife ausgeführt
+                    {
+                        continue;
+                    }
+                    Point point2 = new Point(point1.X + 1, point1.Y); // Speichert das Pixel rechts vom aktuellen Pixel
+                    while (point1.X >= 0 && ColorMatch(getPixel(point1.X, point1.Y), old)) // So lange das aktuelle Pixel nicht links vom Rand ist und die Farbe des Startpixels hat
+                    {
+                        setPixel(_new, point1.X, point1.Y); // Setzt das aktuelle Pixel auf die neue Farbe
+                        if (point1.Y > 0 && ColorMatch(getPixel(point1.X, point1.Y - 1), old)) // Wenn das aktuelle Pixel nicht am linken Rand ist und die Farbe des Startpixels hat
+                        {
+                            queue.Enqueue(new Point(point1.X, point1.Y - 1)); // Fügt das Pixel über dem aktuellen Pixel der Warteschlange hinzu
+                        }
+                        if (point1.Y < imageHeigth - 1 && ColorMatch(getPixel(point1.X, point1.Y + 1), old)) // Wenn das aktuelle Pixel nicht am rechten Rand ist und die Farbe des Startpixels hat
+                        {
+                            queue.Enqueue(new Point(point1.X, point1.Y + 1)); // Fügt das Pixel unter dem aktuellen Pixel der Warteschlange hinzu
+                        }
+                        point1.X--; // Verschiebt das aktuelle Pixel um 1 nach links
+                    }
+                    // Die folgende while-Schleife wiederholt den Ablauf mit dem Pixel rechts vom aktuellen Pixel
+                    while (point2.X <= imageWidth - 1 && ColorMatch(getPixel(point2.X, point2.Y), old))
+                    {
+                        setPixel(_new, point2.X, point2.Y);
+                        if (point2.Y > 0 && ColorMatch(getPixel(point2.X, point2.Y - 1), old))
+                        {
+                            queue.Enqueue(new Point(point2.X, point2.Y - 1));
+                        }
+                        if (point2.Y < imageHeigth - 1 && ColorMatch(getPixel(point2.X, point2.Y + 1), old))
+                        {
+                            queue.Enqueue(new Point(point2.X, point2.Y + 1));
+                        }
+                        point2.X++; // Verschiebt das aktuelle Pixel um 1 nach rechts
+                    }
+                }
             }
         }
-
-        
     }
 }
