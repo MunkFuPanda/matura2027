@@ -1,0 +1,35 @@
+﻿<Window x:Class="Achterbahn.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Achterbahn"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Click="start">Start</Button>
+                <Label FontSize="15" VerticalContentAlignment="Center">Status Zug</Label>
+                <Label>Anzahl Sitzplätze: </Label>
+                <TextBox Name="seats" Width="50"></TextBox>
+                <Label>Anzahl Personen:</Label>
+                <TextBox Name="p" Width="50"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Name="status_train" Height="80" Width="80" Background="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"> Waiting</Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <ListBox Name="driving_list">
+                    <ListBoxItem>Persons driving</ListBoxItem>
+                </ListBox>
+                <ListBox Name="waiting_list">
+                    <ListBoxItem>Persons Waiting</ListBoxItem>
+                </ListBox>
+                <ListBox Name="wandering_list">
+                    <ListBoxItem>Persons wandering</ListBoxItem>
+                </ListBox>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
