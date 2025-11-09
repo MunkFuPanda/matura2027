@@ -1,0 +1,40 @@
+﻿<Window x:Class="Kreuzung.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kreuzung"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1000">
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Button Content="Start Simulation" Width="150" Height="40" Click="StartSimulation_Click"/>
+            <TextBox x:Name="CarsAmountTextBox" Width="150" Height="30" Text="20"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Kreuzung"/>
+            <ListBox x:Name="InKreuzung" ItemsSource="{Binding CarsInCrossing}">
+            </ListBox>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Label Content="Links"/>
+            <ListBox  x:Name="LinksDirection" ItemsSource="{Binding CarsWest}">
+            </ListBox>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Label Content="Rechts"/>
+            <ListBox x:Name="RechtsDirection" ItemsSource="{Binding CarsEast}">
+            </ListBox>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Label Content="Oben"/>
+            <ListBox x:Name="ObenDirection" ItemsSource="{Binding CarsNorth}">
+            </ListBox>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Label Content="Unten"/>
+            <ListBox x:Name="UntenDirection" ItemsSource="{Binding CarsSouth}">
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</Window>
