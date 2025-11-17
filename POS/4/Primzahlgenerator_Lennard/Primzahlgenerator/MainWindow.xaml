@@ -1,0 +1,34 @@
+﻿<Window x:Class="Primzahlgenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Primzahlgenerator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="30">
+                <Label HorizontalAlignment="Center" FontSize="20" Margin="20" Height="40">Primzahlgenerator</Label>
+                <TextBox Name="count" Margin="20">100</TextBox>
+                <Button Click="start_button" Margin="10">Start</Button>
+                <Label Name="result_label" HorizontalAlignment="Center" Margin="20">0</Label>
+                <Image Name="image1" Stretch="Fill" Width="124" Height="124" Source="loading.png">
+                    <Image.RenderTransform>
+                        <RotateTransform Angle="0" CenterX="62" CenterY="62"/>
+                    </Image.RenderTransform>
+                </Image>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Width="100">
+                <ListView Name="result">
+                </ListView>
+                <Button Click="reset_view">Reset List</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+    <Window.Resources>
+        <Storyboard x:Key="loadingRotation">
+            <DoubleAnimation Storyboard.TargetName="image1" Storyboard.TargetProperty="(Image.RenderTransform).(RotateTransform.Angle)" From="0" To="360" Duration="0:0:2.0" RepeatBehavior="Forever" />
+        </Storyboard>
+    </Window.Resources>
+</Window>
