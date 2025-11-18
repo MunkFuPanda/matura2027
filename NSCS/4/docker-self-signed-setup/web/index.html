@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Signed SSL Certificate Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+        
+        .success {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .success h2 {
+            color: #155724;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .success p {
+            color: #155724;
+            line-height: 1.6;
+        }
+        
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .info-box ul {
+            margin-left: 20px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .cert-info {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .cert-info h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .cert-info p {
+            color: #856404;
+            line-height: 1.6;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #e83e8c;
+        }
+        
+        .lock-icon {
+            color: #28a745;
+            font-size: 1.5em;
+        }
+        
+        footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 SSL/TLS Zertifikat Test</h1>
+        <p class="subtitle">OpenSSL Public-Key Übung mit Docker</p>
+        
+        <div class="success">
+            <h2><span class="lock-icon">✓</span> HTTPS Verbindung erfolgreich!</h2>
+            <p>Deine Verbindung zu diesem Server ist mit einem selbst-signierten SSL-Zertifikat gesichert.</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>📋 Zertifikat Details</h3>
+            <ul>
+                <li><strong>Organisation:</strong> HTLWRN</li>
+                <li><strong>Abteilung:</strong> Informatik</li>
+                <li><strong>Ort:</strong> Wiener Neustadt, Niederösterreich, AT</li>
+                <li><strong>Common Name:</strong> Markus</li>
+                <li><strong>Email:</strong> markus@example.com</li>
+            </ul>
+        </div>
+        
+        <div class="cert-info">
+            <h3>⚠️ Hinweis zu selbst-signierten Zertifikaten</h3>
+            <p>
+                Dieses Zertifikat wurde von einer lokalen Root-CA signiert. Um die SSL-Warnung 
+                im Browser zu vermeiden, importiere das Root-Zertifikat (<code>rootCA.crt</code>) 
+                als vertrauenswürdige Stammzertifizierungsstelle in deinem Browser.
+            </p>
+        </div>
+        
+        <div class="info-box">
+            <h3>🌐 Unterstützte Domains</h3>
+            <ul>
+                <li>localhost</li>
+                <li>myexample.com</li>
+                <li>sub.myexample.com</li>
+                <li>myexample1.com</li>
+            </ul>
+        </div>
+        
+        <footer>
+            <p>🐳 Running on Docker with Nginx | NSCS Labor 4</p>
+            <p><small>Prof. Fuxreiter - 17.11.2025</small></p>
+        </footer>
+    </div>
+    
+    <script>
+        // Zeige aktuelle URL-Informationen
+        console.log('🔒 SSL Connection Info:');
+        console.log('Protocol:', window.location.protocol);
+        console.log('Hostname:', window.location.hostname);
+        console.log('Port:', window.location.port);
+    </script>
+</body>
+</html>
