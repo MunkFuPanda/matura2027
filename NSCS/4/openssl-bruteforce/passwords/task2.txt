@@ -1,1 +1,1 @@
-676767
+./bruteforcer -K -i 10000 -v 1 -1 messages/message2.enc -t 12 -d sha256 -s 1234567890

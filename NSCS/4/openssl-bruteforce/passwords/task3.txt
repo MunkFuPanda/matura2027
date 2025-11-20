@@ -1,1 +1,1 @@
-classroom
+./bruteforcer -i 10000 -K -t 10 -v 1 -1 -f wordlist.txt messages/message3.enc
