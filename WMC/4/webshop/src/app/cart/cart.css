@@ -1,0 +1,8 @@
+.container {
+  max-width: 1200px;
+}
+
+h3 {
+  text-align: right;
+  font-weight: bold;
+}

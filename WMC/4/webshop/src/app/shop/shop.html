@@ -3,66 +3,20 @@
   <br>
   <br>
   <div class="row">
-    <!-- Product 1 -->
-    <div class="col-lg-4 col-sm-12 mb-4">
-      <div class="card h-100">
-        <img src="https://valorantstrike.com/wp-content/uploads/2020/07/Valorant-Oni-Collection-Phantom-Small.jpg"
-          class="card-img-top" alt="Produkt 1">
-        <div class="card-body">
-          <h5 class="card-title">Oni Phantom</h5>
-          <p class="card-text">Einzigartiges Design für ein hochwertiges Spielerlebnis.</p>
-          <b>€25,00</b>
-          <br><br>
-          <button class="btn btn-primary add-to-cart" data-id="1">In den Warenkorb</button>
+    @for (product of products; track product.id) {
+      <div class="col-lg-4 col-sm-12 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">{{ product.description }}</p>
+            <b>€{{ product.price }}</b>
+            <br><br>
+            <button class="btn btn-primary add-to-cart" (click)="addToCart(product)" [attr.data-id]="product.id">In den
+              Warenkorb
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- Product 2 -->
-    <div class="col-lg-4 col-sm-12 mb-4">
-      <div class="card h-100">
-        <img src="https://valorantstrike.com/wp-content/uploads/2020/11/Valorant-Ion-Collection-Operator-Small.jpg"
-          class="card-img-top" alt="Produkt 2">
-        <div class="card-body">
-          <h5 class="card-title">Ion Operator</h5>
-          <p class="card-text">Perfekte Präzision und futuristisches Design.</p>
-          <b>€25,00</b>
-          <br><br>
-          <button class="btn btn-primary add-to-cart" data-id="2">In den Warenkorb</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 3 -->
-    <div class="col-lg-4 col-sm-12 mb-4">
-      <div class="card h-100">
-        <img src="https://valorantstrike.com/wp-content/uploads/2020/11/Valorant-Wasteland-Collection-Sheriff-Small.jpg"
-          class="card-img-top" alt="Produkt 3">
-        <div class="card-body">
-          <h5 class="card-title">Wasteland Sheriff</h5>
-          <p class="card-text">Robust und stilvoll für Spieler, die auffallen wollen.</p>
-          <b>€20,00</b>
-          <br><br>
-          <button class="btn btn-primary add-to-cart" data-id="3">In den Warenkorb</button>
-        </div>
-      </div>
-    </div>
+    }
   </div>
 </div>
-
-<script>
-  document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', () => {
-      const productId = button.getAttribute('data-id');
-      let cart = JSON.parse(sessionStorage.getItem('cart')) || {};
-      if (!cart[productId]) {
-        cart[productId] = 1;
-      } else {
-        cart[productId]++;
-      }
-
-      sessionStorage.setItem('cart', JSON.stringify(cart)); // Save updated cart to sessionStorage
-      alert('Produkt wurde zum Warenkorb hinzugefügt!');
-    });
-  });
-</script>

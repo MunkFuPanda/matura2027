@@ -1,0 +1,44 @@
+<div class="container mt-4">
+  <h1>Warenkorb</h1>
+
+  @if (cartService.items().length === 0) {
+    <div class="alert alert-info mt-4">
+      <p>Ihr Warenkorb ist leer.</p>
+      <a routerLink="/shop" class="btn btn-primary">Zum Shop</a>
+    </div>
+  } @else {
+    <div class="table-responsive mt-4">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Produkt</th>
+            <th>Anzahl</th>
+            <th>Einzelpreis</th>
+            <th>Gesamtpreis</th>
+            <th>Aktion</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of cartService.items(); track item.product.id) {
+            <tr>
+              <td>{{ item.product.name }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.product.price | currency: 'EUR' }}</td>
+              <td>{{ getTotalForItem(item.product.price, item.quantity) | currency: 'EUR' }}</td>
+              <td>
+                <button class="btn btn-danger btn-sm" (click)="removeFromCart(item.product.id)">
+                  Entfernen
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-4">
+      <h3>Gesamtpreis: {{ cartService.totalPrice() | currency: 'EUR' }}</h3>
+    </div>
+  }
+</div>
+
