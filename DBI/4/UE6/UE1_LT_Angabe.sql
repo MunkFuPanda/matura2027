@@ -174,6 +174,7 @@ go
 
 drop procedure if exists dbo.stpUpdateMengeTabelle
 
+go
 create procedure dbo.stpUpdateMengeTabelle
     @Prozentwert float
 as
@@ -200,6 +201,7 @@ go
 
 drop procedure if exists dbo.stpDeleteArticle
 
+go
 create procedure dbo.stpDeleteArticle
     @ArticleID char(2)
 as
@@ -229,6 +231,7 @@ go
 
 drop procedure if exists dbo.stpdel_l
 
+go
 create procedure dbo.stpdel_l
     @Lieferant char(2)
 as
@@ -260,6 +263,7 @@ go
 
 drop procedure if exists dbo.stpclear_lt
 
+go
 create procedure dbo.stpclear_lt
     @m int
 as
