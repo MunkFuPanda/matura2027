@@ -1,111 +1,325 @@
-USE lagerverwaltung;
+use lagerverwaltung;
+
 -- Anlieferung
-DROP PROCEDURE IF EXISTS dbo.stpanlieferung
-SELECT *
-FROM lager
-GO CREATE
-   OR ALTER PROCEDURE dbo.stpanlieferung @anr INT,
-   @datum DATETIME,
-   @stueck INT AS
-   BEGIN DECLARE @currentlnr INT = 1;
-       DECLARE @currentlfnd INT = 0;
-       DECLARE @firsttime INT = 0;
-       DECLARE @maxkap INT = 0 DECLARE @howmuchnow INT = 0 WHILE ( @currentlnr < 5 )
-       BEGIN
-           SET @currentlfnd = ( SELECT MAX(lfndnr) FROM lieferung WHERE lnr = @currentlnr ) + 1
-           SET @maxkap = ( SELECT stueckkap FROM lager WHERE lnr = @currentlnr )
-           SET @howmuchnow = ( SELECT SUM(li.stueck)
-                               FROM lieferung li
-                                    JOIN lager la ON la.lnr = li.lnr
-                               WHERE la.lnr = @currentlnr ) DECLARE @add INT = 0 IF ( @maxkap > @howmuchnow + @stueck ) BEGIN SET @add = @stueck END
-           ELSE
-                BEGIN IF ( @maxkap - @howmuchnow < @stueck ) BEGIN SET @add = @maxkap - @howmuchnow END
-                    ELSE BEGIN SET @add = @stueck END
-                END
-           SET @stueck = @stueck - @add
-           INSERT INTO LIEFERUNG(lnr, lfndnr, anr, datum, stueck)
-           VALUES ( @currentlnr, @currentlfnd, @anr, @datum, @stueck ) IF ( @stueck <= 0 ) BEGIN BREAK END
-           SET @currentlnr += 1
-       END IF ( @stueck > 0 ) BEGIN PRINT 'error' END
-       ELSE BEGIN ( SELECT lnr, stueck FROM lieferung WHERE anr = @anr ) END
-   END
-GO EXEC dbo.stpanlieferung 3,
-   '2012-01-01 00:00:00.000',
-   400
-SELECT *
-FROM lieferung;
+go
+create or alter procedure Anlieferung
+    @ANr integer
+    ,@Datum datetime
+    ,@Stueck integer
+as
+begin
+    declare cur_lager cursor for
+        select
+        lager.lnr
+        ,coalesce(max(lfndNr), 0) + 1 as next_lfndnr
+        ,stueckkap - coalesce(sum(stueck), 0) as space
+    from
+        lager
+        left join lieferung
+        on lager.lnr = lieferung.lnr
+    group by lager.lnr, stueckkap
+
+    open cur_lager
+    declare @lnr int
+    declare @next_lfndnr int
+    declare @space int
+    set nocount on
+    fetch cur_lager into @lnr, @next_lfndnr, @space
+
+    declare @Verteilung table (
+        LNr    int
+        ,Stueck int
+    )
+
+    while @@fetch_status=0
+    begin
+        if @Stueck <= 0
+        begin
+            break
+        end
+
+        if @space <= 0
+        begin
+            fetch cur_lager into @lnr, @next_lfndnr, @space
+            continue
+        end
+
+        declare @to_add int
+        if @Stueck > @space begin
+            set @to_add = @space
+        end
+        else begin
+            set @to_add = @Stueck
+        end
+        begin
+            insert into lieferung
+                (LNr, LfndNr, ANr, Datum, Stueck)
+            values
+                (@lnr ,@next_lfndnr ,@ANr ,@Datum ,@to_add)
+            insert into @Verteilung
+                (LNr, Stueck)
+            values
+                (@lnr ,@to_add)
+            set @Stueck = @Stueck - @to_add
+        end
+
+        fetch cur_lager into @lnr, @next_lfndnr, @space
+    end
+
+    close cur_lager
+    deallocate cur_lager
+
+    select
+        *
+    from
+        @Verteilung
+    where @Stueck = 0
+end
+go
+
+begin transaction;
+exec Anlieferung 3, '2024-04-27', 15
+
+exec Anlieferung 3, '2024-04-27', 50
+
+exec Anlieferung 2, '2024-04-27', 405
+
+exec Anlieferung 1, '2024-04-27', 200
+rollback
+go
+
 -- Entnahme
-     
+go
+create or alter procedure Entnahme
+    @ANr integer
+    ,@Stueck integer
+as
+begin
+    declare cur_lager cursor for
+    -- declare @ANr int = 3
+        select
+        lnr
+        ,lfndNr
+        ,stueck
+    from
+        lieferung
+    where anr = @ANr
+    order by datum
+
+    open cur_lager
+    declare @lnr int
+    declare @lfndNr int
+    declare @amount int
+    set nocount on
+    fetch cur_lager into @lnr, @lfndNr, @amount
+
+    declare @Verteilung table (
+        LNr    int
+        ,Stueck int
+    )
+
+    while @@fetch_status=0
+    begin
+        if @Stueck <= 0
+        begin
+            break
+        end
+
+        if @Stueck > @amount
+        begin
+            insert into @Verteilung
+                (LNr, Stueck)
+            values
+                (@lnr ,@amount)
+            delete from lieferung
+            where lnr = @lnr and lfndNr = @lfndNr and stueck = @amount
+            set @Stueck = @Stueck - @amount
+        end
+        else
+        begin
+            insert into @Verteilung
+                (LNr, Stueck)
+            values
+                (@lnr ,@Stueck)
+            update lieferung set stueck = @amount - @Stueck
+            where lnr = @lnr and lfndNr = @lfndNr and stueck = @amount
+            set @Stueck = 0
+        end
+
+        fetch cur_lager into @lnr, @lfndNr, @amount
+    end
+
+    close cur_lager
+    deallocate cur_lager
+
+    select
+        *
+    from
+        @Verteilung
+    where @Stueck = 0
+end
+go
+
+begin transaction;
+exec Entnahme 3, 15
+
+exec Entnahme 2, 5
+
+exec Entnahme 1, 500
+rollback
+go
+
 -- LagerLoeschen
-GO CREATE
-   OR ALTER PROCEDURE dbo.stplagerloeschen @lnr INT AS
-   BEGIN
-       DELETE FROM lieferung
-       WHERE lnr = @lnr
-       DELETE FROM lager
-       WHERE lnr = @lnr
-   END
-GO
--- Bestand
-GO CREATE
-   OR ALTER PROCEDURE dbo.stpbestand AS
-   BEGIN
-       SET nocount ON DECLARE @lnr INT;
-                      DECLARE @lfndnr INT;
-                      DECLARE @anr INT;
-                      DECLARE @sum INT = 0;
-                      DECLARE @bezeichnung VARCHAR ( 30 );
-                      DECLARE @ortaktuell VARCHAR ( 30 );
-                      DECLARE @ort VARCHAR ( 30 );
-                      DECLARE @datum DATETIME;
-                      DECLARE @stueck INT;
-                      DECLARE @ergebnis TABLE ( bezeichnung VARCHAR ( 50 ), ort VARCHAR ( 50 ), datum DATE, stueck INT );
-                      DECLARE crs_lieferung CURSOR FOR
-       SELECT lnr,
-              lfndnr
-       FROM lieferung
-       ORDER BY lnr,
-                anr OPEN crs_lieferung;
-                FETCH crs_lieferung
-       INTO @lnr,
-            @lfndnr;
-            WHILE @@fetch_status = 0
-            BEGIN FETCH crs_lieferung
-                INTO @lnr,
-                     @lfndnr IF ( @anr != ( SELECT anr FROM lieferung WHERE lnr = @lnr AND lfndnr = @lfndnr ) ) BEGIN INSERT INTO @ergebnis VALUES ( 'Summe', '', NULL, @sum ) SET @sum = 0; END IF ( @ortaktuell = ( SELECT ort FROM lager WHERE lnr = @lnr ) ) BEGIN SET @ort = '' END
-                ELSE
-                     BEGIN
-                         SET @ort = ( SELECT ort FROM lager WHERE lnr = @lnr )
-                         SET @ortaktuell = @ort
-                     END
-                SET @anr = ( SELECT anr FROM lieferung WHERE lnr = @lnr AND lfndnr = @lfndnr );
-                SET @bezeichnung = ( SELECT bezeichnung FROM artikel WHERE anr = @anr );
-                SET @datum = ( SELECT datum FROM lieferung WHERE lnr = @lnr AND lfndnr = @lfndnr )
-                SET @stueck = ( SELECT stueck FROM lieferung WHERE lnr = @lnr AND lfndnr = @lfndnr )
-                SET @sum += @stueck
-                INSERT INTO @ergebnis
-                VALUES ( @bezeichnung, @ort, ( SELECT CONVERT(VARCHAR( 10 ), @datum, 104) ), @stueck )
-            END
-       SELECT *
-       FROM @ergebnis;
-            CLOSE crs_lieferung;
-            DEALLOCATE crs_lieferung;
-   END
-GO
-GO EXEC dbo.stpbestand;
+go
+create or alter procedure LagerLoeschen
+    @LNr integer
+as
+begin
+    delete from lieferung where lnr = @LNr
+    delete from lager where lnr = @LNr
+end
+go
+
+begin transaction;
+exec LagerLoeschen 1
+exec LagerLoeschen 3
+exec LagerLoeschen 4
+rollback
+go
+
+-- Bestand (von Tobi)
+go
+create or alter procedure dbo.stpBestand
+as
+begin
+
+    set nocount on
+
+    declare @lnr int;
+    declare @lfndNR int;
+    declare @anr int;
+    declare @sum int = 0;
+
+    declare @Bezeichnung varchar(30);
+    declare @Ortaktuell varchar(30);
+    declare @Ort varchar(30);
+    declare @Datum datetime;
+    declare @Stueck int;
+
+    declare @ergebnis table (Bezeichnung varchar(50)
+        ,Ort         varchar(50)
+        ,Datum       date
+        ,Stueck      int);
+
+    declare crs_lieferung cursor for
+        select
+        lnr
+        ,lfndNR
+    from
+        lieferung
+    order by lnr,anr
+
+    open crs_lieferung;
+
+    fetch crs_lieferung into @lnr,@lfndNR;
+
+    while @@FETCH_STATUS = 0
+    begin
+
+        fetch crs_lieferung into @lnr,@lfndNR
+
+        if (@anr != (select
+            anr
+        from
+            lieferung
+        where lnr = @lnr and lfndNr = @lfndNR))
+        begin
+            insert into @ergebnis
+            values('Summe' ,'' ,null ,@sum)
+            set @sum = 0;
+        end
+
+        if (@Ortaktuell = (select
+            ort
+        from
+            lager
+        where lnr = @lnr))
+        begin
+            set @Ort = ''
+        end
+        else
+        begin
+            set @Ort = (select
+                ort
+            from
+                lager
+            where lnr = @lnr)
+            set @Ortaktuell = @Ort
+        end
+
+        set @anr = (select
+            anr
+        from
+            lieferung
+        where lnr = @lnr and lfndNr = @lfndNR);
+        set @Bezeichnung = (select
+            Bezeichnung
+        from
+            Artikel
+        where anr = @anr);
+        set @Datum = (select
+            datum
+        from
+            lieferung
+        where lnr = @lnr and lfndNr = @lfndNR)
+        set @Stueck = (select
+            stueck
+        from
+            lieferung
+        where lnr = @lnr and lfndNr = @lfndNR)
+        set @sum += @Stueck
+
+        insert into @ergebnis
+        values
+            (@Bezeichnung ,@Ort ,(select
+                    convert(varchar(10), @Datum, 104)) ,@Stueck)
+    end
+
+    select
+        *
+    from
+        @ergebnis;
+
+    close crs_lieferung;
+    deallocate crs_lieferung;
+end
+go
+
+exec dbo.stpBestand;
+
 -- Lagerbestand
-GO CREATE
-   OR ALTER PROCEDURE dbo.stplagerbestand @lnr INT AS
-   BEGIN
-       SET nocount ON
-       SELECT *
-       FROM lager
-       WHERE lnr = @lnr;
-       SELECT a.bezeichnung,
-              SUM(stueck) 'Lagerbestand'
-       FROM lieferung l
-            JOIN artikel a ON a.anr = l.anr
-       WHERE lnr = @lnr
-       GROUP BY a.bezeichnung;
-   END
-GO EXEC dbo.stplagerbestand 1;
+go
+create or alter procedure Lagerbestand
+    @LNr int
+as
+begin
+    select
+        lnr
+        ,ort
+        ,stueckkap
+    from
+        lager
+    where lnr = @LNr;
+
+    select
+        a.bezeichnung
+        ,SUM(li.stueck) as bestand
+    from
+        lieferung li
+        join artikel a on li.anr = a.anr
+    where li.lnr = @LNr
+    group by a.bezeichnung;
+end
+go
+
+exec Lagerbestand 1;
