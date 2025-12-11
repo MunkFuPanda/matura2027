@@ -1,73 +1,103 @@
-
-
-DROP TABLE lt
+drop table lt
 go
-DROP TABLE l
+drop table l
 go
-DROP TABLE t
+drop table t
 go
 
 ---------------------------------------------------------
 -- Tabelle der Lieferanten
 ---------------------------------------------------------
-CREATE TABLE l (
-       lnr    CHAR(2) PRIMARY KEY,
-       lname  VARCHAR(6),
-       rabatt DECIMAL(2),
-       stadt  VARCHAR(6))
+create table l
+(
+    lnr    char(2) primary key,
+    lname  varchar(6),
+    rabatt decimal(2),
+    stadt  varchar(6)
+)
 go
 
 ---------------------------------------------------------
 -- Tabelle der Teile
 ---------------------------------------------------------
-CREATE TABLE t (
-       tnr    CHAR(2) PRIMARY KEY,
-       tname  VARCHAR(8),
-       farbe  VARCHAR(5),
-       preis  DECIMAL(10,2),
-       stadt  VARCHAR(6))
+create table t
+(
+    tnr   char(2) primary key,
+    tname varchar(8),
+    farbe varchar(5),
+    preis decimal(10, 2),
+    stadt varchar(6)
+)
 go
 
 ---------------------------------------------------------
 -- Tabelle der Lieferungen
 ---------------------------------------------------------
-CREATE TABLE lt (
-       lnr    CHAR(2) REFERENCES l,
-       tnr    CHAR(2) REFERENCES t,
-       menge  DECIMAL(4),
-       PRIMARY KEY (lnr,tnr))
+create table lt
+(
+    lnr   char(2) references l,
+    tnr   char(2) references t,
+    menge decimal(4),
+    primary key (lnr, tnr)
+)
 go
 
-INSERT INTO l VALUES ('L1','Schmid',20,'London')
-INSERT INTO l VALUES ('L2','Jonas', 10,'Paris' )
-INSERT INTO l VALUES ('L3','Berger',30,'Paris' )
-INSERT INTO l VALUES ('L4','Klein', 20,'London')
-INSERT INTO l VALUES ('L5','Adam',  30,'Athen' )
+insert into l
+values ('L1', 'Schmid', 20, 'London')
+insert into l
+values ('L2', 'Jonas', 10, 'Paris')
+insert into l
+values ('L3', 'Berger', 30, 'Paris')
+insert into l
+values ('L4', 'Klein', 20, 'London')
+insert into l
+values ('L5', 'Adam', 30, 'Athen')
 go
-INSERT INTO t VALUES ('T1','Mutter',  'rot',  12,'London')
-INSERT INTO t VALUES ('T2','Bolzen',  'gelb', 17,'Paris' )
-INSERT INTO t VALUES ('T3','Schraube','blau', 17,'Rom'   )
-INSERT INTO t VALUES ('T4','Schraube','rot',  14,'London')
-INSERT INTO t VALUES ('T5','Welle',   'blau', 12,'Paris' )
-INSERT INTO t VALUES ('T6','Zahnrad', 'rot',  19,'London')
+insert into t
+values ('T1', 'Mutter', 'rot', 12, 'London')
+insert into t
+values ('T2', 'Bolzen', 'gelb', 17, 'Paris')
+insert into t
+values ('T3', 'Schraube', 'blau', 17, 'Rom')
+insert into t
+values ('T4', 'Schraube', 'rot', 14, 'London')
+insert into t
+values ('T5', 'Welle', 'blau', 12, 'Paris')
+insert into t
+values ('T6', 'Zahnrad', 'rot', 19, 'London')
 go
-INSERT INTO lt VALUES ('L1','T1',300)
-INSERT INTO lt VALUES ('L1','T2',200)
-INSERT INTO lt VALUES ('L1','T3',400)
-INSERT INTO lt VALUES ('L1','T4',200)
-INSERT INTO lt VALUES ('L1','T5',100)
-INSERT INTO lt VALUES ('L1','T6',100)
-INSERT INTO lt VALUES ('L2','T1',300)
-INSERT INTO lt VALUES ('L2','T2',400)
-INSERT INTO lt VALUES ('L3','T2',200)
-INSERT INTO lt VALUES ('L4','T2',200)
-INSERT INTO lt VALUES ('L4','T4',300)
-INSERT INTO lt VALUES ('L4','T5',400)
+insert into lt
+values ('L1', 'T1', 300)
+insert into lt
+values ('L1', 'T2', 200)
+insert into lt
+values ('L1', 'T3', 400)
+insert into lt
+values ('L1', 'T4', 200)
+insert into lt
+values ('L1', 'T5', 100)
+insert into lt
+values ('L1', 'T6', 100)
+insert into lt
+values ('L2', 'T1', 300)
+insert into lt
+values ('L2', 'T2', 400)
+insert into lt
+values ('L3', 'T2', 200)
+insert into lt
+values ('L4', 'T2', 200)
+insert into lt
+values ('L4', 'T4', 300)
+insert into lt
+values ('L4', 'T5', 400)
 go
 
-select * from l;
-select * from t;
-select * from lt;
+select *
+from l;
+select *
+from t;
+select *
+from lt;
 
 --------------------------------------------------------------
 --------------------------------------------------------------
@@ -78,15 +108,15 @@ select * from lt;
 if (select sum(lt.menge)
     from lt
     where lt.lnr = 'L1') > 10
-begin
-    print '10+ Teile am Lager'
-end
+    begin
+        print '10+ Teile am Lager'
+    end
 else
-begin
-    select t.tname, t.farbe, lt.menge
-    from lt
-    join t on t.tnr = lt.tnr
-end
+    begin
+        select t.tname, t.farbe, lt.menge
+        from lt
+                 join t on t.tnr = lt.tnr
+    end
 go
 
 --------------------------------------------------------------
@@ -99,39 +129,43 @@ go
 
 
 -- Variante 1 (mit If und break)
- 
+
 begin transaction;
-select * from lt
+select *
+from lt
 while (select sum(lt.menge)
-        from lt) < 10000
-begin
-    if exists (select (lt.menge) 
-        from lt
-        where menge > 500)
+       from lt) < 10000
     begin
-        break
+        if exists (select (lt.menge)
+                   from lt
+                   where menge > 500)
+            begin
+                break
+            end
+        update lt
+        set menge = menge * 1.1
     end
-    update lt
-    set menge = menge * 1.1
-end
-select * from lt
+select *
+from lt
 rollback
 go
 
 -- Variante 2
- 
+
 begin transaction;
-select * from lt
+select *
+from lt
 while (select sum(lt.menge)
-        from lt) < 10000 and
-        not exists (select lt.menge
-        from lt
-        where lt.menge > 500)
-begin
-    update lt
-    set menge = menge * 1.1
-end
-select * from lt
+       from lt) < 10000 and
+      not exists (select lt.menge
+                  from lt
+                  where lt.menge > 500)
+    begin
+        update lt
+        set menge = menge * 1.1
+    end
+select *
+from lt
 rollback
 go
 
@@ -149,20 +183,25 @@ go
 -- BEURTEILUNGSRELEVANT --
 --------------------------
 
-declare @Durchschnitt int = (select avg(lt.menge) from lt);
-declare @Grenze int = 300;
+declare @durchschnitt int = (select avg(lt.menge)
+                             from lt);
+declare @grenze int = 300;
 
 begin transaction
-select * from lt
+select *
+from lt
 if exists (select lt.menge
-    from lt
-    where lt.lnr = 'L1' and lt.menge > @Grenze)
-begin
-    update lt
-    set lt.menge = lt.menge + @Durchschnitt
-    where lt.lnr = 'L1' and lt.menge > @Grenze
-end
-select * from lt
+           from lt
+           where lt.lnr = 'L1'
+             and lt.menge > @grenze)
+    begin
+        update lt
+        set lt.menge = lt.menge + @durchschnitt
+        where lt.lnr = 'L1'
+          and lt.menge > @grenze
+    end
+select *
+from lt
 rollback
 go
 
@@ -172,23 +211,24 @@ go
 -- die Mengen der Tabelle lt sollen um einen mit�bergebenen Prozentwert erh�ht werden
 -- anlegen:
 
-drop procedure if exists dbo.stpUpdateMengeTabelle
+drop procedure if exists dbo.stpupdatemengetabelle
 
 go
-create procedure dbo.stpUpdateMengeTabelle
-    @Prozentwert float
+create procedure dbo.stpupdatemengetabelle @prozentwert float
 as
 begin
     set nocount on;
     update lt
-    set lt.menge = lt.menge * (1 + @Prozentwert / 100)
+    set lt.menge = lt.menge * (1 + @prozentwert / 100)
 end
 go
 
 begin transaction
-select * from lt
-exec dbo.stpUpdateMengeTabelle @Prozentwert = 10;
-select * from lt
+select *
+from lt
+exec dbo.stpupdatemengetabelle @prozentwert = 10;
+select *
+from lt
 rollback
 go
 
@@ -199,23 +239,24 @@ go
 -- um 5 % erh�ht werden. - verschachtelter prozeduraufruf
 -- anlegen:
 
-drop procedure if exists dbo.stpDeleteArticle
+drop procedure if exists dbo.stpdeletearticle
 
 go
-create procedure dbo.stpDeleteArticle
-    @ArticleID char(2)
+create procedure dbo.stpdeletearticle @articleid char(2)
 as
 begin
     set nocount on;
-    delete from lt where lt.tnr = @ArticleID
-    exec dbo.stpUpdateMengeTabelle @Prozentwert = 5
+    delete from lt where lt.tnr = @articleid
+    exec dbo.stpupdatemengetabelle @prozentwert = 5
 end
 go
 
 begin transaction
-select * from lt
-exec dbo.stpDeleteArticle @ArticleID = 'T1'
-select * from lt
+select *
+from lt
+exec dbo.stpdeletearticle @articleid = 'T1'
+select *
+from lt
 rollback
 go
 
@@ -232,22 +273,23 @@ go
 drop procedure if exists dbo.stpdel_l
 
 go
-create procedure dbo.stpdel_l
-    @Lieferant char(2)
+create procedure dbo.stpdel_l @lieferant char(2)
 as
 begin
-    declare @amountOfLines int = (select count(l.lnr) from l)
-    delete from lt where lt.lnr = @Lieferant
-    delete from l where l.lnr = @Lieferant
-    declare @amountOfLinesAfter int = (select count(l.lnr) from l)
-    print 'Amount of Deleted Lines: ' + convert(varchar, @amountOfLines - @amountOfLinesAfter)
+    declare @amountoflines int = (select count(l.lnr) from l)
+    delete from lt where lt.lnr = @lieferant
+    delete from l where l.lnr = @lieferant
+    declare @amountoflinesafter int = (select count(l.lnr) from l)
+    print 'Amount of Deleted Lines: ' + convert(varchar, @amountoflines - @amountoflinesafter)
 end
 go
 
 begin transaction
-select * from l
-exec dbo.stpdel_l @Lieferant = 'L1'
-select * from l
+select *
+from l
+exec dbo.stpdel_l @lieferant = 'L1'
+select *
+from l
 rollback
 go
 
@@ -264,24 +306,25 @@ go
 drop procedure if exists dbo.stpclear_lt
 
 go
-create procedure dbo.stpclear_lt
-    @m int
+create procedure dbo.stpclear_lt @m int
 as
 begin
-    declare @deletedLines int = 0
+    declare @deletedlines int = 0
     while (select sum(lt.menge)
-        from lt) > @m
-    begin
-        delete from lt where lt.menge in (select min(menge) from lt)
-        set @deletedLines = @deletedLines + 1
-    end
-    print '# deleted Deliveries: ' + convert(varchar, @deletedLines)
+           from lt) > @m
+        begin
+            delete from lt where lt.menge in (select min(menge) from lt)
+            set @deletedlines = @deletedlines + 1
+        end
+    print '# deleted Deliveries: ' + convert(varchar, @deletedlines)
 end
 go
 
 begin transaction
-select * from lt
+select *
+from lt
 exec dbo.stpclear_lt @m = 1000
-select * from lt
+select *
+from lt
 rollback
 go

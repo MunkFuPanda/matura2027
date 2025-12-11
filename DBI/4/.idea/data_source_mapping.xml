@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/.idea/queries/Query.sql" value="bb7f6773-ef1b-4c86-bede-7304dc8994b9" />
+    <file url="file://$PROJECT_DIR$/Datenbanken/UE3_mensa_create_table.sql" value="bb7f6773-ef1b-4c86-bede-7304dc8994b9" />
+    <file url="file://$PROJECT_DIR$/Datenbanken/UE3_mensa_insert.sql" value="bb7f6773-ef1b-4c86-bede-7304dc8994b9" />
+    <file url="file://$PROJECT_DIR$/UE6/UE1_LT_Angabe.sql" value="bb7f6773-ef1b-4c86-bede-7304dc8994b9" />
+    <file url="file://$PROJECT_DIR$/UE8/Abgabe.sql" value="bb7f6773-ef1b-4c86-bede-7304dc8994b9" />
+  </component>
+</project>
