@@ -1,16 +1,5 @@
 use mensa
 
-/*select *
-from menue
-select *
-from menue_besteht_aus
-select *
-from speise
-select *
-from speise_besteht_aus
-select *
-from zutat
-*/
 go
 create or alter procedure dbo.zutatenliste @menuenr int,
                                            @anzahl int
@@ -84,8 +73,11 @@ begin
     from @ausgabe a
              left join zutat on a.zutatennr = zutat.zutatennr;
 
-    update zutat set aktbestand
-
+/*
+    -- Rausnehmen
+    update zutat set aktbestand = a.gesamtmenge - a.fehlendemenge
+    from zutat left join @ausgabe a on a.zutatennr = zutat.zutatennr
+*/
     select * from @ausgabe
 end
 go
