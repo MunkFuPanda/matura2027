@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "WPF_Indicator": {
+      "commandName": "Project"
+    },
+    "Profile 1": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Schule\\POS\\Indicator_Test\\App.xaml"
+    }
+  }
+}

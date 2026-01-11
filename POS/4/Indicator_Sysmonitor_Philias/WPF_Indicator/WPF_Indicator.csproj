@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Ressourcen\blobid1.png" />
+    <None Remove="Ressourcen\blobid2.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Ressourcen\blobid1.png" />
+    <Resource Include="Ressourcen\blobid2.png" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="../Indicator_Test/Indicator_Test.csproj" />
+  <Project Path="../SystemMonitor/SystemMonitor.csproj" Id="4d7d9766-0411-475e-b5c8-b3a4e07a74e9" />
+  <Project Path="WPF_Indicator.csproj" />
+</Solution>
