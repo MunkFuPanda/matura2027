@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Ressourcen\star_filled.png" />
+    <None Remove="Ressourcen\star_unfilled.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Ressourcen\star_filled.png" />
+    <Resource Include="Ressourcen\star_unfilled.png" />
+  </ItemGroup>
+
+</Project>
