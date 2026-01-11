@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "WPF_Anmeldung": {
+      "commandName": "Project"
+    },
+    "Profile 1": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Schule\\POS\\Test_Anmeldung\\MainWindow.xaml"
+    }
+  }
+}

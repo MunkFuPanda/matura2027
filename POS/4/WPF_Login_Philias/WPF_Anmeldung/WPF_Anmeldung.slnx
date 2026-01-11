@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../Test_Anmeldung/Test_Anmeldung.csproj" />
+  <Project Path="WPF_Anmeldung.csproj" />
+</Solution>
