@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="WPF_Rating_System_Impl/WPF_Rating_System_Impl.csproj" Id="13486c19-3613-46ef-8208-67ef294c3dfe" />
+  <Project Path="WPF_Rating_System_Lib/WPF_Rating_System_Lib.csproj" />
+</Solution>

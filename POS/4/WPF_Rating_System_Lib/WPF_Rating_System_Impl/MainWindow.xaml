@@ -1,0 +1,25 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Rating_System_Impl"
+        xmlns:WPF_Rating_System_Lib="clr-namespace:WPF_Rating_System_Lib;assembly=WPF_Rating_System_Lib" x:Class="WPF_Rating_System_Impl.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+
+        <StackPanel>
+            <WPF_Rating_System_Lib:RatingSystem HorizontalAlignment="Center" Margin="0,179,0,0" VerticalAlignment="Top" StarCount="{Binding ElementName=starSlider, Path=Value}"/>
+            <Slider x:Name="starSlider" Minimum="0" Maximum="5"
+                    Width="200"
+                    TickFrequency="1"
+                    IsSnapToTickEnabled="True"
+                    IsMoveToPointEnabled="True"
+                    SmallChange="1"
+                    LargeChange="1">
+            </Slider>
+        </StackPanel>
+
+    </Grid>
+</Window>

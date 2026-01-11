@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\stern_full.jpg" />
+    <None Remove="Resources\stern_leer.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\stern_full.jpg" />
+    <Resource Include="Resources\stern_leer.png" />
+  </ItemGroup>
+
+</Project>
