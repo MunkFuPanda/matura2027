@@ -19,5 +19,6 @@
         <local:Rhombus X1="560" Y1="33" L="50" W="36" Stroke="SandyBrown"></local:Rhombus>
         <local:Trapez X1="666" Y1="33" X2="750" Y2="66" L1="100" L2="50"  Stroke="LightGreen"></local:Trapez>
         <local:Stern X1="66" Y1="111" E="5" R1="33" R2="10" Stroke="DarkBlue"></local:Stern>
-    </Canvas>
+        <local:Spirale X1="200" Y1="200" EndRadius="200" GesamtWinkel="30" StepsN="400" Stroke="DarkBlue"></local:Spirale>
+    </Canvas>   
 </Window>
