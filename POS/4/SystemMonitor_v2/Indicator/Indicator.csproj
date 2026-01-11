@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\blobid1.png" />
+    <None Remove="Resources\blobid2.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\blobid1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\blobid2.png" />
+  </ItemGroup>
+
+</Project>

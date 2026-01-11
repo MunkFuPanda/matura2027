@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Indicator/Indicator.csproj" />
+  <Project Path="IndicatorTest/IndicatorTest.csproj" />
+  <Project Path="SystemMonitor/SystemMonitor.csproj" Id="2e6e77a4-078d-4971-92e0-e93e415cbfb9" />
+</Solution>
