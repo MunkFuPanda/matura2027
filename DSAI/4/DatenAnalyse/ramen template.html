@@ -7519,10 +7519,13 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Objective">Objective<a class="anchor-link" href="#Objective">¶</a></h1><p>Dive deep into working with datasets using <em>pandas</em>.</p>
 <h1 id="Things-To-Learn">Things To Learn<a class="anchor-link" href="#Things-To-Learn">¶</a></h1><ul>
-<li class="task-list-item"><input checked="" class="task-list-item-checkbox" disabled="" type="checkbox"/>Creating and working with <em>pandas dataframes</em> and <em>series</em>.</li>
-<li class="task-list-item"><input checked="" class="task-list-item-checkbox" disabled="" type="checkbox"/>Loading and getting an overview of data.</li>
-<li class="task-list-item"><input checked="" class="task-list-item-checkbox" disabled="" type="checkbox"/>Manipulating datasets.</li>
-<li class="task-list-item"><input checked="" class="task-list-item-checkbox" disabled="" type="checkbox"/>Selecting, grouping and sorting data.</li>
+<li>Creating and working with <em>pandas dataframes</em> and <em>series</em>.</li>
+<li>Loading and getting an overview of data.</li>
+<li>Manipulating datasets.</li>
+<li>Selecting, grouping and sorting data.</li>
+</ul>
+<h1 id="Submission-Guidelines">Submission Guidelines<a class="anchor-link" href="#Submission-Guidelines">¶</a></h1><ul>
+<li>Your finished <em>Jupyter Notebook</em> - both as <code>.ipynb</code> and exported <code>.pdf</code>.</li>
 </ul>
 </div>
 </div>
@@ -7550,10 +7553,10 @@ Import <em>pandas</em> and manually create a <em>dataframe</em> containing data 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [38]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Spitzer</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Spitzer</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
@@ -7581,7 +7584,7 @@ Import <em>pandas</em> and manually create a <em>dataframe</em> containing data 
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[38]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7661,32 +7664,15 @@ Import <em>pandas</em> and manually create a <em>dataframe</em> containing data 
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=joined-trace">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Read the <em>ramen</em> ratings from the provided file and get an overview of the data:</p>
-<ul>
-<li>Take a look at some rows from the top, bottom or random positions...</li>
-<li>Use summary functions to get a statistical overview of the data.</li>
-<li>Find out what data types we're dealing with.</li>
-<li>Identify what column would be suitable as index and set it!</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=neural-google">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=unsigned-hungary-code">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [39]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Spitzer</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Spitzer</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'ramen-ratings.csv'</span><span class="p">)</span>
@@ -7757,19 +7743,19 @@ Last 5 rows:
 2579  Pack       USA   0.5     NaN  
 
 Random 5 rows:
-      Review #   Brand                                            Variety  \
-2078       502  Sunlee                                    Beef Rice Stick   
-794       1786  Nissin  Chow Mein Premium Savory Sauce And Restaurant ...   
-2508        72  Nissin               Demae Ramen Tonkatsu Artificial Pork   
-1810       770   Kailo                                            Chicken   
-1468      1112    Mama         Oriental Style Instant Kua-Chap Clear Soup   
+      Review #             Brand                                Variety Style  \
+104       2476     Samyang Foods                     Kimchi Stew Ramyun  Bowl   
+1273      1307            Nissin                Cup Noodle Cheese Curry   Cup   
+1430      1150  Asian Thai Foods  Krrish Instant Noodles Chicken Flavor  Pack   
+660       1920            Itsuki      Ramen Tonkotudou Kumamoto Noodles  Pack   
+297       2283            Nissin         Raoh Pork Bone Soy Soup Noodle  Pack   
 
-     Style    Country Stars Top Ten  
-2078  Bowl   Thailand     2     NaN  
-794   Tray        USA  4.25     NaN  
-2508  Pack      Japan   3.5     NaN  
-1810  Pack  Hong Kong   3.5     NaN  
-1468  Pack   Thailand  3.75     NaN  
+          Country Stars Top Ten  
+104   South Korea     4     NaN  
+1273        Japan  3.75     NaN  
+1430        Nepal   3.5     NaN  
+660         Japan  0.75     NaN  
+297         Japan     5     NaN  
 
 Summary statistics:
           Review #
@@ -7814,6 +7800,175 @@ Review #
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=joined-trace">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Read the <em>ramen</em> ratings from the provided file and get an overview of the data:</p>
+<ul>
+<li>Take a look at some rows from the top, bottom or random positions...</li>
+<li>Use summary functions to get a statistical overview of the data.</li>
+<li>Find out what data types we're dealing with.</li>
+<li>Identify what column would be suitable as index and set it!</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=neural-google">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [40]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Spitzer</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'ramen-ratings.csv'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"First 5 rows:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Last 5 rows:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Random sample of 5 rows:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Statistical summary:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Data types:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">DataFrame info:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'Review #'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">DataFrame after setting index:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>First 5 rows:
+   Review #           Brand  \
+0      2580       New Touch   
+1      2579        Just Way   
+2      2578          Nissin   
+3      2577         Wei Lih   
+4      2576  Ching's Secret   
+
+                                             Variety Style Country Stars  \
+0                          T's Restaurant Tantanmen    Cup   Japan  3.75   
+1  Noodles Spicy Hot Sesame Spicy Hot Sesame Guan...  Pack  Taiwan     1   
+2                      Cup Noodles Chicken Vegetable   Cup     USA  2.25   
+3                      GGE Ramen Snack Tomato Flavor  Pack  Taiwan  2.75   
+4                                    Singapore Curry  Pack   India  3.75   
+
+  Top Ten  
+0     NaN  
+1     NaN  
+2     NaN  
+3     NaN  
+4     NaN  
+
+Last 5 rows:
+      Review #     Brand                                            Variety  \
+2575         5     Vifon  Hu Tiu Nam Vang ["Phnom Penh" style] Asian Sty...   
+2576         4   Wai Wai                     Oriental Style Instant Noodles   
+2577         3   Wai Wai                                     Tom Yum Shrimp   
+2578         2   Wai Wai                               Tom Yum Chili Flavor   
+2579         1  Westbrae                                         Miso Ramen   
+
+     Style   Country Stars Top Ten  
+2575  Bowl   Vietnam   3.5     NaN  
+2576  Pack  Thailand     1     NaN  
+2577  Pack  Thailand     2     NaN  
+2578  Pack  Thailand     2     NaN  
+2579  Pack       USA   0.5     NaN  
+
+Random sample of 5 rows:
+      Review #      Brand                                            Variety  \
+1868       712  Four Seas                                            Seaweed   
+628       1952    Ve Wong  Kung-Fu Brand Instant Oriental Noodle Soup Art...   
+2307       273    Wai Wai                                Minced Pork Tom Yum   
+1262      1318     Nissin                            Spa Oh Tarako Spaghetti   
+2230       350     Nissin                   Souper Meal Tomato Garlic Shrimp   
+
+     Style    Country Stars Top Ten  
+1868  Bowl  Hong Kong  3.25     NaN  
+628   Pack     Taiwan  3.75     NaN  
+2307  Pack   Thailand   2.5     NaN  
+1262  Bowl      Japan     4     NaN  
+2230  Bowl        USA   3.5     NaN  
+
+Statistical summary:
+          Review #
+count  2580.000000
+mean   1290.500000
+std     744.926171
+min       1.000000
+25%     645.750000
+50%    1290.500000
+75%    1935.250000
+max    2580.000000
+
+Data types:
+Review #     int64
+Brand       object
+Variety     object
+Style       object
+Country     object
+Stars       object
+Top Ten     object
+dtype: object
+
+DataFrame info:
+&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 2580 entries, 0 to 2579
+Data columns (total 7 columns):
+ #   Column    Non-Null Count  Dtype 
+---  ------    --------------  ----- 
+ 0   Review #  2580 non-null   int64 
+ 1   Brand     2580 non-null   object
+ 2   Variety   2580 non-null   object
+ 3   Style     2578 non-null   object
+ 4   Country   2580 non-null   object
+ 5   Stars     2580 non-null   object
+ 6   Top Ten   41 non-null     object
+dtypes: int64(1), object(6)
+memory usage: 141.2+ KB
+None
+
+DataFrame after setting index:
+                   Brand                                            Variety  \
+Review #                                                                      
+2580           New Touch                          T's Restaurant Tantanmen    
+2579            Just Way  Noodles Spicy Hot Sesame Spicy Hot Sesame Guan...   
+2578              Nissin                      Cup Noodles Chicken Vegetable   
+2577             Wei Lih                      GGE Ramen Snack Tomato Flavor   
+2576      Ching's Secret                                    Singapore Curry   
+
+         Style Country Stars Top Ten  
+Review #                              
+2580       Cup   Japan  3.75     NaN  
+2579      Pack  Taiwan     1     NaN  
+2578       Cup     USA  2.25     NaN  
+2577      Pack  Taiwan  2.75     NaN  
+2576      Pack   India  3.75     NaN  
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=progressive-register">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -7835,10 +7990,10 @@ Review #
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [41]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Spitzer</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Spitzer</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Data type of Stars:"</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Stars'</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
 
 <span class="k">try</span><span class="p">:</span>
@@ -7912,31 +8067,15 @@ Mean of Stars: 3.6546759798214974
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=federal-season">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Find-missing-values">Find missing values<a class="anchor-link" href="#Find-missing-values">¶</a></h1><p>print("Missing values per column:")
-print(df.isnull().sum())</p>
-<h1 id="Drop-rows-with-2-missing-values-(likely-Top-Ten)">Drop rows with 2 missing values (likely Top Ten)<a class="anchor-link" href="#Drop-rows-with-2-missing-values-(likely-Top-Ten)">¶</a></h1><p>df = df.dropna(thresh=len(df.columns) - 1)  # Keep rows with at most 1 missing</p>
-<h1 id="Drop-column-with-many-missing-(Top-Ten)">Drop column with many missing (Top Ten)<a class="anchor-link" href="#Drop-column-with-many-missing-(Top-Ten)">¶</a></h1><p>df = df.drop(columns=['Top Ten'])</p>
-<p>print("After dropping:")
-print(df.isnull().sum())</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f1203874">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=severe-treasurer-code">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [42]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Spitzer</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Spitzer</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Missing values per column:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 
@@ -7979,29 +8118,33 @@ dtype: int64
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=unauthorized-litigation">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=federal-season">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Task:-From-Stars-To-Points">Task: From Stars To Points<a class="anchor-link" href="#Task:-From-Stars-To-Points">¶</a></h1><p>Let's switch from a <em>star rating</em> to a <em>point rating</em> between 1 and 100.</p>
+<h1 id="Task:-Create-A-Price-Column">Task: Create A Price-Column<a class="anchor-link" href="#Task:-Create-A-Price-Column">¶</a></h1><p>Unfortunately the ramen reviews don't contain a price column. Let's <em>fake</em> one with rough estimates:</p>
 <ul>
-<li>Calculate the points based on the stars, where 5 stars equal 100 points.</li>
-<li>Change the column name from <em>Stars</em> to <em>Points</em>.</li>
+<li>A <em>pack</em> of ramen should cost 0.79.</li>
+<li>A <em>bowl</em> of ramen should cost 1.79.</li>
+<li>A <em>cup</em> of ramen should cost 1.29.</li>
+<li>A <em>tray</em> of ramen should cost 2.19.</li>
+<li>All other types should cost 1.09.</li>
 </ul>
+<p>Create a function calculating the price based on the style. Use <code>map</code> to create a series and add it as a new column to your dataframe.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=72e2e054">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=federal-season-code">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [43]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Spitzer</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Spitzer</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_price</span><span class="p">(</span><span class="n">style</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">style</span> <span class="o">==</span> <span class="s1">'Pack'</span><span class="p">:</span>
         <span class="k">return</span> <span class="mf">0.79</span>
@@ -8041,32 +8184,29 @@ Review #
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=junior-butler">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=unauthorized-litigation">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Task:-Create-A-Recommendation-Column">Task: Create A Recommendation-Column<a class="anchor-link" href="#Task:-Create-A-Recommendation-Column">¶</a></h1><p>Let's create a new column containing a textual recommendation:</p>
+<h1 id="Task:-From-Stars-To-Points">Task: From Stars To Points<a class="anchor-link" href="#Task:-From-Stars-To-Points">¶</a></h1><p>Let's switch from a <em>star rating</em> to a <em>point rating</em> between 1 and 100.</p>
 <ul>
-<li>Ramen with points higher or equal than 90 points get either <em>Amazing value!</em> (for prices benath 1.3) or <em>Expensive but delicious!</em>.</li>
-<li>Other ramen with ratings above 80 should read <em>Must-Try!</em>.</li>
-<li>Other cheap ramen with a price below 1 should read <em>Budget choice!</em>.</li>
-<li>All other ramen should read <em>Why not?</em>.</li>
+<li>Calculate the points based on the stars, where 5 stars equal 100 points.</li>
+<li>Change the column name from <em>Stars</em> to <em>Points</em>.</li>
 </ul>
-<p>Since you need multiple columns to calculate the recommendation, you need to use <code>apply</code>. Check how often each recommendation text appears afterwards!</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=61fc99d4">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=unauthorized-litigation-code">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [44]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Spitzer</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Spitzer</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'Stars'</span><span class="p">:</span> <span class="s1">'Points'</span><span class="p">})</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">'Points'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Points'</span><span class="p">]</span> <span class="o">*</span> <span class="mi">20</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">'Points'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
@@ -8095,25 +8235,32 @@ Review #
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=respiratory-cotton">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=junior-butler">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Task:-Export-Data">Task: Export Data<a class="anchor-link" href="#Task:-Export-Data">¶</a></h1><p>At this point it makes sense to backup our processed dataframe. Export the data into a file <code>ramen_processed.csv</code> into a subfolder <code>output</code> and compare your results to the provided solution.</p>
+<h1 id="Task:-Create-A-Recommendation-Column">Task: Create A Recommendation-Column<a class="anchor-link" href="#Task:-Create-A-Recommendation-Column">¶</a></h1><p>Let's create a new column containing a textual recommendation:</p>
+<ul>
+<li>Ramen with points higher or equal than 90 points get either <em>Amazing value!</em> (for prices benath 1.3) or <em>Expensive but delicious!</em>.</li>
+<li>Other ramen with ratings above 80 should read <em>Must-Try!</em>.</li>
+<li>Other cheap ramen with a price below 1 should read <em>Budget choice!</em>.</li>
+<li>All other ramen should read <em>Why not?</em>.</li>
+</ul>
+<p>Since you need multiple columns to calculate the recommendation, you need to use <code>apply</code>. Check how often each recommendation text appears afterwards!</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=34a27672">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=junior-butler-code">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [45]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Spitzer</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Spitzer</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()]</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_recommendation</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
@@ -8158,34 +8305,25 @@ Name: count, dtype: int64
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=increasing-hawaii">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=respiratory-cotton">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Task:-Selecting-Data-(Integer-Based)">Task: Selecting Data (<em>Integer-Based</em>)<a class="anchor-link" href="#Task:-Selecting-Data-(Integer-Based)">¶</a></h1><p>You can now either use the dataset you've worked on so far or - if in doubt - load our <code>ramen_processed_solution.csv</code> for the next tasks.</p>
-<p>Solve the following tasks to sharpen your selecting skills:</p>
-<ul>
-<li>Get the first two columns of the last ten rows.</li>
-<li>Get the 4<sup>th</sup> column of the 15<sup>th</sup> row.</li>
-<li>Get the second and the last column of the second last ten rows.</li>
-<li>Get everything but the first column of the 20<sup>th</sup>, 30<sup>th</sup>, 40<sup>th</sup> and 50th row.</li>
-<li>Get every column of the 100<sup>th</sup> up to (and including) the 200<sup>th</sup> row.</li>
-<li>Get the third column of every row.</li>
-</ul>
+<h1 id="Task:-Export-Data">Task: Export Data<a class="anchor-link" href="#Task:-Export-Data">¶</a></h1><p>At this point it makes sense to backup our processed dataframe. Export the data into a file <code>ramen_processed.csv</code> into a subfolder <code>output</code> and compare your results to the provided solution.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=be9e32d8">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=respiratory-cotton-code">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [46]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Spitzer</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Spitzer</span>
 <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'output/ramen_processed.csv'</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Data exported to output/ramen_processed.csv"</span><span class="p">)</span>
 </pre></div>
@@ -8207,31 +8345,34 @@ Name: count, dtype: int64
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=characteristic-order">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=increasing-hawaii">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Task:-Selecting-Data-(Label-Based)">Task: Selecting Data (<em>Label-Based</em>)<a class="anchor-link" href="#Task:-Selecting-Data-(Label-Based)">¶</a></h1><p>Solve the following tasks to sharpen your selecting skills:</p>
+<h1 id="Task:-Selecting-Data-(Integer-Based)">Task: Selecting Data (<em>Integer-Based</em>)<a class="anchor-link" href="#Task:-Selecting-Data-(Integer-Based)">¶</a></h1><p>You can now either use the dataset you've worked on so far or - if in doubt - load our <code>ramen_processed_solution.csv</code> for the next tasks.</p>
+<p>Solve the following tasks to sharpen your selecting skills:</p>
 <ul>
-<li>Get the variety and textual recommendation for the review <em>#1235</em>.</li>
-<li>Get all columns but the textual recommendation for the reviews from (and including) <em>#5</em> to (and including) <em>#10</em>.</li>
-<li>Get the style and points for the reviews <em>#123</em>, <em>#234</em> and <em>#345</em>.</li>
-<li>Get the variety, style and country for all reviews.</li>
+<li>Get the first two columns of the last ten rows.</li>
+<li>Get the 4<sup>th</sup> column of the 15<sup>th</sup> row.</li>
+<li>Get the second and the last column of the second last ten rows.</li>
+<li>Get everything but the first column of the 20<sup>th</sup>, 30<sup>th</sup>, 40<sup>th</sup> and 50th row.</li>
+<li>Get every column of the 100<sup>th</sup> up to (and including) the 200<sup>th</sup> row.</li>
+<li>Get the third column of every row.</li>
 </ul>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2203741b">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=increasing-hawaii-code">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [47]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Spitzer</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Spitzer</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"First two columns of last ten rows:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span>
 
@@ -8358,33 +8499,31 @@ Name: Style, Length: 2575, dtype: object
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=loving-senior">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=characteristic-order">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Task:-Conditional-Selection">Task: Conditional Selection<a class="anchor-link" href="#Task:-Conditional-Selection">¶</a></h1><p>Solve the following tasks to sharpen your selection skills:</p>
+<h1 id="Task:-Selecting-Data-(Label-Based)">Task: Selecting Data (<em>Label-Based</em>)<a class="anchor-link" href="#Task:-Selecting-Data-(Label-Based)">¶</a></h1><p>Solve the following tasks to sharpen your selecting skills:</p>
 <ul>
-<li>Get everything about ramen that comes in a bowl.</li>
-<li>Get variety, style and points of all ramen that comes from Germany.</li>
-<li>Get the columns from brand up to country of all ramen that comes in a cup and has a rating lower than 10 points.</li>
-<li>Get brand, variety and points of all ramen either produced by <em>Samyang</em> or having a rating over 95 points.</li>
-<li>Get everything but price and recommendation for all ramen containing <em>Hello Kitty</em> in their variety field.</li>
-<li>Get everything up to country for all ramen from the brands <em>Knorr</em>, <em>Vifon</em> and <em>Yum Yum</em>.</li>
+<li>Get the variety and textual recommendation for the review <em>#1235</em>.</li>
+<li>Get all columns but the textual recommendation for the reviews from (and including) <em>#5</em> to (and including) <em>#10</em>.</li>
+<li>Get the style and points for the reviews <em>#123</em>, <em>#234</em> and <em>#345</em>.</li>
+<li>Get the variety, style and country for all reviews.</li>
 </ul>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9aa09a88">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=characteristic-order-code">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [48]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Spitzer</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Spitzer</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Variety and recommendation for #1235:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">1235</span><span class="p">],</span> <span class="p">[</span><span class="s1">'Variety'</span><span class="p">,</span> <span class="s1">'Recommendation'</span><span class="p">]])</span>
 
@@ -8447,32 +8586,33 @@ Review #
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=mature-livestock">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=loving-senior">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Task:-Grouping-And-Sorting">Task: Grouping And Sorting<a class="anchor-link" href="#Task:-Grouping-And-Sorting">¶</a></h1><p>Use grouping to solve the following tasks:</p>
+<h1 id="Task:-Conditional-Selection">Task: Conditional Selection<a class="anchor-link" href="#Task:-Conditional-Selection">¶</a></h1><p>Solve the following tasks to sharpen your selection skills:</p>
 <ul>
-<li>Print out the number of reviews per brand in ascending order.</li>
-<li>Print out all the styles and their mean rating points - in descending order.</li>
-<li>Print out the minimum, maximum and mean price per brand, sorted by the maximum values.</li>
-<li>Print out all the values of the highest rated ramen per style!</li>
-<li>Print out the count and mean of ratings per style per brand, sorted by the count.</li>
+<li>Get everything about ramen that comes in a bowl.</li>
+<li>Get variety, style and points of all ramen that comes from Germany.</li>
+<li>Get the columns from brand up to country of all ramen that comes in a cup and has a rating lower than 10 points.</li>
+<li>Get brand, variety and points of all ramen either produced by <em>Samyang</em> or having a rating over 95 points.</li>
+<li>Get everything but price and recommendation for all ramen containing <em>Hello Kitty</em> in their variety field.</li>
+<li>Get everything up to country for all ramen from the brands <em>Knorr</em>, <em>Vifon</em> and <em>Yum Yum</em>.</li>
 </ul>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=dc0873ff">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=loving-senior-code">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [49]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Spitzer</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Spitzer</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Ramen in bowl:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">'Style'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Bowl'</span><span class="p">])</span>
 
@@ -8755,25 +8895,32 @@ Review #
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=whole-baking">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=mature-livestock">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Good-Job!">Good Job!<a class="anchor-link" href="#Good-Job!">¶</a></h1>
+<h1 id="Task:-Grouping-And-Sorting">Task: Grouping And Sorting<a class="anchor-link" href="#Task:-Grouping-And-Sorting">¶</a></h1><p>Use grouping to solve the following tasks:</p>
+<ul>
+<li>Print out the number of reviews per brand in ascending order.</li>
+<li>Print out all the styles and their mean rating points - in descending order.</li>
+<li>Print out the minimum, maximum and mean price per brand, sorted by the maximum values.</li>
+<li>Print out all the values of the highest rated ramen per style!</li>
+<li>Print out the count and mean of ratings per style per brand, sorted by the count.</li>
+</ul>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=8a4dc68b">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=mature-livestock-code">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [50]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Spitzer</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># Spitzer</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Number of reviews per brand (ascending):"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'Brand'</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">())</span>
 
@@ -8892,6 +9039,17 @@ Cup   Nissin                  165    76.603030
 [489 rows x 2 columns]
 </pre>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=whole-baking">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Good-Job!">Good Job!<a class="anchor-link" href="#Good-Job!">¶</a></h1>
 </div>
 </div>
 </div>
