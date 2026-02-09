@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Ressourcen\fast-forward.png" />
+    <None Remove="Ressourcen\pause.png" />
+    <None Remove="Ressourcen\play-button.png" />
+    <None Remove="Ressourcen\previous.png" />
+    <None Remove="Ressourcen\stop-button.png" />
+    <None Remove="Ressourcen\volume-mute.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Ressourcen\fast-forward.png" />
+    <Resource Include="Ressourcen\pause.png" />
+    <Resource Include="Ressourcen\play-button.png" />
+    <Resource Include="Ressourcen\previous.png" />
+    <Resource Include="Ressourcen\stop-button.png" />
+    <Resource Include="Ressourcen\volume-mute.png" />
+  </ItemGroup>
+
+</Project>
