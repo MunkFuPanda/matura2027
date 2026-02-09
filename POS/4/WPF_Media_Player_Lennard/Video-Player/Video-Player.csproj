@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>Video_Player</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="icons\fullscreen.png" />
+    <None Remove="icons\load_folder.png" />
+    <None Remove="icons\load_video.png" />
+    <None Remove="icons\pause_image.png" />
+    <None Remove="icons\play_image.png" />
+    <None Remove="icons\stop_image.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icons\fullscreen.png" />
+    <Resource Include="icons\load_folder.png" />
+    <Resource Include="icons\load_video.png" />
+    <Resource Include="icons\pause_image.png" />
+    <Resource Include="icons\play_image.png" />
+    <Resource Include="icons\stop_image.png" />
+  </ItemGroup>
+
+</Project>
