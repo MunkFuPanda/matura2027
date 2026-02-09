@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using Microsoft.Win32;
+using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
+
 namespace WPF_Media_Player
 {
     /// <summary>
@@ -19,6 +22,13 @@ namespace WPF_Media_Player
     {
         DispatcherTimer timer;
         public int Volume { get; set; }
+
+        string path = string.Empty;
+
+        List<string> videoFiles = new List<string>();
+
+        int currentVideoIndex = 0;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -40,56 +50,109 @@ namespace WPF_Media_Player
 
                 vm.Duration = video.NaturalDuration.TimeSpan.TotalSeconds;
                 vm.Progress = video.Position.TotalSeconds;
+
             }
         }
 
         private void OpenFile_Click(object sender, RoutedEventArgs e)
         {
+            using (var dialog = new FolderBrowserDialog())
+            {
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    path = dialog.SelectedPath;
+                }
+            }
 
+            foreach (var file in Directory.GetFiles(path))
+            {
+                if (file.EndsWith(".mp4") || file.EndsWith(".avi") || file.EndsWith(".mkv"))
+                {
+                    videoFiles.Add(file);
+                }
+            }
+
+            if (videoFiles.Count > 0)
+            {
+                video.Source = new Uri(videoFiles[0]);
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("No video files found in the selected folder.");
+            }
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void About_Click(object sender, RoutedEventArgs e)
-        {
-
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void forwardButton_Click(object sender, RoutedEventArgs e)
         {
+            if (videoFiles.Count == 0)
+            {
+                return;
+            }
 
+            if (currentVideoIndex < videoFiles.Count - 1)
+            {
+                currentVideoIndex++;
+            }
+            else
+            {
+                currentVideoIndex = 0;
+            }
+
+            video.Source = new Uri(videoFiles[currentVideoIndex]);
         }
 
         private void backwardButton_Click(object sender, RoutedEventArgs e)
         {
+            if (videoFiles.Count == 0)
+            {
+                return;
+            }
 
+            if (video.Position.TotalSeconds > 5)
+            {
+                video.Position = TimeSpan.Zero;
+            }
+            else
+            {
+                if (currentVideoIndex > 0)
+                {
+                    currentVideoIndex--;
+                }
+                else
+                {
+                    currentVideoIndex = videoFiles.Count - 1;
+                }
+
+                video.Source = new Uri(videoFiles[currentVideoIndex]);
+            }
         }
 
         bool playing = false;
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-            video.Source = new Uri("C:/Schule/POS/test_videos/video.mp4");
-
             playing = !playing;
             if (playing)
             {
                 img_play.Source = new BitmapImage(new Uri("pack://application:,,,/Ressourcen/pause.png"));
+                timer.Start();
                 video.Play();
             }
             else
             {
                 img_play.Source = new BitmapImage(new Uri("pack://application:,,,/Ressourcen/play-button.png"));
+                timer.Stop();
                 video.Pause();
             }
-
         }
 
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
-
+            video.Stop();
         }
 
         private void MuteButton_Click(object sender, RoutedEventArgs e)
