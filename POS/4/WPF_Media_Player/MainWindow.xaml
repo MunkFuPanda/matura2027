@@ -3,71 +3,135 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Media Player"
         Background="{StaticResource BgBrush}"
-        MinWidth="700"
-        MinHeight="450"
+        MinWidth="900"
+        MinHeight="500"
         WindowStartupLocation="CenterScreen"
         MouseMove="Window_MouseMove">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
 
-        <!-- VIDEO -->
-        <MediaElement x:Name="video"
-                      LoadedBehavior="Manual"
-                      UnloadedBehavior="Stop"
-                      Stretch="Uniform"
-                      Volume="{Binding Volume}"/>
+        <!-- VIDEO + CONTROLS OVERLAY -->
+        <Grid Grid.Column="0">
+            <MediaElement x:Name="video"
+                          LoadedBehavior="Manual"
+                          UnloadedBehavior="Stop"
+                          Stretch="Uniform"
+                          Volume="{Binding Volume}"/>
 
-        <!-- OVERLAY -->
-        <Border x:Name="ControlOverlay"
-                VerticalAlignment="Bottom"
-                Margin="20"
-                Background="#CCFFFFFF"
-                CornerRadius="10"
-                Height="80"
-                Opacity="0.95">
+            <!-- Overlay Controls -->
+            <Border x:Name="ControlOverlay"
+                    VerticalAlignment="Bottom"
+                    Margin="0"
+                    Background="#FEFFFFFF"
+                    BorderBrush="#FFE5E7EB"
+                    BorderThickness="0,2,0,0"
+                    Height="85"
+                    Opacity="0.98">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.15" Color="#000000"/>
+                </Border.Effect>
 
-            <DockPanel LastChildFill="False">
+                <DockPanel LastChildFill="False">
+                    <!-- ProgressBar -->
+                    <ProgressBar x:Name="progressBar"
+                                 Height="5"
+                                 DockPanel.Dock="Top"
+                                 Minimum="0"
+                                 Maximum="{Binding Duration}"
+                                 Value="{Binding Progress}"
+                                 Style="{StaticResource proBar}"
+                                 Margin="10,0,10,6"
+                                 MouseLeftButtonDown="ProgressBar_MouseLeftButtonDown"/>
 
-                <!-- TIMELINE -->
-                <ProgressBar x:Name="progressBar"
-                             Height="5"
-                             DockPanel.Dock="Top"
-                             Minimum="0"
-                             Maximum="{Binding Duration}"
-                             Value="{Binding Progress}"
-                             Style="{StaticResource proBar}"
-                             Margin="10,0,10,6"
-                             MouseLeftButtonDown="ProgressBar_MouseLeftButtonDown"/>
+                    <!-- Controls -->
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
 
-                <!-- CONTROLS -->
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                    <!-- Play / Pause -->
-                    <Button Style="{StaticResource btnStyle}" Click="PlayButton_Click" Margin="6,0">
-                        <Image x:Name="img_play" Source="pack://application:,,,/resources/play-button.png" Width="24"/>
-                    </Button>
+                        <Button Style="{StaticResource btnStyle}" Click="PrevButton_Click">
+                            <Image Source="pack://application:,,,/resources/previous.png" Width="24"/>
+                        </Button>
 
-                    <!-- Stop -->
-                    <Button Style="{StaticResource btnStyle}" Click="StopButton_Click" Margin="6,0">
-                        <Image Source="pack://application:,,,/resources/stop-button.png" Width="24"/>
-                    </Button>
+                        <Button Style="{StaticResource btnStyle}" Click="PlayButton_Click">
+                            <Image x:Name="img_play" Source="pack://application:,,,/resources/play-button.png" Width="24"/>
+                        </Button>
 
-                    <!-- Volume Slider -->
-                    <Slider Width="120" Minimum="0" Maximum="1" SmallChange="0.01" Value="{Binding Volume, Mode=TwoWay}" Margin="6,0"/>
+                        <Button Style="{StaticResource btnStyle}" Click="StopButton_Click">
+                            <Image Source="pack://application:,,,/resources/stop-button.png" Width="24"/>
+                        </Button>
 
-                    <!-- Mute -->
-                    <Button Style="{StaticResource btnStyle}" Click="MuteButton_Click" Margin="6,0">
-                        <Image Source="pack://application:,,,/resources/volume-mute.png" Width="24"/>
-                    </Button>
-                </StackPanel>
-            </DockPanel>
+                        <Button Style="{StaticResource btnStyle}" Click="NextButton_Click">
+                            <Image Source="pack://application:,,,/resources/fast-forward.png" Width="24"/>
+                        </Button>
+
+                        <Slider Width="120" Minimum="0" Maximum="1" SmallChange="0.01" Value="{Binding Volume, Mode=TwoWay}" Margin="6,0"/>
+                        <Button Style="{StaticResource btnStyle}" Click="MuteButton_Click">
+                            <Image Source="pack://application:,,,/resources/volume-mute.png" Width="24"/>
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <!-- PLAYLIST -->
+        <Border Grid.Column="1" Background="{StaticResource PanelBrush}" BorderBrush="#FFE5E7EB" BorderThickness="2,0,0,0" Padding="16">
+            <StackPanel>
+                <TextBlock Text="Playlist" FontWeight="SemiBold" Margin="0 0 0 12" FontSize="18" Foreground="#FF1F2937"/>
+                <ListBox x:Name="playlistBox" SelectedIndex="{Binding CurrentIndex, Mode=TwoWay}" 
+                         MouseDoubleClick="PlaylistBox_MouseDoubleClick"
+                         ItemsSource="{Binding Playlist}" 
+                         BorderThickness="0" Background="Transparent"
+                         Foreground="#FF374151"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ., Converter={StaticResource FilenameConverter}}" 
+                                       Padding="6" FontSize="14"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Margin" Value="2"/>
+                            <Setter Property="Padding" Value="4"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border x:Name="Bd" Background="{TemplateBinding Background}" BorderBrush="#FFF3F4F6" BorderThickness="0,0,0,1" Padding="8,6">
+                                            <ContentPresenter />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd" Property="Background" Value="#FFF9FAFB"/>
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="Bd" Property="Background" Value="#FFDBEAFE"/>
+                                                <Setter TargetName="Bd" Property="BorderBrush" Value="#FF6366F1"/>
+                                                <Setter TargetName="Bd" Property="BorderThickness" Value="0,0,3,1"/>
+                                                <Setter Property="Foreground" Value="#FF4338CA"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </StackPanel>
         </Border>
 
         <!-- MENU BAR -->
-        <Menu VerticalAlignment="Top" Background="{StaticResource PanelBrush}" Opacity="0.95">
+        <Menu VerticalAlignment="Top" Background="#FFFFFFFF" Foreground="#FF374151" BorderBrush="#FFE5E7EB" BorderThickness="0,0,0,1">
             <MenuItem Header="_File">
-                <MenuItem Header="_Open" Click="OpenFile_Click"/>
+                <MenuItem Header="_Open Files" Click="OpenFiles_Click"/>
                 <Separator/>
                 <MenuItem Header="_Exit" Click="Exit_Click"/>
             </MenuItem>
