@@ -1,0 +1,63 @@
+﻿<Window x:Class="Video_Player.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Video_Player"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical" HorizontalAlignment="Center" Margin="0, 0, 0, 0">
+            <ProgressBar Name="progressBar" Style="{StaticResource proBar}" MouseLeftButtonUp="progressBar_MouseLeftButtonUp"  Width="780" Height="20" Margin="5"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Name="playButton" Style="{StaticResource btnStyle}" Width="75" Margin="5" Click="playButton_Click">
+                    <Image x:Name="play_image">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/icons/play_image.png"/>
+                        </Image.Source>
+                    </Image>
+                </Button>
+                <Button Name="pauseButton" Style="{StaticResource btnStyle}" Width="75" Margin="5" Click="pauseButton_Click">
+                    <Image x:Name="pause_image">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/icons/pause_image.png"/>
+                        </Image.Source>
+                    </Image>
+                </Button>
+                <Button Name="stopButton" Style="{StaticResource btnStyle}" Width="75" Margin="5" Click="stopButton_Click">
+                    <Image x:Name="stop_image">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/icons/stop_image.png"/>
+                        </Image.Source>
+                    </Image>
+                </Button>
+                <Button Name="loadButton" Width="100" Style="{StaticResource btnStyle}" Margin="5" Click="loadButton_Click">
+                    <Image x:Name="load_video_image">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/icons/load_video.png"/>
+                        </Image.Source>
+                    </Image>
+                </Button>
+                <Button Name="loadFolderButton" Width="100" Style="{StaticResource btnStyle}" Margin="5" Click="loadFolderButton_Click">
+                    <Image x:Name="load_folder_image">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/icons/load_folder.png"/>
+                        </Image.Source>
+                    </Image>
+                </Button>
+                <Button Name="fullscreenButton" Style="{StaticResource btnStyle}" Width="100" Margin="5" Click="fullscreenButton_Click">
+                    <Image x:Name="fullscreen_image">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/icons/fullscreen.png"/>
+                        </Image.Source>
+                    </Image>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+        <MediaElement Name="videoPlayer" Margin="150, 0, 0, 0"  LoadedBehavior="Manual"/>
+        <Expander Header="Video List" IsExpanded="True" Width="150" DockPanel.Dock="Right" HorizontalAlignment="Right">
+            <ListBox Name="videoListBox" ItemsSource="{Binding videoFiles}" DisplayMemberPath="videoTitle" HorizontalAlignment="Right" Width="150" DockPanel.Dock="Right" SelectionChanged="videoListBox_SelectionChanged"/>
+        </Expander>
+    </DockPanel>
+</Window>
