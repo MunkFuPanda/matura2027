@@ -1,0 +1,73 @@
+﻿<Window x:Class="WPF_Media_Player.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Media_Player"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="550" Width="868">
+    <Grid Margin="0,0,133,0">
+        <DockPanel Margin="0,0,41,0">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_Open" Click="OpenFile_Click"/>
+                    <Separator/>
+                    <MenuItem Header="_Exit" Click="Exit_Click"/>
+                </MenuItem>
+            </Menu>
+            <MediaElement Name="video" LoadedBehavior="Manual" UnloadedBehavior="Stop" Stretch="Uniform" DockPanel.Dock="Top" Height="350" Volume="{Binding MediaVolume}"/>
+
+            <ProgressBar Name="progressBar" Height="20" Margin="20 20 20 20" DockPanel.Dock="Top" Style="{StaticResource proBar}" Minimum="0"
+    Maximum="{Binding Duration}"
+    Value="{Binding Progress}"/>
+
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="10 0 10 10" Height="50" HorizontalAlignment="Center">
+                <Button Name="backwardButton" Click="backwardButton_Click" Style="{StaticResource btnStyle}" Margin="5">
+                    <Image x:Name="img_back">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/Ressourcen/previous.png"/>
+                        </Image.Source>
+                    </Image>
+                </Button>
+                <Button Name="playButton" Click="PlayButton_Click" Style="{StaticResource btnStyle}" Margin="5">
+                    <Image x:Name="img_play">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/Ressourcen/play-button.png"/>
+                        </Image.Source>
+                    </Image>
+                </Button>
+                <Button Name="stopButton" Click="StopButton_Click" Style="{StaticResource btnStyle}" Margin="5">
+                    <Image x:Name="img_stop">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/Ressourcen/stop-button.png"/>
+                        </Image.Source>
+                    </Image>
+                </Button>
+                <Button Name="forwardButton" Click="forwardButton_Click" Style="{StaticResource btnStyle}" Margin="5">
+                    <Image x:Name="img_forward">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/Ressourcen/fast-forward.png"/>
+                        </Image.Source>
+                    </Image>
+                </Button>
+                <Slider HorizontalAlignment="Right" HorizontalContentAlignment="Right" Name="volumeSlider" Minimum="0" Maximum="100" Width="200" Margin="100 15 0 0" Value="{Binding Volume, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Margin="20 20 10 10" Text="{Binding Volume}"/>
+                <Button Name="muteButton" Click="MuteButton_Click" Style="{StaticResource btnStyle}" Margin="5">
+                    <Image x:Name="img_mute">
+                        <Image.Source>
+                            <BitmapImage UriSource="pack://application:,,,/Ressourcen/volume-mute.png"/>
+                        </Image.Source>
+                    </Image>
+                </Button>
+            </StackPanel>
+        </DockPanel>
+        <StackPanel DockPanel.Dock="Right" Margin="699,0,-122,267">
+            <TextBlock Text="Playlist" FontSize="16" FontWeight="Bold" Margin="0 10 0 10"/>
+            <ListBox Name="playlistListBox" SelectionChanged="PlaylistListBox_SelectionChanged"/>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Right" Margin="699,267,-122,0">
+            <TextBlock Text="History" FontSize="16" FontWeight="Bold" Margin="0 10 0 10"/>
+            <ListBox Name="historyListBox" SelectionChanged="HistoryListBox_SelectionChanged"/>
+        </StackPanel>
+    </Grid>
+</Window>
