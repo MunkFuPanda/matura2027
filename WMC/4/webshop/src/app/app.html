@@ -17,10 +17,31 @@
               </a>
             </li>
           }
+          @if (authService.isLoggedIn()) {
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/employee">Bestellungen</a>
+            </li>
+          }
+          <li class="nav-item">
+            <a class="nav-link" (click)="onLoginLogout()" style="cursor: pointer;">
+              @if (authService.isLoggedIn()) {
+                Logout
+              } @else {
+                Login
+              }
+            </a>
+          </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        <form class="d-flex" role="search" (submit)="onSearch($event)">
+          <input 
+            id="searchInput" 
+            class="form-control me-2" 
+            type="search" 
+            placeholder="Produkt suchen" 
+            aria-label="Search"
+            [value]="searchTerm()"
+            (input)="searchTerm.set($any($event.target).value)">
+          <button class="btn btn-outline-success" type="submit">Suchen</button>
         </form>
       </div>
     </div>

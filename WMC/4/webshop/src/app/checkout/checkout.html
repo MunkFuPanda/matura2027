@@ -1,0 +1,127 @@
+<div class="container mt-4">
+  <h1>Bestellung abschließen</h1>
+
+  <div class="row mt-4">
+    <div class="col-md-8">
+      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="salutation" class="form-label">Anrede *</label>
+          <select 
+            id="salutation" 
+            class="form-select" 
+            formControlName="salutation"
+            [class.is-invalid]="submitted && f['salutation'].errors">
+            <option value="">Bitte wählen</option>
+            <option value="Herr">Herr</option>
+            <option value="Frau">Frau</option>
+            <option value="Divers">Divers</option>
+          </select>
+          @if (submitted && f['salutation'].errors) {
+            <div class="invalid-feedback">
+              Bitte wählen Sie eine Anrede.
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="firstName" class="form-label">Vorname *</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="firstName" 
+            formControlName="firstName"
+            [class.is-invalid]="submitted && f['firstName'].errors">
+          @if (submitted && f['firstName'].errors) {
+            <div class="invalid-feedback">
+              Vorname ist ein Pflichtfeld.
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Name *</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="lastName" 
+            formControlName="lastName"
+            [class.is-invalid]="submitted && f['lastName'].errors">
+          @if (submitted && f['lastName'].errors) {
+            <div class="invalid-feedback">
+              Name ist ein Pflichtfeld.
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label for="street" class="form-label">Straße *</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="street" 
+            formControlName="street"
+            [class.is-invalid]="submitted && f['street'].errors">
+          @if (submitted && f['street'].errors) {
+            <div class="invalid-feedback">
+              Straße ist ein Pflichtfeld.
+            </div>
+          }
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="zipCode" class="form-label">PLZ *</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="zipCode" 
+              formControlName="zipCode"
+              [class.is-invalid]="submitted && f['zipCode'].errors">
+            @if (submitted && f['zipCode'].errors) {
+              <div class="invalid-feedback">
+                @if (f['zipCode'].errors['required']) {
+                  PLZ ist ein Pflichtfeld.
+                }
+                @if (f['zipCode'].errors['pattern']) {
+                  PLZ darf nur Zahlen enthalten.
+                }
+              </div>
+            }
+          </div>
+
+          <div class="col-md-8 mb-3">
+            <label for="city" class="form-label">Ort *</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="city" 
+              formControlName="city"
+              [class.is-invalid]="submitted && f['city'].errors">
+            @if (submitted && f['city'].errors) {
+              <div class="invalid-feedback">
+                Ort ist ein Pflichtfeld.
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="d-flex gap-2 mt-4">
+          <button type="button" class="btn btn-secondary" (click)="onCancel()">Abbrechen</button>
+          <button type="submit" class="btn btn-primary">Jetzt kaufen</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h5>Bestellübersicht</h5>
+        </div>
+        <div class="card-body">
+          <p><strong>Artikel im Warenkorb:</strong> {{ cartService.itemCount() }}</p>
+          <p><strong>Gesamtpreis:</strong> {{ cartService.totalPrice() | currency: 'EUR' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

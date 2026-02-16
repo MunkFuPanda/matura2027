@@ -1,4 +1,13 @@
 <div class="container mt-5">
+  @if (searchTerm) {
+    <div class="alert alert-info">
+      Suchergebnisse für: "{{ searchTerm }}"
+      @if (products.length === 0) {
+        - Keine Produkte gefunden
+      }
+    </div>
+  }
+  
   <h2 class="white">Unsere Produkte</h2>
   <br>
   <br>
