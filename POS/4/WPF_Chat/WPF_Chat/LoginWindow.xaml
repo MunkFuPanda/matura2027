@@ -1,0 +1,40 @@
+<Window x:Class="WPF_Chat.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Chat Login" Height="300" Width="350"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Server:" Grid.Row="0" VerticalAlignment="Center" Margin="0,0,10,5"/>
+        <TextBox x:Name="TxtServer" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
+
+        <TextBlock Text="Port:" Grid.Row="1" VerticalAlignment="Center" Margin="0,0,10,5"/>
+        <TextBox x:Name="TxtPort" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5"/>
+
+        <TextBlock Text="Username:" Grid.Row="2" VerticalAlignment="Center" Margin="0,0,10,5"/>
+        <TextBox x:Name="TxtUsername" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5"/>
+
+        <TextBlock Text="Password:" Grid.Row="3" VerticalAlignment="Center" Margin="0,0,10,5"/>
+        <PasswordBox x:Name="TxtPassword" Grid.Row="3" Grid.Column="1" Margin="0,0,0,10"/>
+
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="BtnLogin" Content="Login" Width="100" Margin="0,0,10,0" Click="BtnLogin_Click"/>
+            <Button x:Name="BtnRegister" Content="Register" Width="100" Click="BtnRegister_Click"/>
+        </StackPanel>
+
+        <TextBlock x:Name="TxtStatus" Grid.Row="5" Grid.ColumnSpan="2" Foreground="Red"
+                   TextWrapping="Wrap" Margin="0,10,0,0" HorizontalAlignment="Center"/>
+    </Grid>
+</Window>

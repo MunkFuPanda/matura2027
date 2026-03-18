@@ -1,0 +1,93 @@
+﻿<Window x:Class="WPF_Chat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:WPF_Chat"
+        mc:Ignorable="d"
+        Title="WPF Chat" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Menu -->
+        <Menu Grid.Row="0">
+            <MenuItem Header="Profile">
+                <MenuItem Header="Change Profile Image" Click="MenuProfileImage_Click"/>
+                <MenuItem Header="Change Color">
+                    <xctk:ColorPicker x:Name="ColorPicker"
+                                      SelectedColorChanged="ColorPicker_SelectedColorChanged"
+                                      Width="200" ShowStandardColors="True"/>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Panel: Rooms -->
+            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,1,0">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Chat Rooms" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <ListBox x:Name="LstRooms" Grid.Row="1" MouseDoubleClick="LstRooms_MouseDoubleClick"/>
+                    <TextBox x:Name="TxtNewRoom" Grid.Row="2" Margin="0,5,0,5" ToolTip="Enter room name"/>
+                    <Button Content="Create Room" Grid.Row="3" Click="BtnCreateRoom_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- Center: Chat Tabs -->
+            <Grid Grid.Column="1" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TabControl x:Name="TabChat" Grid.Row="0"/>
+
+                <Grid Grid.Row="1" Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="TxtMessage" Grid.Column="0" Margin="0,0,5,0"
+                             KeyDown="TxtMessage_KeyDown"/>
+                    <Button Content="Send" Grid.Column="1" Width="60" Click="BtnSend_Click"/>
+                </Grid>
+            </Grid>
+
+            <!-- Right Panel: Online Users -->
+            <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="1,0,0,0">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Online Users" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <ListBox x:Name="LstOnlineUsers" Grid.Row="1"/>
+                    <TextBlock Text="Private Message:" Grid.Row="2" Margin="0,5,0,2"/>
+                    <TextBox x:Name="TxtPrivateMessage" Grid.Row="3" Margin="0,0,0,5"/>
+                    <Button Content="Send PM" Grid.Row="4" Click="BtnSendPM_Click"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
