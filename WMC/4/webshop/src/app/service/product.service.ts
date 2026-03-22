@@ -3,9 +3,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, provideHttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Product} from "../model/product.model";
-/*
 import {environment} from "../../environments/environment";
-*/
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +11,16 @@ import {environment} from "../../environments/environment";
 export class ProductService {
 
   constructor(private http: HttpClient) { }
-/*
-  baseUrl = environment.apiUrl+'/users';
-*/
-  baseUrl = 'http://localhost:8081/product';
+
+  baseUrl = `${environment.apiUrl}/product`;
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseUrl);
+  }
+
+  searchProducts(searchTerm: string): Observable<Product[]> {
+    console.log('ProductService: Searching products with term', searchTerm);
+    return this.http.get<Product[]>(`${this.baseUrl}/search/${searchTerm}`);
   }
 
   getProductById(id: number): Observable<Product> {

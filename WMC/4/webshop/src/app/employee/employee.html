@@ -1,0 +1,74 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Mitarbeiterbereich - Bestellverwaltung</h1>
+    <button class="btn btn-outline-secondary" (click)="logout()">Logout</button>
+  </div>
+
+  @if (loading) {
+    <div class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Laden...</span>
+      </div>
+    </div>
+  } @else if (orders.length === 0) {
+    <div class="alert alert-info">
+      Keine offenen Bestellungen vorhanden.
+    </div>
+  } @else {
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Bestellnr.</th>
+            <th>Kunde</th>
+            <th>Lieferadresse</th>
+            <th>Status</th>
+            <th>Produkte</th>
+            <th>Gesamtpreis</th>
+            <th>Aktionen</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (order of orders; track order.id) {
+            <tr>
+              <td>{{ order.id }}</td>
+              <td>
+                {{ order.salutation }} {{ order.firstName }} {{ order.lastName }}
+              </td>
+              <td>{{ order.street }}, {{ order.zipCode }} {{ order.city }}</td>
+              <td>{{ order.finished || order.canceled || '-' }}</td>
+              <td>
+                @if (order.productList && order.productList.length > 0) {
+                  <ul class="list-unstyled mb-0">
+                    @for (product of order.productList; track product.id) {
+                      <li>{{ product.quantity }}x {{ product.name }}</li>
+                    }
+                  </ul>
+                } @else {
+                  <span class="text-muted">Keine Produkte</span>
+                }
+              </td>
+              <td>{{ order.totalPrice | currency: 'EUR' }}</td>
+              <td>
+                <div class="btn-group" role="group">
+                  <button
+                    class="btn btn-success btn-sm"
+                    (click)="finishOrder(order.id)"
+                    title="Bestellung erledigen">
+                    Fertig
+                  </button>
+                  <button
+                    class="btn btn-danger btn-sm"
+                    (click)="cancelOrder(order.id)"
+                    title="Bestellung stornieren">
+                    Storno
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

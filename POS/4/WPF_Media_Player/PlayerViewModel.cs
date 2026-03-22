@@ -1,67 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
-namespace WPF_Media_Player
-{
-    public class PlayerViewModel : INotifyPropertyChanged
-    {
-        private int _volume = 50;
+namespace WPF_Media_Player {
+    public class PlayerViewModel : INotifyPropertyChanged {
+        private double progress;
+        private double duration;
+        private double volume = 0.5;
+        private int currentIndex;
 
-        public int Volume
-        {
-            get => _volume;
-            set
-            {
-                if (_volume != value)
-                {
-                    _volume = value;
-                    OnPropertyChanged(nameof(Volume));
-                    OnPropertyChanged(nameof(MediaVolume));
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public ObservableCollection<string> Playlist { get; } = new ObservableCollection<string>();
+
+        public int CurrentIndex {
+            get => currentIndex;
+            set {
+                if (currentIndex != value) {
+                    currentIndex = value;
+                    OnPropertyChanged(nameof(CurrentIndex));
+                    OnPropertyChanged(nameof(CurrentItem));
+                    OnPropertyChanged(nameof(CurrentFilename));
                 }
             }
         }
 
-        public double MediaVolume => Volume / 100.0;
+        public string? CurrentItem => (Playlist.Count > 0 && CurrentIndex >= 0 && CurrentIndex < Playlist.Count) ? Playlist[CurrentIndex] : null;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string name)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        public string? CurrentFilename => CurrentItem != null ? Path.GetFileName(CurrentItem) : null;
 
-        private double _progress;
-        private double _duration;
-
-        public double Progress
-        {
-            get => _progress;
-            set
-            {
-                if (_progress != value)
-                {
-                    _progress = value;
-                    OnPropertyChanged(nameof(Progress));
-                }
-            }
+        public double Progress {
+            get => progress;
+            set { progress = value; OnPropertyChanged(nameof(Progress)); }
         }
 
-        public double Duration
-        {
-            get => _duration;
-            set
-            {
-                if (_duration != value)
-                {
-                    _duration = value;
-                    OnPropertyChanged(nameof(Duration));
-                }
-            }
+        public double Duration {
+            get => duration;
+            set { duration = value; OnPropertyChanged(nameof(Duration)); }
         }
 
+        public double Volume {
+            get => volume;
+            set { volume = value; OnPropertyChanged(nameof(Volume)); }
+        }
 
-
+        private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
-
 }

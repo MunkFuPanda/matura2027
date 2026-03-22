@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
+/* Force dark theme colors */
+:root {
+  --bs-body-color: #e0e0e0;
+  --bs-body-bg: #1a1a1a;
+}
+
 .welcome-text {
     font-family: 'Lobster', cursive;
     font-size: 48px;
@@ -28,6 +34,11 @@
 
 body {
     background-image: radial-gradient(circle, #3b3b3b, #282828) !important;
+    color: #e0e0e0 !important;
+}
+
+* {
+    color: inherit;
 }
 
 .white {
@@ -36,9 +47,153 @@ body {
 
 .product-details h5 {
     margin-bottom: 5px;
+    color: #fff !important;
 }
 
 .product-price p {
     margin-bottom: 10px;
+    color: #e0e0e0 !important;
 }
+
+/* Dark Theme Improvements - Higher specificity */
+.card,
+.card * {
+    color: #e0e0e0 !important;
+}
+
+.card {
+    background-color: #2b2b2b !important;
+    border-color: #444 !important;
+}
+
+.card-header {
+    background-color: #333 !important;
+    color: #fff !important;
+    border-bottom-color: #444 !important;
+}
+
+.card-header * {
+    color: #fff !important;
+}
+
+.card-body {
+    color: #e0e0e0 !important;
+}
+
+.card-body * {
+    color: #e0e0e0 !important;
+}
+
+.table,
+.table * {
+    color: #e0e0e0 !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.form-label,
+.form-label * {
+    color: #e0e0e0 !important;
+}
+
+.form-control,
+.form-control::placeholder {
+    background-color: #333 !important;
+    color: #e0e0e0 !important;
+    border-color: #555 !important;
+}
+
+.form-control:focus {
+    background-color: #3a3a3a !important;
+    color: #e0e0e0 !important;
+    border-color: #777 !important;
+}
+
+.form-select,
+.form-select option {
+    background-color: #333 !important;
+    color: #e0e0e0 !important;
+    border-color: #555 !important;
+}
+
+.form-select:focus {
+    background-color: #3a3a3a !important;
+    color: #e0e0e0 !important;
+    border-color: #777 !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
+    color: #fff !important;
+}
+
+p, p * {
+    color: #d0d0d0 !important;
+}
+
+.alert-info,
+.alert-info * {
+    background-color: #1a3a52 !important;
+    color: #b3d7ff !important;
+    border-color: #2a5a82 !important;
+}
+
+.alert-success,
+.alert-success * {
+    background-color: #1a4d2e !important;
+    color: #b3ffb3 !important;
+    border-color: #2a6d4e !important;
+}
+
+.alert-danger,
+.alert-danger * {
+    background-color: #5a1a1a !important;
+    color: #ffb3b3 !important;
+    border-color: #8a2a2a !important;
+}
+
+.text-muted,
+.text-muted * {
+    color: #999 !important;
+}
+
+.list-unstyled,
+.list-unstyled *,
+.list-unstyled li {
+    color: #e0e0e0 !important;
+}
+
+label {
+    color: #e0e0e0 !important;
+}
+
+.invalid-feedback {
+    color: #ffb3b3 !important;
+}
+
+.btn {
+    color: #fff !important;
+}
+
+thead th {
+    color: #fff !important;
+}
+
+td, th {
+    color: #e0e0e0 !important;
+}
+
+a,
+a:hover,
+.nav-link,
+.navbar-brand {
+    color: #e0e0e0 !important;
+}
+
+.text-dark {
+    color: #e0e0e0 !important;
+}
+
 

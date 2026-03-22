@@ -1,0 +1,15 @@
+<div class="container mt-4">
+  <div class="alert alert-success">
+    <h2>Vielen Dank für Ihre Bestellung!</h2>
+    <p>Ihre Bestellung wurde erfolgreich aufgenommen und wird bearbeitet.</p>
+  </div>
+
+  @if (orderComplete()) {
+    <app-cart [showButtons]="false" [cartItems]="orderItems()" />
+  }
+
+  <div class="mt-4">
+    <a routerLink="/shop" class="btn btn-primary">Zurück zum Shop</a>
+    <a routerLink="/" class="btn btn-secondary ms-2">Zur Startseite</a>
+  </div>
+</div>

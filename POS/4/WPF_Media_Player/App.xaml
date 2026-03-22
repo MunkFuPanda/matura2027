@@ -4,53 +4,44 @@
              xmlns:local="clr-namespace:WPF_Media_Player"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style x:Key="btnStyle">
-            <Setter Property="Control.Height" Value="35" />
-            <Setter Property="Control.FontSize" Value="18" />
-            <Setter Property="Control.Background" Value="Transparent"/>
-            <Setter Property="Control.BorderBrush" Value="Transparent"/>
+
+        <!-- Converter für Playlist -->
+        <local:FilenameConverter x:Key="FilenameConverter"/>
+
+        <!-- Buttons Style -->
+        <Style x:Key="btnStyle" TargetType="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Background" Value="#FFFFFFFF"/>
+            <Setter Property="BorderBrush" Value="#FFD1D5DB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF6366F1"/>
+                    <Setter Property="BorderBrush" Value="#FF6366F1"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#FF4F46E5"/>
+                    <Setter Property="BorderBrush" Value="#FF4F46E5"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
+        <!-- ProgressBar Style -->
         <Style TargetType="ProgressBar" x:Key="proBar">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ProgressBar" >
-                        <Grid x:Name="Root">
-                            <Border 
-            Name="PART_Track" 
-            CornerRadius="2" 
-            Background="LightGreen"
-            BorderBrush="Green"
-            BorderThickness="2" />
-                            <Border 
-            Name="PART_Indicator" 
-            CornerRadius="2" 
-            Background="ForestGreen" 
-            BorderBrush="Green" 
-            BorderThickness="2" 
-            HorizontalAlignment="Left" />
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <!-- Getting vertical style working using technique described here: http://stackoverflow.com/a/6849237/7532 -->
-                            <Trigger Property="Orientation" Value="Vertical">
-                                <Setter TargetName="Root" Property="LayoutTransform">
-                                    <Setter.Value>
-                                        <RotateTransform Angle="270" />
-                                    </Setter.Value>
-                                </Setter>
-
-                                <Setter TargetName="Root" Property="Width"
-                Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Height}"
-              />
-                                <Setter TargetName="Root" Property="Height"
-                Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Width}"
-              />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Height" Value="5"/>
+            <Setter Property="Foreground" Value="#FF10B981"/>
+            <Setter Property="Background" Value="#FFD1FAE5"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
+
+        <!-- Theme Colors -->
+        <SolidColorBrush x:Key="BgBrush" Color="#FFF8F9FA"/>
+        <SolidColorBrush x:Key="PanelBrush" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="#FF6366F1"/>
+        <SolidColorBrush x:Key="SecondaryBrush" Color="#FF10B981"/>
     </Application.Resources>
 </Application>
