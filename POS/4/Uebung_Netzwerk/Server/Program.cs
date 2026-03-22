@@ -16,7 +16,7 @@ namespace Server
 
         public static TcpListener server = new TcpListener(System.Net.IPAddress.Any, 12345);
         public static ChatDB db = new ChatDB(new DataOptions().UseSQLite(@"Data Source=Model\chat.db"));
-        public static List<TcpClient> listConnectedClients = new List<TcpClient>();
+        public static List<Transfer<Message>> listConnectedClients = new List<Transfer<Message>>();
 
         public static void Main(string[] args)
         {
@@ -27,11 +27,13 @@ namespace Server
             {
                 TcpClient newClient = server.AcceptTcpClient();
 
-                listConnectedClients.Add(newClient);
+                // db.Insert(new User { Username = "test", Password = "test" });
 
                 Task.Run(() =>
                 {
                     Transfer<Message> newTransfer = new Transfer<Message>(newClient);
+
+                    listConnectedClients.Add(newTransfer);
 
                     newTransfer.OnMessageReceived += HandleMessage;
                 });
@@ -44,6 +46,16 @@ namespace Server
             {
                 case MessageTyp.Chat:
                     Console.WriteLine($"{msg.Username}: {msg.Content}");
+
+                    var senderTransfer = (Transfer<Message>)sender;
+
+                    foreach (Transfer<Message> client in listConnectedClients)
+                    {
+                        if (client != senderTransfer)
+                        {
+                            client.SendMessage(msg);
+                        }
+                    }
                     break;
                 case MessageTyp.Login:
                     var _transfer = (Transfer<Message>)sender;
