@@ -1,0 +1,33 @@
+﻿<Window x:Class="WPF_Gomoku.StartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Gomoku"
+        mc:Ignorable="d"
+        Title="StartWindow" Height="450" Width="400">
+    <Grid>
+        <Label Content="Wähle Spielmodus" HorizontalAlignment="Center" Margin="0,23,0,0" VerticalAlignment="Top"/>
+        <StackPanel Margin="0,54,0,0">
+            <RadioButton x:Name="rb1" Content="Lokal" GroupName="grp" Checked="GameMode_Changed"/>
+            <RadioButton x:Name="rb2" Content="Computer" GroupName="grp" Checked="GameMode_Changed"/>
+            <RadioButton x:Name="rb3" Content="Netzwerk Server" GroupName="grp" Checked="GameMode_Changed"/>
+            <RadioButton x:Name="rb4" Content="Netzwerk Client" GroupName="grp" Checked="GameMode_Changed"/>
+
+            <ComboBox x:Name="cb1" Margin="0,10,0,10">
+                <ComboBoxItem Content="9x9"/>
+                <ComboBoxItem Content="12x12"/>
+                <ComboBoxItem Content="15x15"/>
+            </ComboBox>
+
+            <StackPanel Height="130" x:Name="NetworkGrid" Visibility="Collapsed">
+                <TextBlock Text="Gib die IP-Adresse ein:" Margin="0,10,0,10"/>
+                <TextBox x:Name="tb1" Margin="0,0,0,10"/>
+                <TextBlock Text="Gib den Port ein:" Margin="0,10,0,10"/>
+                <TextBox x:Name="tb2" Margin="0,0,0,10" Text="12345"/>
+            </StackPanel>
+
+            <Button Content="Check" Click="Button_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
