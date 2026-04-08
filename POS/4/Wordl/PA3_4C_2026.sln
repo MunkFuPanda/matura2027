@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36429.23 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{DD7231CD-EE00-4551-B2E4-0491B59C269D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{60159ABF-94D0-45BA-8A12-64AB140EC758}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network", "Network\Network.csproj", "{4A21F7C3-EEA0-40F8-BBBF-25017660D5E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD7231CD-EE00-4551-B2E4-0491B59C269D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD7231CD-EE00-4551-B2E4-0491B59C269D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD7231CD-EE00-4551-B2E4-0491B59C269D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD7231CD-EE00-4551-B2E4-0491B59C269D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60159ABF-94D0-45BA-8A12-64AB140EC758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60159ABF-94D0-45BA-8A12-64AB140EC758}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60159ABF-94D0-45BA-8A12-64AB140EC758}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60159ABF-94D0-45BA-8A12-64AB140EC758}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A21F7C3-EEA0-40F8-BBBF-25017660D5E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A21F7C3-EEA0-40F8-BBBF-25017660D5E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A21F7C3-EEA0-40F8-BBBF-25017660D5E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A21F7C3-EEA0-40F8-BBBF-25017660D5E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E1AF660E-8485-42BE-BE08-28AAB284CD2B}
+	EndGlobalSection
+EndGlobal
