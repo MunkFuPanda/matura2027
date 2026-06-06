@@ -1,0 +1,218 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Model\Map.png" />
+    <None Remove="Model\Waldwunder.db" />
+    <None Remove="new_images\Ahornriesen1.jpg" />
+    <None Remove="new_images\Ahornriesen2.jpg" />
+    <None Remove="new_images\Ahornriesen3.jpg" />
+    <None Remove="new_images\Asketenwald1.jpg" />
+    <None Remove="new_images\Asketenwald2.jpg" />
+    <None Remove="new_images\Bergsturzwald1.jpg" />
+    <None Remove="new_images\Bergsturzwald2.jpg" />
+    <None Remove="new_images\Bergsturzwald3.jpg" />
+    <None Remove="new_images\Bergsturzwald4.jpg" />
+    <None Remove="new_images\Buchen-Kathedralen1.jpg" />
+    <None Remove="new_images\Buchen-Kathedralen2.jpg" />
+    <None Remove="new_images\Buchen-Kathedralen3.jpg" />
+    <None Remove="new_images\Dirndl-Wald1.jpg" />
+    <None Remove="new_images\Dirndl-Wald2.jpg" />
+    <None Remove="new_images\Dirndl-Wald3.jpg" />
+    <None Remove="new_images\Unterwasserwald1.jpg" />
+    <None Remove="new_images\Unterwasserwald2.jpg" />
+    <None Remove="new_images\Unterwasserwald3.jpg" />
+    <None Remove="new_images\Unterwasserwald4.jpg" />
+    <None Remove="new_images\Urige Steirer-Zirben1.jpg" />
+    <None Remove="new_images\Urige Steirer-Zirben2.jpg" />
+    <None Remove="new_images\Urige Steirer-Zirben3.jpg" />
+    <None Remove="new_images\Urige Steirer-Zirben4.jpg" />
+    <None Remove="new_images\Urige Steirer-Zirben5.jpg" />
+    <None Remove="new_images\Waldreich1.jpg" />
+    <None Remove="new_images\Waldreich2.jpg" />
+    <None Remove="new_images\Waldreich3.jpg" />
+    <None Remove="new_images\Waldreich4.jpg" />
+    <None Remove="Testdaten\images\Hallstatt1.jpg" />
+    <None Remove="Testdaten\images\Hallstatt2.jpg" />
+    <None Remove="Testdaten\images\Hallstatt3.jpg" />
+    <None Remove="Testdaten\images\Schluchtwald1.jpg" />
+    <None Remove="Testdaten\images\Schluchtwald2.jpg" />
+    <None Remove="Testdaten\images\Schluchtwald3.jpg" />
+    <None Remove="Testdaten\images\Schluchtwald4.jpg" />
+    <None Remove="Testdaten\images\Storchenwald1.jpg" />
+    <None Remove="Testdaten\images\Storchenwald2.jpg" />
+    <None Remove="Testdaten\images\Storchenwald3.jpg" />
+    <None Remove="Testdaten\images\Storchenwald4.jpg" />
+    <None Remove="Testdaten\images\Wasserwald1.jpg" />
+    <None Remove="Testdaten\images\Wasserwald2.jpg" />
+    <None Remove="Testdaten\images\Wasserwald3.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Model\Map.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Model\Waldwunder.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Ahornriesen1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Ahornriesen2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Ahornriesen3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Asketenwald1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Asketenwald2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Bergsturzwald1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Bergsturzwald2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Bergsturzwald3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Bergsturzwald4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Buchen-Kathedralen1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Buchen-Kathedralen2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Buchen-Kathedralen3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Dirndl-Wald1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Dirndl-Wald2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Dirndl-Wald3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Unterwasserwald1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Unterwasserwald2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Unterwasserwald3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Unterwasserwald4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Urige Steirer-Zirben1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Urige Steirer-Zirben2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Urige Steirer-Zirben3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Urige Steirer-Zirben4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Urige Steirer-Zirben5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Waldreich1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Waldreich2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Waldreich3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="new_images\Waldreich4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testdaten\images\Hallstatt1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testdaten\images\Hallstatt2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testdaten\images\Hallstatt3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testdaten\images\Schluchtwald1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testdaten\images\Schluchtwald2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testdaten\images\Schluchtwald3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testdaten\images\Schluchtwald4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testdaten\images\Storchenwald1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testdaten\images\Storchenwald2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testdaten\images\Storchenwald3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testdaten\images\Storchenwald4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testdaten\images\Wasserwald1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testdaten\images\Wasserwald2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testdaten\images\Wasserwald3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="linq2db" Version="6.2.1" />
+    <PackageReference Include="linq2db.SQLite" Version="6.2.1" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Model\DB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DB.generated.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Model\DB.generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

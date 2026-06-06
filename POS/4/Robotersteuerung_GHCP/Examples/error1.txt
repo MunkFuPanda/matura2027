@@ -1,0 +1,4 @@
+MOVE RIGHT
+REPEAT ABC {
+    COLLECT
+}

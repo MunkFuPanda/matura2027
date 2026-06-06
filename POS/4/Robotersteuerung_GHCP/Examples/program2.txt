@@ -1,0 +1,25 @@
+REPEAT 4 {
+    UNTIL DOWN IS-A OBSTACLE {
+        MOVE DOWN
+        IF DOWN IS-A A {
+            MOVE DOWN
+            COLLECT
+        }
+    }
+    UNTIL RIGHT IS-A OBSTACLE {
+        MOVE RIGHT
+    }
+    UNTIL UP IS-A OBSTACLE {
+        MOVE UP
+        IF UP IS-A B {
+            MOVE UP
+            COLLECT
+        }
+    }
+    UNTIL RIGHT IS-A OBSTACLE {
+        MOVE RIGHT
+    }
+}
+MOVE DOWN
+MOVE DOWN
+COLLECT

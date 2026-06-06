@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XML_Field>
+  <Width>9</Width>
+  <Height>9</Height>
+  <Fields>
+    <XML_Cell>
+      <X>0</X>
+      <Y>0</Y>
+      <Type>robot</Type>
+    </XML_Cell>
+    <XML_Cell>
+      <X>4</X>
+      <Y>7</Y>
+      <Type>A</Type>
+    </XML_Cell>
+    <XML_Cell>
+      <X>8</X>
+      <Y>3</Y>
+      <Type>B</Type>
+    </XML_Cell>
+    <XML_Cell>
+      <X>6</X>
+      <Y>2</Y>
+      <Type>C</Type>
+    </XML_Cell>
+  </Fields>
+</XML_Field>

@@ -1,0 +1,73 @@
+﻿<Window x:Class="Robotersteuerung.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:AbcRobotCore;assembly=AbcRobotCore"
+        Title="Roboter Steuerung" Height="750" Width="1200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="420"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left side: Custom Field Control -->
+        <StackPanel Grid.Column="0" Margin="10">
+            <TextBlock Text="Spielfeld (Custom Control):" FontSize="14" FontWeight="Bold" Margin="0,0,0,10"/>
+            <Border BorderBrush="Black" BorderThickness="2" Margin="0,0,0,10">
+                <local:RobotField x:Name="RobotFieldControl" Height="600" Width="600"/>
+            </Border>
+            
+            <TextBlock Text="Gesammelte Buchstaben:" FontSize="14" FontWeight="Bold" Margin="0,0,0,10"/>
+            <TextBlock x:Name="CollectedLetters" FontSize="12" Margin="0,0,0,20" Text="(noch keine)" FontWeight="Bold"/>
+        </StackPanel>
+
+        <!-- Right side: Controls -->
+        <StackPanel Grid.Column="1" Margin="10" VerticalAlignment="Top">
+            <TextBlock Text="Steuerung" FontSize="16" FontWeight="Bold" Margin="0,0,0,20"/>
+
+            <!-- Field selection -->
+            <TextBlock Text="XML-Spielfeld:" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+            <Grid Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="70"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="FieldPath" Grid.Column="0" Padding="5"/>
+                <Button Grid.Column="1" Content="Laden" Click="LoadFieldButton_Click" Margin="5,0,0,0"/>
+            </Grid>
+
+            <!-- Program selection -->
+            <TextBlock Text="Programm-Datei:" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+            <Grid Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="70"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="ProgramPath" Grid.Column="0" Padding="5"/>
+                <Button Grid.Column="1" Content="Laden" Click="LoadProgramButton_Click" Margin="5,0,0,0"/>
+            </Grid>
+
+            <!-- Program display -->
+            <TextBlock Text="Programm:" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBox x:Name="ProgramText" Height="180" VerticalScrollBarVisibility="Auto" 
+                     FontFamily="Courier New" FontSize="11" Padding="5" Margin="0,0,0,10" TextWrapping="Wrap"/>
+
+            <!-- Error display -->
+            <TextBlock Text="Fehler:" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBox x:Name="ErrorDisplay" Height="60" IsReadOnly="True" VerticalScrollBarVisibility="Auto"
+                     FontFamily="Courier New" FontSize="10" Padding="5" Margin="0,0,0,10" Foreground="Red"/>
+
+            <!-- Control buttons -->
+            <Button x:Name="ParseButton" Content="Programm analysieren" Click="ParseButton_Click" 
+                    Padding="10,5" Margin="0,0,0,5"/>
+            <Button x:Name="ExecuteButton" Content="Programm ausführen" Click="ExecuteButton_Click" 
+                    Padding="10,5" Margin="0,0,0,5" IsEnabled="False"/>
+            <Button x:Name="ResetButton" Content="Zurücksetzen" Click="ResetButton_Click" 
+                    Padding="10,5" Margin="0,0,0,20"/>
+
+            <!-- Execution log -->
+            <TextBlock Text="Ausführungsprotokoll:" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBox x:Name="ExecutionLog" Height="120" IsReadOnly="True" VerticalScrollBarVisibility="Auto"
+                     FontFamily="Courier New" FontSize="10" Padding="5"/>
+        </StackPanel>
+    </Grid>
+</Window>

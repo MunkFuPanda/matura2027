@@ -1,0 +1,49 @@
+﻿<Window x:Class="Painter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Painter"
+        xmlns:controls="clr-namespace:Painter.Controls"
+        mc:Ignorable="d"
+        Title="Painter - Programmiersprache Interpreter" Height="600" Width="1200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Linke Seite: Code-Editor -->
+        <StackPanel Grid.Column="0" Orientation="Vertical">
+            <TextBlock Text="Quellcode:" FontWeight="Bold" Margin="5"/>
+            <TextBox x:Name="CodeTextBox" 
+                     Margin="5"
+                     Padding="5"
+                     AcceptsReturn="True"
+                     VerticalScrollBarVisibility="Auto"
+                     FontFamily="Courier New"
+                     Text="TURN RIGHT 45&#10;COLOR White&#10;DRAW 250&#10;FOR 6 {&#10;COLOR Red&#10;TURN LEFT 150&#10;DRAW 150&#10;COLOR Blue&#10;TURN LEFT 150&#10;DRAW 150&#10;}&#10;TURN RIGHT 90&#10;COLOR Green&#10;FOR 12 {&#10;TURN RIGHT 30&#10;DRAW 40&#10;}"/>
+            
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Button x:Name="ExecuteButton" Content="Ausführen" Padding="10,5" Click="ExecuteButton_Click"/>
+                <Button x:Name="ClearButton" Content="Löschen" Padding="10,5" Margin="5,0,0,0" Click="ClearButton_Click"/>
+            </StackPanel>
+
+            <TextBlock Text="Fehler:" FontWeight="Bold" Margin="5,10,5,5"/>
+            <TextBox x:Name="ErrorTextBox" 
+                     Margin="5"
+                     Padding="5"
+                     AcceptsReturn="True"
+                     VerticalScrollBarVisibility="Auto"
+                     IsReadOnly="True"
+                     Foreground="Red"
+                     Background="#FFF0F0"/>
+        </StackPanel>
+
+        <!-- Rechte Seite: Visualisierung -->
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <TextBlock Text="Ausgabe:" FontWeight="Bold" Margin="5"/>
+            <controls:PainterControl x:Name="PainterControl" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,33 @@
+# Backus-Naur-Form (ABNF) für die Painter-Programmiersprache
+#
+# Diese Grammatik definiert die Syntax für Programme, die Figuren zeichnen
+
+program        = *( statement CRLF )
+statement      = turn-command / draw-command / color-command / for-loop / block
+
+; Dreht den Stift um einen Winkel (in Grad)
+turn-command   = "TURN" ( "LEFT" / "RIGHT" ) number
+
+; Zeichnet eine Linie mit angegebener Länge
+draw-command   = "DRAW" number
+
+; Setzt die Zeichenfarbe
+color-command  = "COLOR" color-name
+
+; Wiederholt einen Block eine bestimmte Anzahl Male
+for-loop       = "FOR" number block
+
+; Ein Block mit mehreren Statements in geschweiften Klammern
+block          = "{" *( statement CRLF ) "}"
+
+; Farbnamen (case-insensitive)
+color-name     = "Red" / "Green" / "Blue" / "Yellow" / "White" / "Black" / "Cyan" / "Magenta" / "Gray"
+
+; Eine positive ganze Zahl
+number         = 1*DIGIT
+
+; Whitespace zwischen Tokens (wird ignoriert)
+CRLF           = CR LF / LF / CR
+DIGIT          = "0" / "1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9"
+CR             = %x0D  ; Carriage Return
+LF             = %x0A  ; Line Feed

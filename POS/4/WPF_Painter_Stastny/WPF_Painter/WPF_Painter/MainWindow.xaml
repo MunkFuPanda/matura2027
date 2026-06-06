@@ -1,0 +1,51 @@
+﻿<Window x:Class="WPF_Painter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Painter"
+        xmlns:paint="clr-namespace:Painter;assembly=Painter"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Margin="0,0,10,0">
+            <Label Content="Dein Code:" FontWeight="Bold" />
+            <TextBox x:Name="Input" 
+                     Height="250" 
+                     AcceptsReturn="True" 
+                     FontFamily="Consolas" 
+                     FontSize="14" 
+                     VerticalScrollBarVisibility="Auto"
+                     Text="COLOR Red&#x0a;FOR 6 {&#x0a;DRAW 100&#x0a;TURN RIGHT 60&#x0a;}"/>
+
+            <Button Content="Programm Ausführen" 
+                    Margin="0,10,0,10" 
+                    Height="40" 
+                    Background="#4CAF50" 
+                    Foreground="White" 
+                    FontWeight="Bold" 
+                    Click="Button_Click"/>
+
+            <Label Content="Token-Liste (Debug):" FontWeight="Bold" />
+            <ListBox x:Name="TokenListBox" Height="150" Background="#E8E8E8">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Type}" FontWeight="Bold" Width="100" Foreground="Blue"/>
+                            <TextBlock Text="{Binding Value}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+        <Border Grid.Column="1" BorderBrush="#CCCCCC" BorderThickness="2" Background="White" CornerRadius="5">
+            <paint:PainterControl x:Name="MyPainterControl" />
+        </Border>
+    </Grid>
+</Window>
