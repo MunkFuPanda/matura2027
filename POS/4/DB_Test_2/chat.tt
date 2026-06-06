@@ -1,0 +1,26 @@
+﻿<#@ template language="C#" debug="True" hostSpecific="True" #>
+<#@ output extension=".generated.cs" #>
+
+<#@ include file="$(LinqToDBT4SQLiteTemplatesPath)LinqToDB.SQLite.ttinclude" once="true" #>
+<#@ include file="$(LinqToDBT4TemplatesPath)PluralizationService.ttinclude"  once="true" #>
+
+<#@ assembly name="System.Data.SQLite" #>
+<#@ import namespace="System.IO" #>
+
+<#
+    NamespaceName        = "DataModels";
+    DataContextName      = "ChatDbContext";
+    GenerateSchemaAsType = true;
+
+    var dbPath = Path.GetFullPath(Path.Combine(
+        Path.GetDirectoryName(Host.TemplateFile),
+        "chatdb.sqlite"
+    ));
+
+    if (!File.Exists(dbPath))
+        throw new Exception("Missing DB: " + dbPath);
+
+    LoadSQLiteMetadata($"Data Source={dbPath};");
+
+    GenerateModel();
+#>
