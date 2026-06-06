@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37111.16 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_Solitaer", "WPF_Solitaer\WPF_Solitaer.csproj", "{BA286B0E-24A5-4491-B5CE-08C528022539}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA286B0E-24A5-4491-B5CE-08C528022539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA286B0E-24A5-4491-B5CE-08C528022539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA286B0E-24A5-4491-B5CE-08C528022539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA286B0E-24A5-4491-B5CE-08C528022539}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B92B6E9-146B-45B0-A5ED-FE0D733B616E}
+	EndGlobalSection
+EndGlobal

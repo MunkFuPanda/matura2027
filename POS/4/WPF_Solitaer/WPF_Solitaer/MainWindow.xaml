@@ -1,0 +1,22 @@
+﻿<Window x:Class="WPF_Solitaer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Solitaer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="800">
+    <Grid>
+        <Grid PreviewMouseMove="Grid_PreviewMouseMove" PreviewDragOver="Grid_PreviewDragOver" x:Name="grid"/>
+        <Border x:Name="MenuOverlay" Background="#CCFFFFFF" Panel.ZIndex="100">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+                <TextBlock Text="Wähle ein Spielfeld" FontSize="24" FontWeight="Bold" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+                <Button Content="1. Europäisch (7x7)" Margin="5" Padding="10" Click="StartGame_Click" Tag="1"/>
+                <Button Content="2. Großes Kreuz (9x9)" Margin="5" Padding="10" Click="StartGame_Click" Tag="2"/>
+                <Button Content="3. Längliches Kreuz (9x9)" Margin="5" Padding="10" Click="StartGame_Click" Tag="3"/>
+                <Button Content="4. Klassisches Kreuz (7x7)" Margin="5" Padding="10" Click="StartGame_Click" Tag="4"/>
+                <Button Content="5. Raute (9x9)" Margin="5" Padding="10" Click="StartGame_Click" Tag="5"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
