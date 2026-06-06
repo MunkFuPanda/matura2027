@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- ================================================================
+       SDK-style WPF-Projekt fuer .NET 8.
+       Faellt deine Schule auf .NET Framework zurueck, siehe
+       docs/05_WPF_Cheatsheet.md -> Abschnitt "Framework-Variante".
+       ================================================================ -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>            <!-- bewusst aus: konservatives C# -->
+    <ImplicitUsings>disable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <!-- EF Core / SQLite fuer den Persistenz-Teil (Waldwunder).
+       Brauchst du keine DB, kannst du diese 2 Zeilen entfernen. -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.6" />
+  </ItemGroup>
+
+</Project>

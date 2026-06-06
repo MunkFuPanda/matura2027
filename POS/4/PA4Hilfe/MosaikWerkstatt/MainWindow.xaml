@@ -1,0 +1,83 @@
+<Window x:Class="MosaikWerkstatt.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Mosaik-Werkstatt" Height="640" Width="1000">
+
+    <!-- ===================================================================
+         GUI-Layout. Zeigt die wichtigsten WPF-Bausteine fuer die PA:
+          - Grid mit Star-Sizing (*) => skaliert beim Fenster-Vergroessern
+          - Menu mit OpenFileDialog-Anbindung
+          - ToolBar mit Buttons (Click -> Code-Behind)
+          - TextBox (AcceptsReturn) als Code-Editor
+          - ListBox mit SelectionChanged (gespeicherte Programme)
+          - Viewbox + UniformGrid als skalierendes Mosaik-Feld
+          - StatusBar fuer Fehlermeldungen
+         =================================================================== -->
+
+    <DockPanel>
+        <!-- Menue -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Datei">
+                <MenuItem Header="Programm _laden..." Click="OnOpenFile_Click"/>
+                <MenuItem Header="In _Datenbank speichern" Click="OnSaveDb_Click"/>
+                <Separator/>
+                <MenuItem Header="_Beenden" Click="OnExit_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- ToolBar -->
+        <ToolBar DockPanel.Dock="Top">
+            <Button Content="Laden..." Click="OnOpenFile_Click" Margin="2"/>
+            <Button Content="Parsen (Syntax pruefen)" Click="OnParse_Click" Margin="2"/>
+            <Button Content="Ausfuehren" Click="OnRun_Click" Margin="2"/>
+            <Separator/>
+            <Button Content="DB speichern" Click="OnSaveDb_Click" Margin="2"/>
+            <Button Content="DB laden" Click="OnLoadDb_Click" Margin="2"/>
+        </ToolBar>
+
+        <!-- Statusleiste (unten): Fehler / Erfolg -->
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusText" Text="Bereit." />
+            </StatusBarItem>
+        </StatusBar>
+
+        <!-- Hauptbereich: links Code, rechts Feld -->
+        <Grid Margin="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>   <!-- Code-Spalte -->
+                <ColumnDefinition Width="6"/>     <!-- Trenner -->
+                <ColumnDefinition Width="3*"/>   <!-- Feld-Spalte -->
+            </Grid.ColumnDefinitions>
+
+            <!-- LINKS: Editor + gespeicherte Programme -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>      <!-- Code-Editor -->
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="120"/>     <!-- gespeicherte Programme -->
+                </Grid.RowDefinitions>
+
+                <TextBox x:Name="CodeBox" Grid.Row="0"
+                         AcceptsReturn="True" AcceptsTab="True"
+                         FontFamily="Consolas" FontSize="13"
+                         VerticalScrollBarVisibility="Auto"
+                         TextWrapping="NoWrap"
+                         Text="SET COLOR Red&#10;REPEAT 4 { MOVE RIGHT }&#10;REPEAT 4 { MOVE DOWN }&#10;REPEAT 4 { MOVE LEFT }&#10;REPEAT 4 { MOVE UP }"/>
+
+                <TextBlock Grid.Row="1" Margin="0,4" Text="Gespeicherte Programme (Doppelklick zum Laden):"/>
+
+                <ListBox x:Name="SavedList" Grid.Row="2"
+                         MouseDoubleClick="OnSavedList_DoubleClick"/>
+            </Grid>
+
+            <!-- RECHTS: skalierendes Mosaik-Feld -->
+            <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="1" Background="#FAFAFA">
+                <Viewbox Stretch="Uniform" Margin="8">
+                    <!-- UniformGrid wird im Code-Behind mit Zellen befuellt -->
+                    <UniformGrid x:Name="FieldHost" Width="360" Height="360"/>
+                </Viewbox>
+            </Border>
+        </Grid>
+    </DockPanel>
+</Window>
