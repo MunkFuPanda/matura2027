@@ -1,0 +1,15 @@
+﻿<Window x:Class="WPF_Painter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:painter="clr-namespace:Painter;assembly=Painter"
+        xmlns:local="clr-namespace:WPF_Painter"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800">
+    <Grid>
+        <TextBox x:Name="InputTextBox" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="196" Height="383" AcceptsReturn="True"/>
+        <Button Content="Run" HorizontalAlignment="Left" Margin="10,404,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.42,-0.037" Width="196" Click="Button_Click"/>
+        <painter:PainterControl x:Name="PainterControl" HorizontalAlignment="Left" Margin="216,10,0,0" VerticalAlignment="Top" Width="568" Height="383"/>
+    </Grid>
+</Window>

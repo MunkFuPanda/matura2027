@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37111.16 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_Painter", "WPF_Painter\WPF_Painter.csproj", "{2BD38C6B-AE19-43E0-B36E-9B1F97019BDA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BD38C6B-AE19-43E0-B36E-9B1F97019BDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BD38C6B-AE19-43E0-B36E-9B1F97019BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BD38C6B-AE19-43E0-B36E-9B1F97019BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BD38C6B-AE19-43E0-B36E-9B1F97019BDA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5DFEF3C0-DC80-4591-8A57-3D3E85ACF888}
+	EndGlobalSection
+EndGlobal
