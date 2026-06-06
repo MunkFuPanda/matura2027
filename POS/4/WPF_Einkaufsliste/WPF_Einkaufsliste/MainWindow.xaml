@@ -1,0 +1,104 @@
+﻿<Window x:Class="WPF_Einkaufsliste.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Einkaufsliste" Height="600" Width="900">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="New" Executed="New_Executed"/>
+        <CommandBinding Command="Open" Executed="Open_Executed"/>
+        <CommandBinding Command="Save" Executed="Save_Executed"/>
+        <CommandBinding Command="Print" Executed="Print_Executed"/>
+        <CommandBinding Command="Delete" Executed="Delete_Executed" CanExecute="Delete_CanExecute"/>
+    </Window.CommandBindings>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Datei">
+                <MenuItem Command="New" Header="Neu"/>
+                <MenuItem Command="Open" Header="Laden..."/>
+                <MenuItem Command="Save" Header="Speichern..."/>
+                <Separator/>
+                <MenuItem Command="Print" Header="Drucken"/>
+            </MenuItem>
+            <MenuItem Header="Bearbeiten">
+                <MenuItem Command="Delete" Header="Löschen (Auswahl)"/>
+            </MenuItem>
+        </Menu>
+
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Linke Spalte: Eingaben -->
+            <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                <GroupBox Header="1. Suchen" Margin="0,0,0,10">
+                    <StackPanel>
+                        <TextBox x:Name="SearchTextBox" TextChanged="SearchTextBox_TextChanged" Margin="0,0,0,5" ToolTip="Suchbegriff eingeben"/>
+                        <ComboBox x:Name="SearchComboBox" DisplayMemberPath="Name"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="2. Produktkatalog" Margin="0,0,0,10">
+                    <StackPanel>
+                        <TextBlock Text="Kategorie:"/>
+                        <ComboBox x:Name="CategoryComboBox" SelectionChanged="CategoryComboBox_SelectionChanged" Margin="0,0,0,5"/>
+                        <TextBlock Text="Produkt:"/>
+                        <ComboBox x:Name="ProductComboBox" DisplayMemberPath="Name"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="3. Eigenes Produkt" Margin="0,0,0,10">
+                    <TextBox x:Name="CustomProductTextBox" ToolTip="Falls nicht in der Liste vorhanden"/>
+                </GroupBox>
+
+                <GroupBox Header="Menge" Margin="0,0,0,10">
+                    <StackPanel>
+                        <Slider x:Name="MengeSlider" Minimum="1" Maximum="20" Value="1" TickFrequency="1" IsSnapToTickEnabled="True" Margin="0,0,0,5"/>
+                        <TextBlock Text="{Binding Value, ElementName=MengeSlider}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <Button Content="Hinzufügen" Click="Hinzufuegen_Click" Padding="10"/>
+            </StackPanel>
+
+            <!-- Mittlere Spalte: ListBox -->
+            <GroupBox Grid.Column="1" Header="Liste (Flach)" Margin="0,0,5,0">
+                <ListBox x:Name="EinkaufsListeBox" SelectionMode="Extended">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Menge}" FontWeight="Bold" Margin="0,0,5,0"/>
+                                <TextBlock Text="x "/>
+                                <TextBlock Text="{Binding Name}" Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding Kategorie, StringFormat=({0})}" Foreground="Gray"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </GroupBox>
+
+            <!-- Rechte Spalte: TreeView -->
+            <GroupBox Grid.Column="2" Header="Liste (nach Kategorie)" Margin="5,0,0,0">
+                <TreeView x:Name="EinkaufsListeTree">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Items}">
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="DarkBlue"/>
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Menge}" Margin="0,0,5,0" FontWeight="Bold"/>
+                                        <TextBlock Text="x"/>
+                                        <TextBlock Text="{Binding Name}" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </GroupBox>
+        </Grid>
+    </DockPanel>
+</Window>

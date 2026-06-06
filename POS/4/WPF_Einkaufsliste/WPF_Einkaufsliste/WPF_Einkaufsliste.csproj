@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Produkte.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LINQtoCSVCore" Version="1.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Produkte.csv" />
+  </ItemGroup>
+
+</Project>
