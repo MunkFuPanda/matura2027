@@ -24,7 +24,7 @@ namespace MosaikWerkstatt.Language
     // ---------------------------------------------------------------------
 
     // Ein Schnappschuss des Felds zu einem Zeitpunkt (fuer die Animation).
-    public class Frame
+    public class MFrame
     {
         public int CursorRow { get; set; }
         public int CursorCol { get; set; }
@@ -40,7 +40,7 @@ namespace MosaikWerkstatt.Language
         public string CurrentColor { get; private set; }
 
         private readonly string[,] _cells; // logischer Zustand
-        public List<Frame> Frames { get; } = new List<Frame>();
+        public List<MFrame> Frames { get; } = new List<MFrame>();
 
         public Context(int rows, int cols)
         {
@@ -106,7 +106,7 @@ namespace MosaikWerkstatt.Language
         {
             var copy = new string[Rows, Cols];
             Array.Copy(_cells, copy, _cells.Length);
-            Frames.Add(new Frame
+            Frames.Add(new MFrame
             {
                 CursorRow = CursorRow,
                 CursorCol = CursorCol,

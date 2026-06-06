@@ -33,7 +33,7 @@ namespace MosaikWerkstatt.Language
         }
 
         // Parsen + ausfuehren. Liefert die Frames fuer die Animation zurueck.
-        public List<Frame> Run(string source)
+        public List<MFrame> Run(string source)
         {
             Block program = Parse(source);
             var ctx = new Context(_rows, _cols);

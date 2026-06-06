@@ -94,7 +94,7 @@ namespace MosaikWerkstatt
         private async void OnRun_Click(object sender, RoutedEventArgs e)
         {
             ClearField();
-            List<Frame> frames;
+            List<MFrame> frames;
             try
             {
                 var interp = new MosaikInterpreter(Rows, Cols);
@@ -177,7 +177,7 @@ namespace MosaikWerkstatt
                 }
         }
 
-        private void RenderFrame(Frame frame)
+        private void RenderFrame(MFrame frame)
         {
             for (int r = 0; r < Rows; r++)
                 for (int c = 0; c < Cols; c++)
