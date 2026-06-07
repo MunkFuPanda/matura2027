@@ -1,0 +1,16 @@
+﻿program    = *statement
+
+statement  = colorstmt / move / line / for / form
+
+colorstmt  = "COLOR" SP colorvalue
+move       = "MOVE" SP integer SP integer
+line       = "LINE" SP integer SP integer
+for        = "FOR" SP integer SP block
+form       = "FORM" SP name
+
+block      = "{" *statement "}"
+
+colorvalue = "Black" / "Red" / "Green" / "Blue" / "Yellow" / "White"
+sign       = "+" / "-"
+integer    = [ sign ] 1*DIGIT
+name       = ALPHA *(ALPHA / DIGIT)

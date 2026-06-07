@@ -1,0 +1,73 @@
+﻿<Window x:Class="PainterPA.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PainterPA"
+        xmlns:painter="clr-namespace:Painter;assembly=Painter"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Background="#F3F3F3" BorderBrush="#DDD"
+        BorderThickness="0,0,0,1" Padding="8,6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="RunButton" Content="Run" Click="OnRun_Clicked"
+                    Padding="14,5" Margin="0,0,8,0" MinWidth="80"
+                    Background="#2D7D46" Foreground="White" FontWeight="SemiBold"
+                    BorderThickness="0"/>
+                
+                <TextBlock x:Name="StatusText" Grid.Column="1" Text="Bereit."
+                   VerticalAlignment="Center" HorizontalAlignment="Right"
+                   Foreground="#666" FontSize="12"/>
+            </Grid>
+        </Border>
+
+        <!-- Hauptbereich: links Code, rechts Feld -->
+        <Grid Margin="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <!-- Code-Spalte -->
+                <ColumnDefinition Width="6"/>
+                <!-- Trenner -->
+                <ColumnDefinition Width="3*"/>
+                <!-- Feld-Spalte -->
+            </Grid.ColumnDefinitions>
+
+            <!-- LINKS: Editor + gespeicherte Programme -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <!-- Code-Editor -->
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="120"/>
+                    <!-- gespeicherte Programme -->
+                </Grid.RowDefinitions>
+
+                <TextBox x:Name="CodeBox" Grid.Row="0"
+                         AcceptsReturn="True" AcceptsTab="True"
+                         FontFamily="Consolas" FontSize="13"
+                         VerticalScrollBarVisibility="Auto"
+                         TextWrapping="NoWrap"
+                         Text="SET COLOR Red&#10;REPEAT 4 { MOVE RIGHT }&#10;REPEAT 4 { MOVE DOWN }&#10;REPEAT 4 { MOVE LEFT }&#10;REPEAT 4 { MOVE UP }"/>
+
+                <TextBlock Grid.Row="1" Margin="0,4" Text="Formen:"/>
+
+                <ListBox x:Name="SavedList" Grid.Row="2"
+                         MouseDoubleClick="OnSavedList_DoubleClick"/>
+            </Grid>
+
+            <!-- RECHTS: skalierendes Mosaik-Feld -->
+            <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="1" Background="#FAFAFA">
+                <Viewbox Stretch="Uniform" Margin="8">
+                    <!-- UniformGrid wird im Code-Behind mit Zellen befuellt -->
+                    <painter:PainterControl x:Name="PainterControl" HorizontalAlignment="Left" Margin="216,10,0,0" VerticalAlignment="Top" Width="568" Height="383"></painter:PainterControl>
+                </Viewbox>
+            </Border>
+        </Grid>
+    </DockPanel>
+</Window>
