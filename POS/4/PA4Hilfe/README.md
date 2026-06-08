@@ -27,7 +27,10 @@ PA4Hilfe/
 │  ├─ 06_Fehler_Zeilennummer.md Teil 7: Fehlerbehandlung
 │  ├─ 07_EFCore_SQLite.md     Waldwunder-Variante: DB + LINQ
 │  ├─ 08_XML_laden.md         Feld aus XML laden (Roboter-Stil)
-│  └─ 09_CustomControl_DLL.md falls eine .dll mitkommt
+│  ├─ 09_CustomControl_DLL.md falls eine .dll mitkommt
+│  ├─ 10_Verwaltungs_GUI_MasterDetail.md  Waldwunder: ListBox-Sync, CRUD-Formular
+│  ├─ 11_Datei_IO_Import.md   Waldwunder: CSV/Text einlesen, DB-Import/-Export
+│  └─ 12_Suche_Filter_LINQ.md Waldwunder: Suche, Filter, Aggregate in der GUI
 └─ MosaikWerkstatt/           <- lauffaehiges Referenzprojekt (.NET 8 WPF)
    ├─ MosaikWerkstatt.csproj
    ├─ App.xaml(.cs)
