@@ -1,0 +1,49 @@
+﻿<Window x:Class="PA4_4C.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PA4_4C"
+        mc:Ignorable="d"
+        Title="4. praktische Arbeit" Height="450" Width="800">
+    <DockPanel>
+        <!-- Hauptbereich: links Code, rechts Feld -->
+        <Grid Margin="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <!-- Code-Spalte -->
+                <ColumnDefinition Width="6"/>
+                <!-- Trenner -->
+                <ColumnDefinition Width="6*"/>
+                <!-- Feld-Spalte -->
+            </Grid.ColumnDefinitions>
+
+            <!-- LINKS: Editor + gespeicherte Programme -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <!-- Code-Editor -->
+                    <RowDefinition Height="30"/>
+                    <!-- gespeicherte Programme -->
+                </Grid.RowDefinitions>
+
+                <TextBox x:Name="Code" Grid.Row="0"
+                         AcceptsReturn="True" AcceptsTab="True"
+                         FontFamily="Consolas" FontSize="13"
+                         VerticalScrollBarVisibility="Auto"
+                         TextWrapping="NoWrap"
+                         Text="SET COLOR Red&#10;REPEAT 4 { MOVE RIGHT }&#10;REPEAT 4 { MOVE DOWN }&#10;REPEAT 4 { MOVE LEFT }&#10;REPEAT 4 { MOVE UP }"/>
+
+                <Button x:Name="RunButton" Content="Run" Click="OnRun_Clicked"
+                    Padding="14,5" MinWidth="80"
+                     Grid.Row="2"/>
+            </Grid>
+
+            <!-- RECHTS: skalierendes Mosaik-Feld -->
+            <Grid Grid.Column="2" x:Name="Map">
+                <Image Source="/Europe.jpg" Stretch="Uniform"></Image>
+                <Canvas x:Name="MapCanvas"/>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>

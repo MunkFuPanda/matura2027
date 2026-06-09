@@ -1,0 +1,10 @@
+program    = *statement
+
+statement  = country
+
+country   = "COUNTRY" SP name SP block
+words     = "RANDOM" / "LARGEST" / "SMALLEST"
+
+block      = "{" *words "}"
+
+name       = ALPHA *(ALPHA)
