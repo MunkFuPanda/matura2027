@@ -1,0 +1,17 @@
+﻿<Window x:Class="_3tePAUebung.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_3tePAUebung"
+        mc:Ignorable="d"
+        Title="Client" Height="450" Width="800">
+    <DockPanel>
+        <Button x:Name="loginButton" Content="Anmelden" DockPanel.Dock="Top" Click="loginButton_Click"></Button>
+        <ComboBox x:Name="cb_userlist" DockPanel.Dock="Top"></ComboBox>
+        <ComboBox x:Name="cb_messages" DockPanel.Dock="Top"></ComboBox>
+        <Button x:Name="loadMessageButton" Content="Nachricht laden" DockPanel.Dock="Top" Click="loadMessageButton_Click"></Button>
+        <Button x:Name="sendMessageButton" Content="Nachricht senden" DockPanel.Dock="Top" Click="sendMessageButton_Click"></Button>
+        <RichTextBox x:Name="richTextBox" DockPanel.Dock="Top"></RichTextBox>
+    </DockPanel>
+</Window>

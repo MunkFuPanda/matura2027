@@ -1,0 +1,42 @@
+REPEAT 4 {
+    UNTIL DOWN IS-A OBSTACLE {
+        MOVE DOWN
+        IF DOWN IS-A A {
+            MOVE DOWN
+            COLLECT
+        }
+    }
+    UNTIL RIGHT IS-A OBSTACLE {
+        MOVE RIGHT
+    }
+    UNTIL UP IS-A OBSTACLE {
+        MOVE UP
+        IF UP IS-A B {
+            MOVE UP
+            COLLECT
+        }
+    }
+    UNTIL RIGHT IS-A OBSTACLE {
+        MOVE RIGHT
+    }
+}
+MOVE DOWN
+MOVE DOWN
+COLLECT
+
+-- 1 und 2 Teil
+
+<Program> ::= <Statement> { <Statement> }
+<Block> ::= { <Program> }
+<Statement> ::= <Move> | COLLECT | <Repeat> | <Until> | <If>
+<If> ::= IF <Condition> <Block>
+<Until> ::= UNTIL <Condition> <Block>
+<Condition> ::= <Direction> IS-A <Object>
+<Object> ::= OBSTACLE | <Letter>
+<Repeat> ::= REPEAT <Number> <Block>
+<Move> ::= MOVE <Direction>
+<Direction> ::= LEFT | RIGHT | UP | DOWN
+<Number> ::= <Digit> { <Digit> }
+<Digit> ::= 0 | 1 | … | 9
+<Letter> ::= A | B | … | Z
+

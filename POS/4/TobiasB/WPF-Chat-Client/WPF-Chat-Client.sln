@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36930.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF-Chat-Client", "WPF-Chat-Client\WPF-Chat-Client.csproj", "{9BC0E53D-79F1-49E0-A3E6-15644A1E9C9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF-Chat-Server", "WPF-Chat-Server\WPF-Chat-Server.csproj", "{B3F78660-A995-46C3-8175-D50543CB9422}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{84D27F74-D2BA-6C25-2661-968F101900D9}"
+	ProjectSection(SolutionItems) = preProject
+		protocolenum.cs = protocolenum.cs
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9BC0E53D-79F1-49E0-A3E6-15644A1E9C9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BC0E53D-79F1-49E0-A3E6-15644A1E9C9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BC0E53D-79F1-49E0-A3E6-15644A1E9C9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BC0E53D-79F1-49E0-A3E6-15644A1E9C9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3F78660-A995-46C3-8175-D50543CB9422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3F78660-A995-46C3-8175-D50543CB9422}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3F78660-A995-46C3-8175-D50543CB9422}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3F78660-A995-46C3-8175-D50543CB9422}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E3D3996-DAFC-4D28-873A-B46FC8A5E3D8}
+	EndGlobalSection
+EndGlobal

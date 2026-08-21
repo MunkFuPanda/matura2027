@@ -1,0 +1,55 @@
+﻿<Window x:Class="WPF_Video_Player.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Video_Player"
+        mc:Ignorable="d"
+        Title="WPF Video Player" Height="550" Width="800">
+    <Window.CommandBindings>
+        <CommandBinding Command="MediaCommands.Play" CanExecute="Play_CanExecute" Executed="Play_Executed"></CommandBinding>
+        <CommandBinding Command="MediaCommands.Pause" CanExecute="Pause_CanExecute" Executed="Pause_Executed"></CommandBinding>
+        <CommandBinding Command="MediaCommands.Stop" CanExecute="Stop_CanExecute" Executed="Stop_Executed"></CommandBinding>
+        <CommandBinding Command="MediaCommands.MuteVolume" CanExecute="Mute_CanExecute" Executed="Mute_Executed"></CommandBinding>
+    </Window.CommandBindings>
+    <DockPanel LastChildFill="True">
+
+        <StackPanel x:Name="listpanel" DockPanel.Dock="Right" Visibility="Collapsed" Width="200">
+            <Label Content="Playlist"></Label>
+            <ListView x:Name="playlistbox" MouseDoubleClick="playlistbox_MouseDoubleClick">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"></TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Content="Playhistory"></Label>
+            <ListView x:Name="playhistorybox"></ListView>
+        </StackPanel>
+
+        <UniformGrid Columns="10" Rows="1" DockPanel.Dock="Bottom" Height="40">
+            <Button Command="MediaCommands.Play" Content="Play" CommandTarget="{Binding ElementName=media}"></Button>
+            <Button Command="MediaCommands.Pause" Content="Pause" CommandTarget="{Binding ElementName=media}"></Button>
+            <Button Command="MediaCommands.Stop" Content="Stop" CommandTarget="{Binding ElementName=media}"></Button>
+            <Button Content="Vorheriges" Click="Prev_Click"></Button>
+            <Button Content="Nächstes" Click="Next_Click"></Button>
+            <Slider x:Name="volumeSlider" Minimum="0" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" AutoToolTipPlacement="BottomRight" ValueChanged="Slider_ValueChanged" VerticalAlignment="Center"></Slider>
+            <DockPanel>
+                <CheckBox Command="MediaCommands.MuteVolume" VerticalAlignment="Center" HorizontalAlignment="Center" CommandTarget="{Binding ElementName=media}"></CheckBox>
+                <Label Content="Mute"></Label>
+            </DockPanel>
+            <ToggleButton x:Name="togglelist" Content="Listen anzeigen" Click="togglelist_Click"></ToggleButton>
+            <Button Content="Video hinz." Click="videoload_Click"></Button>
+            <Button Content="Videoordner" Click="videodirload_Click"></Button>
+        </UniformGrid>
+
+        <ProgressBar x:Name="videoprogressbar" DockPanel.Dock="Bottom" VerticalAlignment="Stretch" Height="10" Maximum="100" Minimum="0"></ProgressBar>
+
+        <MediaElement x:Name="media" LoadedBehavior="Manual" MediaEnded="media_MediaEnded" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="UniformToFill"></MediaElement>
+
+        
+
+        
+
+    </DockPanel>
+</Window>

@@ -1,0 +1,32 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:WPF_Indicator">
+    <Style TargetType="{x:Type local:Indicator}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:Indicator}">
+                    
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid Width="250" Height="250">
+                            <Image Source="/WPF_Indicator;component/res/tacho.png"/>
+
+                            <Label x:Name="PART_MAX_LABEL" Content="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="90,0,0,35" Background="Transparent" Foreground="Black"/>
+                            <Label x:Name="PART_VALUE_LABEL" Content="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,100" Background="Transparent" Foreground="Black"/>
+                            <Label x:Name="PART_MIN_LABEL" Content="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,90,35" Background="Transparent" Foreground="Black"/>
+
+                            <Image x:Name="PART_NADEL" Source="/WPF_Indicator;component/res/nadel.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="125" RenderTransformOrigin="0.5,0.5">
+                                <Image.RenderTransform>
+                                    <RotateTransform />
+                                </Image.RenderTransform>
+                            </Image>
+                        </Grid>
+                    </Border>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

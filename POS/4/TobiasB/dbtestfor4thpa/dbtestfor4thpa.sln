@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37301.10 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dbtestfor4thpa", "dbtestfor4thpa\dbtestfor4thpa.csproj", "{01E9C468-B4C1-4D7E-A487-37CFBDBA945A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01E9C468-B4C1-4D7E-A487-37CFBDBA945A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01E9C468-B4C1-4D7E-A487-37CFBDBA945A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01E9C468-B4C1-4D7E-A487-37CFBDBA945A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01E9C468-B4C1-4D7E-A487-37CFBDBA945A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {234E3278-B008-4EDA-9BDC-D3965C6272B7}
+	EndGlobalSection
+EndGlobal

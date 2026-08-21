@@ -1,0 +1,22 @@
+﻿<Window x:Class="Wecker_Programm.testdesign"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wecker_Programm"
+        mc:Ignorable="d"
+        Title="testdesign" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <TextBlock Foreground="Red" FontSize="36" 
+       x:Name="PART_CURRENTDATETIME"></TextBlock>
+            <CheckBox x:Name="PART_CHECKBOXALARMSET" >Alarm Set</CheckBox>
+            <Button x:Name="PART_SETALARMBUTTON" >
+                <StackPanel>
+                    <TextBlock FontSize="24">Set Alarm Time</TextBlock>
+                    <TextBlock FontSize="24" x:Name="PART_SETALARMBUTTONTEXTPANE"></TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

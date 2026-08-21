@@ -1,0 +1,33 @@
+﻿<Window x:Class="Robotersteuerung.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:robot="clr-namespace:AbcRobotCore;assembly=RobotLibrary"
+        xmlns:local="clr-namespace:Robotersteuerung"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <UniformGrid Rows="1" Columns="2">
+        <!--Für mehrere Zeilen AcceptsReturn-->
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <TextBox AcceptsReturn="True" x:Name="tb_input" DockPanel.Dock="Top" MaxHeight="400"></TextBox>
+            <Button Content="Run" Click="Tokenize_Click" DockPanel.Dock="Top"></Button>
+            <Label Content="Tokens" DockPanel.Dock="Right"></Label>
+            <ListBox Name="TokensListBox" DockPanel.Dock="Right">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Type}"></TextBlock>
+                            <TextBlock Text="{Binding Value}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        
+        
+        <robot:RobotField Name="RobotFieldControl" Grid.Row="0" Grid.Column="1"></robot:RobotField>
+
+    </UniformGrid>
+</Window>

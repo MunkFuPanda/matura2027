@@ -1,0 +1,30 @@
+<TURN>
+<COLOR>
+<DRAW>
+FOR 6 {
+<COLOR>
+<TURN>
+<DRAW>
+<COLOR>
+<TURN>
+<DRAW>
+}
+<TURN>
+<COLOR>
+FOR 12 {
+<TURN>
+<DRAW>
+}
+
+
+
+<Block> ::= { <Program> }
+<Program> ::= <Statement> { <Statement> }
+<Statement> ::= <DRAW> | <TURN> | <COLOR> | <FOR>
+<FOR> ::= FOR <Number> <Block>
+<DRAW> ::= DRAW <Number>
+<TURN> ::= TURN <Direction> <Number>
+<COLOR> ::= COLOR <ColorType>
+<Direction> ::= RIGHT | LEFT | UP | DOWN
+<ColorType> ::= RED | BLUE | YELLOW | GREEN | …
+<Number> ::= 1 | 2 | 3 | 4 | ...

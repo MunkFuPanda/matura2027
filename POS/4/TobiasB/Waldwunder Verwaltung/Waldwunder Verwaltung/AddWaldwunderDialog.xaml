@@ -1,0 +1,35 @@
+﻿<Window x:Class="Waldwunder_Verwaltung.AddWaldwunderDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Waldwunder_Verwaltung"
+        mc:Ignorable="d"
+        Title="Waldwunder hinzufügen" Height="500" Width="400">
+    <StackPanel>
+        <Label Content="Id"></Label>
+        <TextBox x:Name="tb_id"></TextBox>
+        <Label Content="Name"></Label>
+        <TextBox x:Name="tb_name"></TextBox>
+        <Label Content="Beschreibung"></Label>
+        <TextBox x:Name="tb_beschreibung" TextWrapping="Wrap" AcceptsReturn="True" MaxHeight="50"></TextBox>
+        <Label Content="Bundesland"></Label>
+        <ComboBox x:Name="cb_bundesland"></ComboBox>
+        <Label Content="Longitude"></Label>
+        <TextBox x:Name="tb_longitude"></TextBox>
+        <Label Content="Latitude"></Label>
+        <TextBox x:Name="tb_latitude"></TextBox>
+        <Label Content="Art"></Label>
+        <TextBox x:Name="tb_art"></TextBox>
+        <Label Content="Bilder hinzufügen (zum entfernen Doppelclicken)"></Label>
+        <Button x:Name="buttonOpenImage" Content="Öffnen" Click="buttonOpenImage_Click"></Button>
+        <ListBox x:Name="lb_images" MouseDoubleClick="lb_images_MouseDoubleClick">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"></TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button x:Name="registerButton" Content="Registrieren" Click="registerButton_Click"></Button>
+    </StackPanel>
+</Window>

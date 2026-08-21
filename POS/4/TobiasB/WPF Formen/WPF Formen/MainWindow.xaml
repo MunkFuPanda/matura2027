@@ -1,0 +1,22 @@
+﻿<Window x:Class="WPF_Formen.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Formen"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Canvas>
+        <local:Basis X1="50" Y1="34" Stroke="Blue"></local:Basis>
+        <local:Rechteck X1="100" Y1="44" Laenge="3cm" Breite="2cm" Stroke="Red"></local:Rechteck>
+        <local:Quadrat X1="200" Y1="44" Laenge="4cm" Stroke="Green"></local:Quadrat>
+        <local:Parallelogramm X1="200" Y1="44" X2="400" Y2="70" Laenge="4cm" Stroke="Blue"></local:Parallelogramm>
+        <local:Kreis X1="350" Y1="300" Radius="4cm" Stroke="Orange"></local:Kreis>
+        <local:Ellipse X1="350" Y1="300" Radius="4cm" Radius2="2cm" Stroke="Aqua"></local:Ellipse>
+        <local:Trapez X1="150" Y1="100" X2="150" Y2="60" Laenge="5cm" Laenge2="2.5cm" Stroke="Purple"></local:Trapez>
+        <local:Polygon X1="1000" Y1="100" Laenge="5cm" Corner="5" Stroke="DeepSkyBlue"></local:Polygon>
+        <local:Sechseck X1="500" Y1="100" Laenge="3cm" Corner="6" Stroke="Black"></local:Sechseck>
+        <local:Dreieck X1="500" Y1="200" Laenge="2in" Corner="3" Stroke="DarkGray"></local:Dreieck>
+        <local:Raute X1="170" Y1="200" Laenge="4cm" Stroke="PaleVioletRed"></local:Raute>
+    </Canvas>
+</Window>

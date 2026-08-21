@@ -1,0 +1,41 @@
+﻿<Window x:Class="Kreuzung.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kreuzung"
+        mc:Ignorable="d"
+        Title="Kreuzung" Height="450" Width="800">
+    
+    <!--Uniform Grid verwenden-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="118*"/>
+            <ColumnDefinition Width="128*"/>
+            <ColumnDefinition Width="137*"/>
+            <ColumnDefinition Width="418*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="165*"/>
+            <RowDefinition Height="128*"/>
+            <RowDefinition Height="141*"/>
+        </Grid.RowDefinitions>
+
+        <ListBox x:Name="lb_north" Grid.Column="1" Grid.Row="0"></ListBox>
+        <ListBox x:Name="lb_south" Grid.Column="1" Grid.Row="2"></ListBox>
+        <ListBox x:Name="lb_west" Grid.Column="0" Grid.Row="1"></ListBox>
+        <ListBox x:Name="lb_east" Grid.Column="2" Grid.Row="1"></ListBox>
+        <ListBox x:Name="lb_middle" Grid.Column="1" Grid.Row="1"></ListBox>
+
+        <StackPanel Grid.Column="3" Grid.Row="0">
+            <Label Content="Anzahl Autos"></Label>
+            <TextBox x:Name="count_car" Text="5"></TextBox>
+            <Label Content="Art der Kreuzung"></Label>
+            <ComboBox x:Name="crossroad_type"></ComboBox>
+            <Button x:Name="startButton" Content="Start" Click="startButton_Click"></Button>
+            <Button x:Name="resetButton" Content="Reset" Click="resetButton_Click"></Button>
+            </StackPanel>
+        <Label x:Name="lb_ampel" Grid.Row="1" Grid.Column="3" Content="Ampel" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+
+    </Grid>
+</Window>

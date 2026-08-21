@@ -1,0 +1,35 @@
+﻿<Window x:Class="Die_speisenden_Philosophen.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Die_speisenden_Philosophen"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Label Content="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="2" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+        <Label Content="3" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.396,3.651"/>
+        <Label Content="4" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.396,3.651"/>
+        <Label Content="5" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.396,3.651"/>
+        <Label x:Name="status_1" Content="Status" HorizontalAlignment="Left" Margin="50,10,0,0" VerticalAlignment="Top" Width="58"/>
+        <Label x:Name="status_2" Content="Status" HorizontalAlignment="Left" Margin="50,41,0,0" VerticalAlignment="Top" Width="58"/>
+        <Label x:Name="status_3" Content="Status" HorizontalAlignment="Left" Margin="50,72,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.396,3.651" Width="58"/>
+        <Label x:Name="status_4" Content="Status" HorizontalAlignment="Left" Margin="50,103,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.396,3.651" Width="58"/>
+        <Label x:Name="status_5" Content="Status" HorizontalAlignment="Left" Margin="50,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.396,3.651" Width="58"/>
+        <TextBox x:Name="tb_avg_think" HorizontalAlignment="Left" Margin="369,36,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tb_var_think" HorizontalAlignment="Left" Margin="369,67,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tb_avg_eat" HorizontalAlignment="Left" Margin="369,98,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tb_var_eat" HorizontalAlignment="Left" Margin="369,129,0,0" TextWrapping="Wrap" Text="40" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tb_take_fork" HorizontalAlignment="Left" Margin="369,152,0,0" TextWrapping="Wrap" Text="40" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Zeit in ms" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top"/>
+        <Label Content="Durchschnittszeit denken" HorizontalAlignment="Left" Margin="514,32,0,0" VerticalAlignment="Top"/>
+        <Label Content="Varianz denken" HorizontalAlignment="Left" Margin="514,67,0,0" VerticalAlignment="Top"/>
+        <Label Content="Durchschnittszeit essen" HorizontalAlignment="Left" Margin="514,98,0,0" VerticalAlignment="Top"/>
+        <Label Content="Varianz essen" HorizontalAlignment="Left" Margin="514,125,0,0" VerticalAlignment="Top"/>
+        <Label Content="Gabel nehmen" HorizontalAlignment="Left" Margin="514,151,0,0" VerticalAlignment="Top"/>
+        <Button Content="Start" HorizontalAlignment="Left" Margin="289,217,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="Stop" HorizontalAlignment="Left" Margin="347,217,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+
+    </Grid>
+</Window>

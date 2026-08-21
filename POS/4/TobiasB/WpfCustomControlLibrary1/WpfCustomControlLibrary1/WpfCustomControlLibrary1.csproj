@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="05 - Munkhbat.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="05 - Munkhbat.jpeg" />
+  </ItemGroup>
+
+</Project>

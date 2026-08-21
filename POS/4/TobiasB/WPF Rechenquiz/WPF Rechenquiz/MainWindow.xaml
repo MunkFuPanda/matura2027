@@ -1,0 +1,26 @@
+﻿<Window x:Class="WPF_Rechenquiz.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Rechenquiz"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl x:Name="tabControl" SelectionChanged="tabControl_SelectionChanged">
+            <TabItem Header="Quiz">
+                <ListBox x:Name="lb_quiz"></ListBox>
+            </TabItem>
+            <TabItem Header="Bearbeiten">
+                <StackPanel>
+                    <Button x:Name="AddQuiz" Content="Quiz erstellen" Click="AddQuiz_Click"></Button>
+                    <Button x:Name="EditQuiz" Content="Bestehendes Quiz bearbeiten" Click="EditQuiz_Click"></Button>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Statistik">
+                <ListBox x:Name="lb_results"></ListBox>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

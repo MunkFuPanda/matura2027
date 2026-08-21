@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Multithreaded Counter": {
+      "commandName": "Project",
+      "commandLineArgs": "50 100"
+    }
+  }
+}

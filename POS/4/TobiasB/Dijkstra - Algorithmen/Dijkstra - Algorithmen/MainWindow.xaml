@@ -1,0 +1,30 @@
+﻿<Window x:Class="Dijkstra___Algorithmen.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Dijkstra___Algorithmen"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="840">
+    <DockPanel>
+        <ComboBox x:Name="cb_country_select" DockPanel.Dock="Top" SelectionChanged="cb_country_select_SelectionChanged"></ComboBox>
+        <UniformGrid Columns="2" Rows="1" DockPanel.Dock="Top">
+            <ComboBox x:Name="cb_first_city" MinHeight="40" MaxHeight="40">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Name}"></Label>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox x:Name="cb_second_city" MinHeight="40" MaxHeight="40">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Name}"></Label>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </UniformGrid>
+        <Button x:Name="startButton" Content="Start" DockPanel.Dock="Top" Click="startButton_Click"></Button>
+        <Canvas x:Name="cv_map" DockPanel.Dock="Top"></Canvas>
+    </DockPanel>
+</Window>

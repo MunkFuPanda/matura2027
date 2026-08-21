@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="res\nadel.png" />
+    <None Remove="res\tacho.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="res\nadel.png" />
+    <Resource Include="res\tacho.png" />
+  </ItemGroup>
+
+</Project>

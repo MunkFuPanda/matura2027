@@ -1,0 +1,5 @@
+Der Kartenausschnitt zeigt die Region DACH mit folgender Begrenzung:
+•	Norden: Latitude 55.1° 
+•	Süden: Latitude 45.7°
+•	Westen: Longitude 5.5° 
+•	Osten: Longitude 17.2°

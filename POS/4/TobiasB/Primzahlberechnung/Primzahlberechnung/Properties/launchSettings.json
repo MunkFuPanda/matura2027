@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Primzahlberechnung": {
+      "commandName": "Project",
+      "commandLineArgs": "1600000 5"
+    }
+  }
+}

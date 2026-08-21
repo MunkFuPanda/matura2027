@@ -1,0 +1,59 @@
+﻿<Window x:Class="WPF_Einkauflistengenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Einkauflistengenerator"
+        mc:Ignorable="d"
+        Title="Einkaufslistengenerator" Height="450" Width="800">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New"
+                        Executed="New_Executed"></CommandBinding>
+        <CommandBinding Command="ApplicationCommands.Open"
+                        Executed="Open_Executed"></CommandBinding>
+        <CommandBinding Command="ApplicationCommands.Save"
+                        Executed="Save_Executed"
+                        CanExecute="Save_CanExecute"></CommandBinding>
+        <CommandBinding Command="ApplicationCommands.Print"
+                        Executed="Print_Executed"></CommandBinding>
+        <CommandBinding Command="ApplicationCommands.Delete"
+                        Executed="Delete_Executed"></CommandBinding>
+    </Window.CommandBindings>
+    
+    <StackPanel>
+
+        <Menu>
+            <MenuItem Command="ApplicationCommands.New"></MenuItem>
+            <MenuItem Command="ApplicationCommands.Open"></MenuItem>
+            <MenuItem Command="ApplicationCommands.Save"></MenuItem>
+            <MenuItem Command="ApplicationCommands.Print"></MenuItem>
+            <MenuItem Command="ApplicationCommands.Delete"></MenuItem>
+        </Menu>
+        
+        
+        <Label Content="Kategorie"></Label>
+        <ComboBox x:Name="cb_cat" SelectionChanged="cb_cat_SelectionChanged"></ComboBox>
+        <Label Content="Produkt"></Label>
+        <ComboBox x:Name="cb_prod"></ComboBox>
+        <Label Content="Eingabe"></Label>
+        <TextBox x:Name="tb_input"></TextBox>
+        <Label Content="Anzahl"></Label>
+
+        <Button x:Name="addButton" Click="Add_Click" Content="Hinzufügen"></Button>
+        <!--Value current as tooltip and show tick lines where every tick is-->
+        <Slider x:Name="sl_count" Minimum="1" Maximum="100" Value="0" IsSnapToTickEnabled="True" TickFrequency="1" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="0"></Slider>
+        <ListBox x:Name="lb_einkaufsliste">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <UniformGrid Rows="1" Columns="3">
+                        <Label Content="{Binding Category}"></Label>
+                        <Label Content="{Binding Name}"></Label>
+                        <Label Content="{Binding Quantity}"></Label>
+                    </UniformGrid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <!-- Hierachical data template for tree-->
+    </StackPanel>
+</Window>

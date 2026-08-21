@@ -1,0 +1,43 @@
+﻿<SyntaxDefinition name="Paint"
+        xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+	<Color name="Comment" foreground="Green" />
+	<Color name="String" foreground="Blue" />
+
+	<!-- This is the main ruleset. -->
+	<RuleSet>
+		<Span color="Comment" begin="//" />
+		<Span color="Comment" multiline="true" begin="/\*" end="\*/" />
+
+		<Span color="String">
+			<Begin>"</Begin>
+			<End>"</End>
+			<RuleSet>
+				<!-- nested span for escape sequences -->
+				<Span begin="\\" end="." />
+			</RuleSet>
+		</Span>
+
+		<Keywords fontWeight="bold" foreground="Blue">
+			<Word>DRAW</Word>
+			<Word>TURN</Word>
+			<Word>COLOR</Word>
+			<Word>FOR</Word>
+			<Word>{</Word>
+			<Word>}</Word>
+		</Keywords>
+
+		<Keywords fontWeight="bold" foreground="Green">
+			<Word>LEFT</Word>
+			<Word>RIGHT</Word>
+		</Keywords>
+
+		<!-- Digits \b sind Leerstellen -->
+		<Rule foreground="DarkRed">
+			\b\d+\b
+		</Rule>
+
+		<Rule foreground="Orange">
+			\b\w+\b
+		</Rule>
+	</RuleSet>
+</SyntaxDefinition>
