@@ -1,0 +1,61 @@
+use("moviedb");
+
+// Testdaten
+db.movies.insertMany([
+  {
+    "movie_id": "6",
+    "title": "The Revenant",
+    "genre": "Drama",
+    "release_year": 2015,
+    "duration": 156,
+    "ratings": 4.4,
+    "actors": ["Leonardo DiCaprio", "Tom Hardy"]
+  },
+  {
+    "movie_id": "7",
+    "title": "Dune",
+    "genre": "Sci-Fi",
+    "release_year": 2021,
+    "duration": 155,
+    "ratings": 4.6,
+    "actors": ["Timothée Chalamet", "Zendaya"]
+  }
+]);
+
+// 13
+db.movies.find({ release_year: { $gte: 2015 } });
+
+// 14
+db.theaters.find({ "location.state": "California" });
+
+// 15
+db.bookings.deleteMany({
+  movie_id: db.movies.findOne({ title: "Inception" }).movie_id
+});
+
+// 16
+db.theaters.insertOne({
+  "theater_id": "5",
+  "name": "Cineplexx Wien",
+  "location": {
+    "city": "Vienna",
+    "state": "Vienna",
+    "country": "Austria"
+  },
+  "seating_capacity": 300
+});
+
+// 17
+db.movies.find().sort({ release_year: -1 }).limit(5);
+
+// 18
+db.movies.countDocuments({ genre: "Sci-Fi" });
+
+// 19
+db.users.find({ loyalty_points: 50 });
+
+// 20
+db.users.updateOne(
+  { user_id: "1" },
+  { $set: { name: "Johnny Doe" } }
+);

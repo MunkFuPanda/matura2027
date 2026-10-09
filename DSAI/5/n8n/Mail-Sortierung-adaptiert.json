@@ -1,0 +1,833 @@
+{
+  "name": "Mail-Sortierung IMAP + Gemini-Priorität + ntfy (adaptiert)",
+  "nodes": [
+    {
+      "parameters": {
+        "postProcessAction": "nothing",
+        "options": {
+          "customEmailConfig": "[\"UNSEEN\"]",
+          "trackLastMessageId": true
+        }
+      },
+      "name": "E-Mail Trigger (IMAP)",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2.1,
+      "position": [
+        -208,
+        48
+      ],
+      "id": "6a1f1afa-956b-4e9f-b756-a187ec7db7d0",
+      "executeOnce": false,
+      "credentials": {
+        "imap": {
+          "id": "O4zN8Ni5ytFgblFW",
+          "name": "IMAP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f1",
+              "name": "uid",
+              "type": "string",
+              "value": "={{ $json.attributes?.uid ?? $json.uid }}"
+            },
+            {
+              "id": "f2",
+              "name": "absender",
+              "type": "string",
+              "value": "={{ $json.from || $json.envelope?.from?.[0]?.address || 'unbekannt' }}"
+            },
+            {
+              "id": "f3",
+              "name": "betreff",
+              "type": "string",
+              "value": "={{ $json.subject || $json.envelope?.subject || '(kein Betreff)' }}"
+            },
+            {
+              "id": "f4",
+              "name": "inhalt",
+              "type": "string",
+              "value": "={{ ($json.textPlain || $json.textHtml || $json.textContent || '').toString().slice(0, 3000) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Mail-Felder extrahieren",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        0
+      ],
+      "id": "9e90e2e0-eff9-48f9-b50b-b5cce4713476"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.5-flash-lite",
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "name": "Google Gemini Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        448,
+        288
+      ],
+      "id": "cd86e949-d923-418a-a58e-a62c1c9e46f7",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "rREZa5SYmuf6D907",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"prioritaet\": {\n      \"type\": \"integer\",\n      \"minimum\": 1,\n      \"maximum\": 5,\n      \"description\": \"5 sofort Aktion nötig, Schaden oder Frist drohen; 4 Antwort/Aktion heute erwartet; 3 normal, in den nächsten Tagen; 2 nur zur Kenntnis; 1 Werbung/automatisch, kann ungelesen bleiben\"\n    },\n    \"dringlichkeit\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"sofort\",\n        \"heute\",\n        \"diese Woche\",\n        \"nebenbei\"\n      ]\n    },\n    \"aktion\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"antworten\",\n        \"erledigen\",\n        \"bezahlen\",\n        \"lesen\",\n        \"keine\"\n      ]\n    },\n    \"grund\": {\n      \"type\": \"string\",\n      \"description\": \"Ein kurzer deutscher Satz\"\n    }\n  },\n  \"required\": [\n    \"prioritaet\",\n    \"dringlichkeit\",\n    \"aktion\",\n    \"grund\"\n  ]\n}"
+      },
+      "name": "Bewertung-Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        608,
+        304
+      ],
+      "id": "8a08fca1-0b6e-4598-99cf-66e2f4ad0cf3"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Bewerte diese E-Mail nach Handlungsbedarf und Frist.\n\nVon: {{ $json.absender }}\nBetreff: {{ $json.betreff }}\n\n{{ $json.inhalt }}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Du bewertest eingehende E-Mails für einen Postfachbesitzer. Maßgeblich sind nur Handlungsbedarf und Frist, nicht Absender oder Tonfall. Werbung und automatische Newsletter sind prioritaet 1. Antworte ausschließlich im vorgegebenen JSON-Format."
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "name": "Wichtigkeit bewerten",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        448,
+        0
+      ],
+      "id": "312b803b-dfa8-478d-8185-c2122420054e",
+      "retryOnFail": true,
+      "maxTries": 4,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b1",
+              "name": "uid",
+              "type": "string",
+              "value": "={{ $('Mail-Felder extrahieren').item.json.uid }}"
+            },
+            {
+              "id": "b2",
+              "name": "absender",
+              "type": "string",
+              "value": "={{ $('Mail-Felder extrahieren').item.json.absender }}"
+            },
+            {
+              "id": "b3",
+              "name": "betreff",
+              "type": "string",
+              "value": "={{ $('Mail-Felder extrahieren').item.json.betreff }}"
+            },
+            {
+              "id": "b4",
+              "name": "inhalt",
+              "type": "string",
+              "value": "={{ $('Mail-Felder extrahieren').item.json.inhalt }}"
+            },
+            {
+              "id": "b5",
+              "name": "prioritaet",
+              "type": "number",
+              "value": "={{ Math.min(5, Math.max(1, Math.round(Number($json.output.prioritaet) || 3))) }}"
+            },
+            {
+              "id": "b6",
+              "name": "dringlichkeit",
+              "type": "string",
+              "value": "={{ $json.output.dringlichkeit }}"
+            },
+            {
+              "id": "b7",
+              "name": "aktion",
+              "type": "string",
+              "value": "={{ $json.output.aktion }}"
+            },
+            {
+              "id": "b8",
+              "name": "grund",
+              "type": "string",
+              "value": "={{ $json.output.grund }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Bewertung zusammenführen",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        768,
+        0
+      ],
+      "id": "83994dac-d80c-4b43-80de-7af16adff59b"
+    },
+    {
+      "parameters": {
+        "inputText": "=Von: {{ $json.absender }}\nBetreff: {{ $json.betreff }}\n\n{{ $json.inhalt }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "Dringend",
+              "description": "Zeitkritische Mails, die sofort Aufmerksamkeit brauchen: Deadlines, Ausfälle, Mahnungen, Terminänderungen, Antwort erwartet heute. Schlüsselwörter: dringend, urgent, ASAP, Frist, heute."
+            },
+            {
+              "category": "Uni/Arbeit",
+              "description": "Mails zu Arbeit, Uni, Schule, Projekten, Kollegen, Meetings, Kursen und Abgaben (z.B. RDI, n8n Academy)."
+            },
+            {
+              "category": "Rechnung",
+              "description": "Rechnungen, Zahlungsbestätigungen, Bestellungen, Abos, Versandbenachrichtigungen, Bank und Versicherung."
+            },
+            {
+              "category": "Newsletter",
+              "description": "Newsletter, Werbung, Rabattaktionen, Produkt-Updates, Marketing, automatisierte Massenmails."
+            },
+            {
+              "category": "Sonstiges",
+              "description": "Alles, was in keine andere Kategorie passt."
+            }
+          ]
+        },
+        "options": {
+          "systemPromptTemplate": "Ordne die Mail des Users genau einer dieser Kategorien zu: {categories}. Antworte nur im vorgegebenen JSON-Format, ohne Erklärung."
+        }
+      },
+      "name": "Mail-Klassifizierer",
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1,
+      "position": [
+        992,
+        0
+      ],
+      "id": "446afc58-1aba-46a7-a3ef-ed9f3f254be3",
+      "retryOnFail": true,
+      "maxTries": 4,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "o1",
+              "name": "zielordner",
+              "type": "string",
+              "value": "Dringend"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "name": "Ordner: Dringend",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1264,
+        -400
+      ],
+      "id": "4f394cf0-4fbe-4bce-a4d4-6ac3062b909d"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "o1",
+              "name": "zielordner",
+              "type": "string",
+              "value": "Uni-Arbeit"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "name": "Ordner: Uni/Arbeit",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1264,
+        -208
+      ],
+      "id": "c61b2886-cf7a-4e66-8f63-a934cbe05f84"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "o1",
+              "name": "zielordner",
+              "type": "string",
+              "value": "Rechnung"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "name": "Ordner: Rechnung",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1264,
+        0
+      ],
+      "id": "6f217af8-8665-4acd-8851-e717be044a8a"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "o1",
+              "name": "zielordner",
+              "type": "string",
+              "value": "Newsletter"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "name": "Ordner: Newsletter",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1264,
+        208
+      ],
+      "id": "71d5b460-3da5-4a3a-8c94-a031ae54291d"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "o1",
+              "name": "zielordner",
+              "type": "string",
+              "value": "Sonstiges"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "name": "Ordner: Sonstiges",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1264,
+        400
+      ],
+      "id": "e4f72eba-6828-4d1f-af8e-b2babee4f4da"
+    },
+    {
+      "parameters": {
+        "resource": "email",
+        "operation": "moveEmail",
+        "sourceMailbox": {
+          "__rl": true,
+          "mode": "path",
+          "value": "INBOX"
+        },
+        "emailUid": "={{ $('Bewertung zusammenführen').item.json.uid }}",
+        "destinationMailbox": {
+          "__rl": true,
+          "mode": "path",
+          "value": "={{ $json.path }}"
+        }
+      },
+      "name": "Einsortieren (IMAP verschieben)",
+      "type": "n8n-nodes-imap.imap",
+      "typeVersion": 1,
+      "position": [
+        1552,
+        0
+      ],
+      "id": "14620155-9ced-467c-83fd-1a29670a7511",
+      "credentials": {
+        "imapApi": {
+          "id": "yRRP3wo6FSHtjiTW",
+          "name": "IMAP Credentials account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "n1",
+              "name": "titel",
+              "type": "string",
+              "value": "={{ String($json.destination || $json.path || 'Postfach').split(/[./]/).pop() }} · {{ $('Bewertung zusammenführen').item.json.dringlichkeit }} · {{ $('Bewertung zusammenführen').item.json.aktion }}"
+            },
+            {
+              "id": "n2",
+              "name": "nachricht",
+              "type": "string",
+              "value": "={{ $('Bewertung zusammenführen').item.json.betreff }}\nVon: {{ $('Bewertung zusammenführen').item.json.absender }}\n{{ $('Bewertung zusammenführen').item.json.grund }}"
+            },
+            {
+              "id": "n3",
+              "name": "prioritaet",
+              "type": "number",
+              "value": "={{ $('Bewertung zusammenführen').item.json.prioritaet }}"
+            },
+            {
+              "id": "n4",
+              "name": "tags",
+              "type": "string",
+              "value": "={{ $('Bewertung zusammenführen').item.json.prioritaet >= 5 ? 'rotating_light,email' : 'email' }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "ntfy-Nachricht bauen",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1808,
+        0
+      ],
+      "id": "1136fb37-05ec-404a-b1d8-6ef2366151a8"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ntfy.spizza.cc/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ topic: 'n8n', title: $json.titel, message: $json.nachricht, priority: $json.prioritaet, tags: $json.tags.split(',') }) }}",
+        "options": {}
+      },
+      "name": "ntfy senden",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2064,
+        0
+      ],
+      "id": "662889a9-59c7-48c6-b5e9-62b9406b8cd7",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ntfyN8nBearer01",
+          "name": "ntfy n8n (Bearer)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### 1) Credentials\nIMAP-Trigger braucht ein Credential vom Typ **IMAP** (eingebaut), der IMAP-Node nutzt das Community-Credential „IMAP Credentials account“. Dazu Gemini-API-Key und ntfy (Header Auth, Bearer-Token).",
+        "height": 200,
+        "width": 340
+      },
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        -224
+      ],
+      "id": "812f3f2f-902a-4db5-ac70-eda47bfd213f"
+    },
+    {
+      "parameters": {
+        "content": "### 2) Zielordner\nIn Plesk/Webmail anlegen: Dringend, Uni-Arbeit, Rechnung, Newsletter, Sonstiges. Pfade ggf. mit Präfix (z.B. `INBOX.Rechnung`) in den Ordner-Set-Nodes anpassen.",
+        "height": 200,
+        "width": 360
+      },
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        -656
+      ],
+      "id": "bd23f887-b3c7-4487-bec8-8bc324f8368d"
+    },
+    {
+      "parameters": {
+        "content": "### 3) Benachrichtigung\nNur ntfy: Die Zahl `prioritaet` (1-5) steuert, wie laut das Handy wird. Im Text stehen nur Kategorie, Dringlichkeit und Aktion.",
+        "height": 200,
+        "width": 340
+      },
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1792,
+        -224
+      ],
+      "id": "559685fe-b77a-4255-8800-4e328cc8b757"
+    },
+    {
+      "parameters": {},
+      "name": "Manuell starten (Bestandsmails)",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -560
+      ],
+      "id": "0d7743e5-8e63-4a36-9ebc-e5caea58ba84"
+    },
+    {
+      "parameters": {
+        "resource": "email",
+        "mailboxPath": {
+          "__rl": true,
+          "mode": "path",
+          "value": "INBOX"
+        },
+        "emailDateRange": {
+          "since": "={{ $now.minus({ days: 14 }).toISO() }}"
+        },
+        "emailFlags": {},
+        "emailSearchFilters": {},
+        "includeParts": [
+          "textContent"
+        ]
+      },
+      "name": "Bestandsmails holen (IMAP)",
+      "type": "n8n-nodes-imap.imap",
+      "typeVersion": 1,
+      "position": [
+        224,
+        -560
+      ],
+      "id": "d7f6b4cc-f904-4035-b53c-7bc0128cab84",
+      "credentials": {
+        "imapApi": {
+          "id": "yRRP3wo6FSHtjiTW",
+          "name": "IMAP Credentials account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "maxItems": 5,
+        "keep": "lastItems"
+      },
+      "name": "Limit (temporär: letzte 5)",
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        448,
+        -560
+      ],
+      "id": "822d63d0-53bd-4f8f-a554-e6ac5b0c251e"
+    },
+    {
+      "parameters": {
+        "operation": "createMailbox",
+        "topLevelMailbox": false,
+        "mailboxPath": {
+          "__rl": true,
+          "mode": "path",
+          "value": "INBOX"
+        },
+        "mailboxName": "={{ $json.zielordner }}"
+      },
+      "name": "Ordner anlegen (falls fehlt)",
+      "type": "n8n-nodes-imap.imap",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        0
+      ],
+      "id": "47b4a3c8-471e-4f47-8e4f-dc233a7c68cf",
+      "credentials": {
+        "imapApi": {
+          "id": "yRRP3wo6FSHtjiTW",
+          "name": "IMAP Credentials account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Mail-Klassifizierer": {
+      "main": [
+        [
+          {
+            "node": "Ordner: Dringend",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ordner: Uni/Arbeit",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ordner: Rechnung",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ordner: Newsletter",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ordner: Sonstiges",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ordner: Dringend": {
+      "main": [
+        [
+          {
+            "node": "Ordner anlegen (falls fehlt)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ordner: Uni/Arbeit": {
+      "main": [
+        [
+          {
+            "node": "Ordner anlegen (falls fehlt)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ordner: Rechnung": {
+      "main": [
+        [
+          {
+            "node": "Ordner anlegen (falls fehlt)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ordner: Newsletter": {
+      "main": [
+        [
+          {
+            "node": "Ordner anlegen (falls fehlt)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ordner: Sonstiges": {
+      "main": [
+        [
+          {
+            "node": "Ordner anlegen (falls fehlt)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "E-Mail Trigger (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Mail-Felder extrahieren",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mail-Felder extrahieren": {
+      "main": [
+        [
+          {
+            "node": "Wichtigkeit bewerten",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wichtigkeit bewerten": {
+      "main": [
+        [
+          {
+            "node": "Bewertung zusammenführen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bewertung zusammenführen": {
+      "main": [
+        [
+          {
+            "node": "Mail-Klassifizierer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Einsortieren (IMAP verschieben)": {
+      "main": [
+        [
+          {
+            "node": "ntfy-Nachricht bauen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ntfy-Nachricht bauen": {
+      "main": [
+        [
+          {
+            "node": "ntfy senden",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Wichtigkeit bewerten",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Mail-Klassifizierer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bewertung-Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Wichtigkeit bewerten",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manuell starten (Bestandsmails)": {
+      "main": [
+        [
+          {
+            "node": "Bestandsmails holen (IMAP)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bestandsmails holen (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Limit (temporär: letzte 5)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit (temporär: letzte 5)": {
+      "main": [
+        [
+          {
+            "node": "Mail-Felder extrahieren",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ordner anlegen (falls fehlt)": {
+      "main": [
+        [
+          {
+            "node": "Einsortieren (IMAP verschieben)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "2b1c3431-4621-41b8-9419-e451a6638749",
+  "meta": {
+    "instanceId": "c58fc40a131e6327e821ea3904f576afda24eea15cf15f98e376d63777fb6625"
+  },
+  "nodeGroups": [],
+  "id": "mailSortImapNtfy01",
+  "tags": []
+}

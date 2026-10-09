@@ -1,0 +1,205 @@
+// ============================================================
+//  MongoDB Setup – Movie Booking System
+//  Ausführen: mongosh < setup.js
+// ============================================================
+
+use("moviedb");
+
+// ============================================================
+//  Movies Collection
+// ============================================================
+
+db.movies.drop();
+
+db.movies.insertMany([
+  {
+    "movie_id": "1",
+    "title": "Inception",
+    "genre": "Sci-Fi",
+    "release_year": 2010,
+    "duration": 148,
+    "ratings": 4.8,
+    "actors": ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page"]
+  },
+  {
+    "movie_id": "2",
+    "title": "The Dark Knight",
+    "genre": "Action",
+    "release_year": 2008,
+    "duration": 152,
+    "ratings": 4.9,
+    "actors": ["Christian Bale", "Heath Ledger", "Aaron Eckhart"]
+  },
+  {
+    "movie_id": "3",
+    "title": "Interstellar",
+    "genre": "Sci-Fi",
+    "release_year": 2014,
+    "duration": 169,
+    "ratings": 4.7,
+    "actors": ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain"]
+  },
+  {
+    "movie_id": "4",
+    "title": "The Matrix",
+    "genre": "Action",
+    "release_year": 1999,
+    "duration": 136,
+    "ratings": 4.6,
+    "actors": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"]
+  },
+  {
+    "movie_id": "5",
+    "title": "Forrest Gump",
+    "genre": "Drama",
+    "release_year": 1994,
+    "duration": 142,
+    "ratings": 4.8,
+    "actors": ["Tom Hanks", "Robin Wright", "Gary Sinise"]
+  }
+]);
+
+// ============================================================
+//  Theaters Collection
+// ============================================================
+
+db.theaters.drop();
+
+db.theaters.insertMany([
+  {
+    "theater_id": "1",
+    "name": "AMC Empire 25",
+    "location": {
+      "city": "New York",
+      "state": "New York",
+      "country": "USA"
+    },
+    "seating_capacity": 250
+  },
+  {
+    "theater_id": "2",
+    "name": "Regal Cinemas",
+    "location": {
+      "city": "San Francisco",
+      "state": "California",
+      "country": "USA"
+    },
+    "seating_capacity": 400
+  },
+  {
+    "theater_id": "3",
+    "name": "Cineworld",
+    "location": {
+      "city": "New York",
+      "state": "New York",
+      "country": "USA"
+    },
+    "seating_capacity": 180
+  },
+  {
+    "theater_id": "4",
+    "name": "Odeon Leicester Square",
+    "location": {
+      "city": "London",
+      "state": "England",
+      "country": "UK"
+    },
+    "seating_capacity": 350
+  }
+]);
+
+// ============================================================
+//  Users Collection
+// ============================================================
+
+db.users.drop();
+
+db.users.insertMany([
+  {
+    "user_id": "1",
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "date_of_birth": ISODate("1985-04-23"),
+    "loyalty_points": 120
+  },
+  {
+    "user_id": "2",
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "date_of_birth": ISODate("1990-07-12"),
+    "loyalty_points": 50
+  },
+  {
+    "user_id": "3",
+    "name": "Bob Johnson",
+    "email": "bob.johnson@example.com",
+    "date_of_birth": ISODate("1978-11-05"),
+    "loyalty_points": 200
+  },
+  {
+    "user_id": "4",
+    "name": "Alice Brown",
+    "email": "alice.brown@example.com",
+    "date_of_birth": ISODate("1995-03-18"),
+    "loyalty_points": 75
+  }
+]);
+
+// ============================================================
+//  Bookings Collection
+// ============================================================
+
+db.bookings.drop();
+
+db.bookings.insertMany([
+  {
+    "booking_id": "1",
+    "user_id": "1",
+    "movie_id": "1",
+    "theater_id": "1",
+    "seats_booked": 2,
+    "total_price": 30,
+    "booking_date": ISODate("2023-09-10")
+  },
+  {
+    "booking_id": "2",
+    "user_id": "2",
+    "movie_id": "3",
+    "theater_id": "2",
+    "seats_booked": 4,
+    "total_price": 60,
+    "booking_date": ISODate("2023-09-11")
+  },
+  {
+    "booking_id": "3",
+    "user_id": "3",
+    "movie_id": "1",
+    "theater_id": "1",
+    "seats_booked": 1,
+    "total_price": 15,
+    "booking_date": ISODate("2023-09-12")
+  },
+  {
+    "booking_id": "4",
+    "user_id": "1",
+    "movie_id": "2",
+    "theater_id": "2",
+    "seats_booked": 3,
+    "total_price": 45,
+    "booking_date": ISODate("2023-10-05")
+  },
+  {
+    "booking_id": "5",
+    "user_id": "4",
+    "movie_id": "4",
+    "theater_id": "3",
+    "seats_booked": 2,
+    "total_price": 30,
+    "booking_date": ISODate("2023-10-08")
+  }
+]);
+
+print("movies:   " + db.movies.countDocuments()   + " Dokumente");
+print("theaters: " + db.theaters.countDocuments() + " Dokumente");
+print("users:    " + db.users.countDocuments()    + " Dokumente");
+print("bookings: " + db.bookings.countDocuments() + " Dokumente");

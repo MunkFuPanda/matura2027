@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>8-phasen.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="togaf-adm---die-8-phasen-im-detail-erkl%C3%A4rt">TOGAF ADM - Die 8 Phasen im Detail erklärt</h1>
+<hr>
+<h2 id="%F0%9F%8E%AF-phase-a-architecture-vision">🎯 <strong>Phase A: Architecture Vision</strong></h2>
+<h3 id="%22was-wollen-wir-eigentlich-erreichen%22">&quot;Was wollen wir eigentlich erreichen?&quot;</h3>
+<p><strong>Analogie</strong>: Du träumst von einem Traumhaus und skizzierst erste Ideen auf einer Serviette.</p>
+<p><strong>Was passiert hier:</strong></p>
+<ul>
+<li>Du verstehst das <strong>Geschäftsproblem</strong>: &quot;Unsere Website ist zu langsam, wir verlieren Kunden&quot;</li>
+<li>Du definierst die <strong>Vision</strong>: &quot;Wir wollen eine schnelle, skalierbare Cloud-Plattform&quot;</li>
+<li>Du holst die <strong>wichtigen Leute</strong> an Bord (CEO, CTO, Abteilungsleiter)</li>
+<li>Du erstellst ein grobes <strong>Zielbild</strong></li>
+</ul>
+<p><strong>Outputs:</strong></p>
+<ul>
+<li>Architecture Vision Document (1-2 Seiten)</li>
+<li>High-Level Requirements (&quot;System muss 10.000 Nutzer gleichzeitig bedienen&quot;)</li>
+<li>Stakeholder-Map (Wer ist beteiligt? Wer entscheidet?)</li>
+</ul>
+<p><strong>Beispiel:</strong></p>
+<blockquote>
+<p>&quot;Unsere Bank will eine moderne Banking-App. Vision: Kunden können in 30 Sekunden ein Konto eröffnen, nicht wie jetzt in 3 Tagen.&quot;</p>
+</blockquote>
+<hr>
+<h2 id="%F0%9F%8F%A2-phase-b-business-architecture">🏢 <strong>Phase B: Business Architecture</strong></h2>
+<h3 id="%22wie-funktioniert-unser-gesch%C3%A4ft%22">&quot;Wie funktioniert unser Geschäft?&quot;</h3>
+<p><strong>Analogie</strong>: Du planst die Raumaufteilung - Küche, Wohnzimmer, Büro, etc.</p>
+<p><strong>Was passiert hier:</strong></p>
+<ul>
+<li>Du modellierst <strong>Geschäftsprozesse</strong>: Wie läuft eine Bestellung ab? Vom Warenkorb bis zur Lieferung.</li>
+<li>Du definierst <strong>Business Services</strong>: &quot;Kundenregistrierung&quot;, &quot;Bestellabwicklung&quot;, &quot;Retouren&quot;</li>
+<li>Du verstehst die <strong>Organisation</strong>: Welche Abteilungen gibt es? Wer macht was?</li>
+</ul>
+<p><strong>Wichtige Artefakte:</strong></p>
+<ul>
+<li><strong>Business Process Models</strong> (Flowcharts der Prozesse)</li>
+<li><strong>Organizational Charts</strong> (Organigramme)</li>
+<li><strong>Business Capability Map</strong> (Was kann das Unternehmen?)</li>
+</ul>
+<p><strong>Beispiel:</strong></p>
+<pre class="hljs"><code><div>Prozess: Online-Bestellung
+1. Kunde legt Produkt in Warenkorb
+2. Kunde geht zur Kasse
+3. Zahlungsdaten werden validiert
+4. Bestellung wird ans Lager geschickt
+5. Versandbenachrichtigung geht raus
+</div></code></pre>
+<p><strong>AS-IS vs. TO-BE:</strong></p>
+<ul>
+<li><strong>AS-IS</strong> (Ist-Zustand): &quot;Bestellung dauert 2 Minuten, viele brechen ab&quot;</li>
+<li><strong>TO-BE</strong> (Soll-Zustand): &quot;One-Click-Bestellung in 10 Sekunden&quot;</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%92%BE-phase-c-information-systems-architectures">💾 <strong>Phase C: Information Systems Architectures</strong></h2>
+<h3 id="%22welche-daten-und-anwendungen-brauchen-wir%22">&quot;Welche Daten und Anwendungen brauchen wir?&quot;</h3>
+<p>Diese Phase hat <strong>2 Teile</strong>:</p>
+<h3 id="c1-data-architecture---%22welche-daten-flie%C3%9Fen-wo%22"><strong>C1: Data Architecture</strong> - &quot;Welche Daten fließen wo?&quot;</h3>
+<p><strong>Analogie</strong>: Du planst die Wasser- und Stromleitungen im Haus.</p>
+<p><strong>Was passiert:</strong></p>
+<ul>
+<li>Du identifizierst <strong>Datenquellen</strong>: Kundendatenbank, Produktkatalog, Bestellhistorie</li>
+<li>Du definierst <strong>Datenflüsse</strong>: &quot;Kundendaten fließen von der Registrierung ins CRM&quot;</li>
+<li>Du planst <strong>Datenmanagement</strong>: Wo werden Daten gespeichert? Wie lange? Wer darf darauf zugreifen?</li>
+</ul>
+<p><strong>Beispiel:</strong></p>
+<pre class="hljs"><code><div>Datenfluss einer Bestellung:
+Webshop → Order-Datenbank → Warehouse-System → Versanddienstleister
+         ↓
+    Customer-DB (für Profil-Updates)
+</div></code></pre>
+<h3 id="c2-application-architecture---%22welche-software-systeme-brauchen-wir%22"><strong>C2: Application Architecture</strong> - &quot;Welche Software-Systeme brauchen wir?&quot;</h3>
+<p><strong>Analogie</strong>: Du wählst die Geräte aus - Herd, Kühlschrank, Waschmaschine.</p>
+<p><strong>Was passiert:</strong></p>
+<ul>
+<li>Du kartierst <strong>bestehende Anwendungen</strong>: SAP, Salesforce, eigene Legacy-Software</li>
+<li>Du definierst <strong>neue Anwendungen</strong>: Mobile App, API-Gateway, Microservices</li>
+<li>Du zeigst <strong>Beziehungen</strong>: &quot;Mobile App kommuniziert mit Backend-API&quot;</li>
+</ul>
+<p><strong>Beispiel - E-Commerce:</strong></p>
+<pre class="hljs"><code><div>┌─────────────┐
+│  Web-Shop   │ (Frontend)
+└──────┬──────┘
+       │
+┌──────▼──────────┐
+│  API Gateway    │ (Vermittler)
+└──────┬──────────┘
+       │
+   ┌───┴────┬─────────┬────────┐
+   │        │         │        │
+┌──▼──┐ ┌──▼──┐ ┌────▼───┐ ┌──▼──────┐
+│Prod.│ │Order│ │Payment │ │Shipping │
+│Svc  │ │Svc  │ │Service │ │Service  │
+└─────┘ └─────┘ └────────┘ └─────────┘
+</div></code></pre>
+<p><strong>Technology Mapping:</strong>
+Du ordnest zu: &quot;Payment Service → Business Function: Zahlungsabwicklung&quot;</p>
+<hr>
+<h2 id="%E2%9A%99%EF%B8%8F-phase-d-technology-architecture">⚙️ <strong>Phase D: Technology Architecture</strong></h2>
+<h3 id="%22welche-technik-setzen-wir-ein%22">&quot;Welche Technik setzen wir ein?&quot;</h3>
+<p><strong>Analogie</strong>: Du wählst Baumaterialien - Beton, Holz, Ziegel, Dämmung.</p>
+<p><strong>Was passiert:</strong></p>
+<ul>
+<li>Du definierst die <strong>technische Infrastruktur</strong>: Server, Cloud, Netzwerk</li>
+<li>Du wählst <strong>Technologie-Stack</strong>:
+<ul>
+<li>Frontend: React</li>
+<li>Backend: Java Spring Boot</li>
+<li>Datenbank: PostgreSQL</li>
+<li>Cloud: AWS</li>
+</ul>
+</li>
+<li>Du planst <strong>Security &amp; Compliance</strong>: Firewall, Verschlüsselung, GDPR</li>
+</ul>
+<p><strong>Beispiel - Technology Stack:</strong></p>
+<pre class="hljs"><code><div>┌─────────────────────────────────┐
+│  CDN (CloudFront)               │ ← Für schnelle Auslieferung
+├─────────────────────────────────┤
+│  Load Balancer                  │
+├─────────────────────────────────┤
+│  Kubernetes Cluster (AWS EKS)   │ ← Container-Orchestrierung
+│  ├─ Docker Container            │
+│  └─ Microservices               │
+├─────────────────────────────────┤
+│  PostgreSQL (RDS)               │ ← Datenbank
+│  Redis (ElastiCache)            │ ← Cache
+└─────────────────────────────────┘
+</div></code></pre>
+<p><strong>Deliverables:</strong></p>
+<ul>
+<li>Technology Stack Document</li>
+<li>Infrastructure Diagrams</li>
+<li>Security Architecture</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%94%8D-phase-e-opportunities--solutions">🔍 <strong>Phase E: Opportunities &amp; Solutions</strong></h2>
+<h3 id="%22was-sind-unsere-optionen-zur-umsetzung%22">&quot;Was sind unsere Optionen zur Umsetzung?&quot;</h3>
+<p><strong>Analogie</strong>: Du vergleichst verschiedene Baufirmen und Angebote.</p>
+<p><strong>Was passiert:</strong></p>
+<ul>
+<li><strong>Gap Analysis</strong>: &quot;Was haben wir? Was fehlt uns?&quot;</li>
+<li><strong>Portfolio-Analyse</strong>: &quot;Welche Projekte müssen wir starten?&quot;</li>
+<li><strong>Roadmap erstellen</strong>: &quot;In welcher Reihenfolge bauen wir?&quot;</li>
+</ul>
+<p><strong>Beispiel - Gap Analysis:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>AS-IS</th>
+<th>TO-BE</th>
+<th>Gap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frontend</td>
+<td>Monolith</td>
+<td>React SPA</td>
+<td>Neu entwickeln</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>Legacy Java</td>
+<td>Microservices</td>
+<td>Refactoring</td>
+</tr>
+<tr>
+<td>Datenbank</td>
+<td>Oracle</td>
+<td>PostgreSQL</td>
+<td>Migration</td>
+</tr>
+<tr>
+<td>Cloud</td>
+<td>On-Premises</td>
+<td>AWS</td>
+<td>Cloud Migration</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Work Packages (Arbeitspakete):</strong></p>
+<ol>
+<li><strong>WP1</strong>: API Gateway aufsetzen (2 Monate, Team A)</li>
+<li><strong>WP2</strong>: Microservices entwickeln (4 Monate, Team B)</li>
+<li><strong>WP3</strong>: Datenbank migrieren (3 Monate, Team C)</li>
+</ol>
+<p><strong>Implementierungs-Roadmap:</strong></p>
+<pre class="hljs"><code><div>Q1 2024: Foundation (Cloud-Setup, API Gateway)
+Q2 2024: Core Services (Auth, Customer, Order)
+Q3 2024: Advanced Features (Payment, Shipping)
+Q4 2024: Testing &amp; Go-Live
+</div></code></pre>
+<hr>
+<h2 id="%F0%9F%9A%9A-phase-f-migration-planning">🚚 <strong>Phase F: Migration Planning</strong></h2>
+<h3 id="%22wie-kommen-wir-vom-alten-zum-neuen-system%22">&quot;Wie kommen wir vom alten zum neuen System?&quot;</h3>
+<p><strong>Analogie</strong>: Du planst den Umzug - was packst du zuerst, was bleibt noch in der alten Wohnung?</p>
+<p><strong>Was passiert:</strong></p>
+<ul>
+<li>Du wählst eine <strong>Migrationsstrategie</strong></li>
+<li>Du planst <strong>Risiken und Ressourcen</strong></li>
+<li>Du managst <strong>Abhängigkeiten</strong></li>
+</ul>
+<p><strong>3 Haupt-Migrationsansätze:</strong></p>
+<h3 id="1-big-bang-%F0%9F%8E%86">1. <strong>Big Bang</strong> 🎆</h3>
+<ul>
+<li>Alles auf einmal umstellen</li>
+<li><strong>Pro</strong>: Schnell fertig</li>
+<li><strong>Contra</strong>: Hohes Risiko, keine Rückzugsmöglichkeit</li>
+<li><strong>Beispiel</strong>: &quot;Samstagnacht schalten wir das alte System ab, Sonntag läuft das neue&quot;</li>
+</ul>
+<h3 id="2-phased-schrittweise-%F0%9F%93%8A">2. <strong>Phased (Schrittweise)</strong> 📊</h3>
+<ul>
+<li>In Etappen migrieren</li>
+<li><strong>Pro</strong>: Kontrollierbares Risiko</li>
+<li><strong>Contra</strong>: Dauert länger</li>
+<li><strong>Beispiel</strong>: &quot;Monat 1: Deutschland, Monat 2: Österreich, Monat 3: Schweiz&quot;</li>
+</ul>
+<h3 id="3-parallel-%E2%9A%96%EF%B8%8F">3. <strong>Parallel</strong> ⚖️</h3>
+<ul>
+<li>Beide Systeme laufen gleichzeitig</li>
+<li><strong>Pro</strong>: Sicherheitsnetz, jederzeit zurück möglich</li>
+<li><strong>Contra</strong>: Doppelter Aufwand</li>
+<li><strong>Beispiel</strong>: &quot;6 Monate laufen alt und neu parallel, dann schalten wir alt ab&quot;</li>
+</ul>
+<p><strong>Strangler Pattern</strong> (Beliebt bei Legacy-Systemen):</p>
+<pre class="hljs"><code><div>Alt: [████████████████████] 100%
+     ↓ Monat 1
+     [████████████████░░░░] 80% Alt, 20% Neu
+     ↓ Monat 6
+     [████████░░░░░░░░░░░░] 40% Alt, 60% Neu
+     ↓ Monat 12
+     [░░░░░░░░░░░░░░░░░░░░] 0% Alt, 100% Neu ✓
+</div></code></pre>
+<p><strong>Risikomanagement:</strong></p>
+<ul>
+<li>Was kann schiefgehen? (Datenverlust, Ausfall, Performance-Probleme)</li>
+<li>Backup-Pläne</li>
+<li>Rollback-Strategie</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%91%81%EF%B8%8F-phase-g-implementation-governance">👁️ <strong>Phase G: Implementation Governance</strong></h2>
+<h3 id="%22l%C3%A4uft-die-umsetzung-nach-plan%22">&quot;Läuft die Umsetzung nach Plan?&quot;</h3>
+<p><strong>Analogie</strong>: Der Bauinspektor kommt regelmäßig vorbei und prüft.</p>
+<p><strong>Was passiert:</strong></p>
+<ul>
+<li><strong>Monitoring</strong>: Du überwachst den Fortschritt</li>
+<li><strong>Kontrolle</strong>: Werden Standards eingehalten?</li>
+<li><strong>Änderungsmanagement</strong>: Jemand will etwas ändern → Muss geprüft werden</li>
+<li><strong>Qualitätssicherung</strong>: Code Reviews, Testing, Security Audits</li>
+</ul>
+<p><strong>Architecture Review Board (ARB):</strong>
+Ein Gremium trifft sich wöchentlich:</p>
+<ul>
+<li>Prüft: &quot;Wird nach den Architektur-Vorgaben entwickelt?&quot;</li>
+<li>Entscheidet: &quot;Dürfen wir von der Architektur abweichen?&quot;</li>
+<li>Eskaliert: &quot;Dieses Problem muss der CTO entscheiden&quot;</li>
+</ul>
+<p><strong>Beispiel - Governance Gate:</strong></p>
+<pre class="hljs"><code><div>Team A: &quot;Wir wollen MongoDB statt PostgreSQL verwenden&quot;
+       ↓
+ARB-Meeting: Diskussion
+       ↓
+Entscheidung: &quot;Nein, wir bleiben bei PostgreSQL aus
+               Konsistenzgründen&quot;
+</div></code></pre>
+<p><strong>KPIs (Erfolgsmessung):</strong></p>
+<ul>
+<li>Migration Progress: 60% der Services migriert</li>
+<li>Performance: API Response Time &lt; 200ms ✓</li>
+<li>Kosten: Budgetrahmen eingehalten ✓</li>
+<li>Risiken: 3 kritische Issues offen ⚠️</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%94%84-phase-h-architecture-change-management">🔄 <strong>Phase H: Architecture Change Management</strong></h2>
+<h3 id="%22wie-halten-wir-die-architektur-aktuell%22">&quot;Wie halten wir die Architektur aktuell?&quot;</h3>
+<p><strong>Analogie</strong>: Regelmäßige Wartung des Hauses - Heizung checken, Dach reparieren.</p>
+<p><strong>Was passiert:</strong></p>
+<ul>
+<li><strong>Continuous Monitoring</strong>: System läuft, aber wie gut?</li>
+<li><strong>Change Requests</strong>: &quot;Wir brauchen ein neues Feature!&quot;</li>
+<li><strong>Architektur-Updates</strong>: Technologien ändern sich, Architektur muss angepasst werden</li>
+</ul>
+<p><strong>Aktivitäten:</strong></p>
+<h3 id="1-performance-monitoring">1. <strong>Performance Monitoring</strong></h3>
+<ul>
+<li>Ist das System noch performant?</li>
+<li>Skaliert es wie erwartet?</li>
+<li>Gibt es Bottlenecks?</li>
+</ul>
+<h3 id="2-change-request-management">2. <strong>Change Request Management</strong></h3>
+<pre class="hljs"><code><div>Request: &quot;Wir wollen AI-Chatbot integrieren&quot;
+        ↓
+Bewertung: Impact auf bestehende Architektur?
+        ↓
+Klein → Direktes Go
+Groß  → Zurück zu Phase A (neuer ADM-Zyklus)
+</div></code></pre>
+<h3 id="3-architektur-aktualisierung">3. <strong>Architektur-Aktualisierung</strong></h3>
+<ul>
+<li>Dokumentation auf dem neuesten Stand halten</li>
+<li>Neue Best Practices einarbeiten</li>
+<li>Technologie-Stack modernisieren</li>
+</ul>
+<p><strong>Beispiel:</strong></p>
+<pre class="hljs"><code><div>Jahr 1: System läuft stabil
+Jahr 2: Neue EU-Regulierung → Architektur anpassen
+Jahr 3: Neue Cloud-Services verfügbar → Evaluation
+Jahr 4: Legacy-Komponente wird End-of-Life → Migration planen
+</div></code></pre>
+<hr>
+<h2 id="%F0%9F%94%84-der-iterative-charakter">🔄 <strong>Der iterative Charakter</strong></h2>
+<p><strong>WICHTIG</strong>: TOGAF ist <strong>kein Wasserfall</strong>!</p>
+<p>Du springst zwischen den Phasen hin und her:</p>
+<pre class="hljs"><code><div>A → B → C → D → E → &quot;Moment, in Phase B haben wir was vergessen&quot;
+                → zurück zu B → weiter mit E → F → G → H
+                                                    ↓
+                    &quot;Neues Projekt&quot; → zurück zu A
+</div></code></pre>
+<hr>
+<h2 id="%F0%9F%93%8B-zusammenfassung---die-8-phasen-auf-einen-blick">📋 <strong>Zusammenfassung - Die 8 Phasen auf einen Blick</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Name</th>
+<th>Kernfrage</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong></td>
+<td>Vision</td>
+<td>Was wollen wir?</td>
+<td>Vision Document</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td>Business</td>
+<td>Wie arbeiten wir?</td>
+<td>Process Models</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>Information Systems</td>
+<td>Welche Systeme &amp; Daten?</td>
+<td>Data &amp; App Architecture</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td>Technology</td>
+<td>Welche Technik?</td>
+<td>Tech Stack</td>
+</tr>
+<tr>
+<td><strong>E</strong></td>
+<td>Opportunities</td>
+<td>Welche Optionen?</td>
+<td>Roadmap, Gaps</td>
+</tr>
+<tr>
+<td><strong>F</strong></td>
+<td>Migration</td>
+<td>Wie kommen wir dorthin?</td>
+<td>Migration Plan</td>
+</tr>
+<tr>
+<td><strong>G</strong></td>
+<td>Governance</td>
+<td>Läuft alles?</td>
+<td>Monitoring, QA</td>
+</tr>
+<tr>
+<td><strong>H</strong></td>
+<td>Change</td>
+<td>Wie halten wir aktuell?</td>
+<td>Updates, Changes</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>

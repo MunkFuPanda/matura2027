@@ -1,0 +1,22 @@
+name: mongo
+
+services:
+  mongodb:
+    image: mongo:7.0
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - 27017:27017
+    ulimits:
+      nofile:
+        soft: 64000
+        hard: 64000
+    volumes:
+      - db:/data/db
+      - configdb:/data/configdb
+
+volumes:
+  db:
+  configdb:

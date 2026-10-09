@@ -1,0 +1,153 @@
+2.1)
+
+- Positive GuV
+- Wenig Gewinn
+- Personalkosten sind die höchsten Kosten
+
+2.2.1)
+
+Bilanz wird um 40.000 mehr
+Aktiva seite Firmenwagen
+Passiva Seite Bankkredit
+
+2.2.2)
+
+GuV wird um 80.000 weniger
+Konto Werbeaufwand
+
+3.1)
+
+Umsatz: 71.000.000
+Betriebsergebnis: 3.500.000
+Jahresergebnis vor Steuern: 1.500.000
+Cashflow: Ergebnis Vor Steuern - Gewinnsteuer + Abschreibung = 3.125.000
+Eigenkapital-Rentabilität: Jahresüberschuss / Eigenkapital * 100 = 1.78%
+Gesamtkapital-Rentabilität: (Ergebnis nach Steuern + Abschreibung) / (Eigenkapital + Fremdkapital) * 100 = 1.38%
+Liquidität 1. Grades: (Kassa + Bank) / Kurzfristige Verbindlichkeiten * 100 = 66.67%
+Liquidität 2. Grades: (Kassa + Bank + Offene Forderungen) / Kurzfristige Verbindlichkeiten * 100 = 400%
+Eigenkapital-Quote: (Eigenkapital + Rücklagen) / Fremdkapital * 100 = 27.84%
+
+3.2)
+
+Umsatz = Revenues
+Betriebsergebnis = Earnings before Interest and Taxes
+Jahresergebnis vor Steuern = Earnings before Taxes
+Eigenkapital-Rentabilität = Return on Equity
+Gesamtkapital-Rentabilität = Return on Investment
+
+3.3.1)
+Rentabilität: Sehr wenig, sagt aus wie viel % des investierten Kapitals jährlich erwirtschaftet wird.
+
+3.3.2)
+Liquidität: Ist gut weil > 30%, aber viel Geld in offenen Forderungen
+=> Kreditwürdigkeit ist auch gut
+
+3.3.3)
+Wettbewerbsfähigkeit: kann man nicht direkt sagen, da Konkurrenz unbekannt.
+
+3.3.4)
+
+(Bilanzgewinn Chinesen: 20.125.000)
+Eigenkapital-Rentabilität: 32.63% vs 1.78%
+ROI: 12.11% vs 0.66%
+Umsatz-Rentabilität: 38.73% vs 2.1%
+
+=> Die Chinesen stehen viel besser da
+
+4.1)
+
+Eigenkapital-Rentabilität: 21.04% vs -20.09%
+ROI: 5.86% vs -5.59%
+Umsatz-Rentabilität: 23.42% vs -22.6%
+
+=> das ist unser Untergang
+=> Chinesen sind immer noch positiv
+
+4.3)
+
+einzeln: lokale Anbieter kaufen & in lokale Unternehmen investieren
+unternehmen: lokal produzieren & klimaneutral werden
+politik: import Zölle & Qualitätsregulierungen
+
+5.1)
+
+Fixkosten fallen immer an, auch wenn nichts produziert wird
+Variable Kosten richten sich nach der Produktionsmenge
+
+5.2)
+
+Materialverbrauch,13.000.000,variabel
+Personal,40.000.000,Fixkosten
+Miete & Leasing,3.000.000,Fixkosten
+Werbeaufwand,1.000.000,Fixkosten
+Zinsaufwand,2.000.000,Fixkosten
+Betriebsaufwand,8.000.000,variabel
+
+6.1)
+
+Deckungsbeitrag:
+A=900
+B=1600
+C=-100
+
+6.2)
+
+32.000.000
+
+6.3)
+
+=> Produktionskosten senken
+=> Verkaufspreis erhöhen
+
+6.4)
+
+=> Die Personalkosten sind höher als von A & C, und die Produktion von C ist für A&B evtl relevant.
+
+6.5)
+
+=> Kapazitäten könnten ausgelastet sein => man müsste auf produktverkäufe vom vollen Preis verzichten
+=> höhere Personalkosten durch Mehranstellung um deadline zu meeten
+=> Bestehende Kunden könnten auch den selben Preis haben wollen
+
+7.1)
+
+=> alleinige Entscheidungsfreiheit
+=> einfachere Buchhaltung
+=> Privatkapitalhaftung
+=> weniger Kompetenzen
+
+7.2)
+
+Gewinn von Kapital
+Nachteile:
+Mind. 2 Personen
+Doppelte Buchhaltung
+alleinige Unternehmensvertretung
+Unternehmensrat
+
+7.3.1)
+
+30 => 18 = 40%
+
+7.3.2)
+
+20 => 18 = 10%
+
+7.3.3)
+
+Ja kann er, er kann ihn abwählen durch 51% Stimmen bei der Hauptversammlung
+
+7.3.4)
+
+Die Gewinne wurden reinvestiert => Aufbau von Rücklagen
+
+7.3.5)
+
++ Belohnung für Eigenleistung
++ Motivation für Zukunft
+- Keine Dividende
+- Schlechtere Bilanz
+
+7.3.6)
+
+Zusätzlich ist der Kurs auch noch gefallen.

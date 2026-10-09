@@ -1,0 +1,84 @@
+use("moviedb");
+
+// 1
+db.movies.insertOne({
+"movie_id": "1",
+"title": "Inception",
+"genre": "Sci-Fi",
+"release_year": 2010,
+"duration": 148,
+"ratings": 4.8,
+"actors": ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page"]
+});
+
+// 2
+db.users.insertMany([
+{
+"user_id": "1",
+"name": "John Doe",
+"email": "john.doe@example.com",
+"date_of_birth": ISODate("1985-04-23"),
+"loyalty_points": 120
+},
+{
+"user_id": "2",
+"name": "Jane Smith",
+"email": "jane.smith@example.com",
+"date_of_birth": ISODate("1990-07-12"),
+"loyalty_points": 50
+}
+]);
+
+// 3
+db.movies.find({ "genre": "Action" }).pretty();
+
+// 4
+db.theaters.find({ "location": "New York" }).pretty();
+
+// 5
+db.theaters.updateOne(
+{ "theater_id": "1" },
+{ $set: { "capacity": 250 } }
+);
+
+// 6
+db.movies.deleteOne({ "title": "Inception" });
+
+// 7
+db.bookings.find({ "user_id": "2" }).pretty();
+
+// 8
+db.movies.find(
+  { title: "Inception" },
+  { _id: 0, title: 1, genre: 1 }
+)
+
+// 9
+db.users.find(
+  { loyalty_points: { $gt: 100 } }
+)
+
+// 10
+db.bookings.insertOne({
+  booking_id: '6',
+  user_id: '1',
+  movie_id: '1',
+  theater_id: '1',
+  seats_booked: NumberInt('2'),
+  total_price: NumberInt('30'),
+  booking_date: ISODate('2026-09-10T00:00:00.000Z')
+});
+
+// 11
+db.users.find({
+  date_of_birth: {
+    $gt: ISODate("1990-01-01T00:00:00.000Z")
+  }
+})
+
+// 12
+db.movies.findAndModify({
+  query: { title: "Inception" },
+  update: { $set: { ratings: 4.9 } },
+  new: true
+});

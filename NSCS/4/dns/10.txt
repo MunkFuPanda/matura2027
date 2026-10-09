@@ -1,0 +1,2 @@
+orf: netadmin.orf.at => netadmin@orf.at
+google: dns-admin.google.com => dns-admin@google.com
