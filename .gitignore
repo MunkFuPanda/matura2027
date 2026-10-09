@@ -1,0 +1,19 @@
+# IDE / Editor
+.idea/
+.qtcreator/
+*.user
+.vs/
+
+# Build-Artefakte
+build/
+build-*/
+*.o
+*.class
+node_modules/
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
+~$*
