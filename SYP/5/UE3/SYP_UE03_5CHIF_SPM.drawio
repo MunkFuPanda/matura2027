@@ -1,0 +1,100 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="ucd-vetmed" name="UE03 Online-Tierarzt">
+    <mxGraphModel dx="1169" dy="827" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Systemgrenze -->
+        <mxCell id="sys" value="Online-Beratung VetMed" style="shape=rect;html=1;verticalAlign=top;align=left;spacingLeft=10;fontStyle=1;fontSize=14;fillColor=none;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="150" y="30" width="800" height="760" as="geometry"/>
+        </mxCell>
+
+        <!-- Akteure -->
+        <mxCell id="tb" value="Tierbesitzer" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="160" width="30" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="ta" value="Tierarzt" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="520" width="30" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="vdb" value="&amp;laquo;system&amp;raquo;&lt;br&gt;&lt;b&gt;VDB&lt;/b&gt;&lt;br&gt;(Veterin&amp;auml;r-&lt;br&gt;Datenbank)" style="shape=rect;html=1;fillColor=#f5f5f5;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="60" width="120" height="700" as="geometry"/>
+        </mxCell>
+
+        <!-- Use Cases links -->
+        <mxCell id="l1" value="Verf&amp;uuml;gbare Tier&amp;auml;rzte einsehen" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="175" y="72" width="200" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="l2" value="Videoverbindung (Skype) aufbauen" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="175" y="162" width="200" height="56" as="geometry"/>
+        </mxCell>
+
+        <!-- Haupt-Use-Case -->
+        <mxCell id="main" value="&lt;b&gt;Online-Beratung durchf&amp;uuml;hren&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="175" y="370" width="200" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Spalte M -->
+        <mxCell id="m1" value="Kunden identifizieren" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="450" y="80" width="200" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="m2" value="Tierakt abrufen" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="450" y="302" width="200" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="m3" value="Medikation vorschlagen" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="450" y="452" width="200" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="m4" value="Termin vereinbaren und eintragen" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="450" y="532" width="200" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="m5" value="Beratungsinfos im Tierakt vermerken" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="450" y="612" width="200" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="m6" value="Abrechnung erstellen und &amp;uuml;bermitteln" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="450" y="692" width="200" height="56" as="geometry"/>
+        </mxCell>
+
+        <!-- Spalte E -->
+        <mxCell id="e1" value="Bekannten Kunden identifizieren (visuell + Passwort)" style="ellipse;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="730" y="42" width="200" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="Neuen Kunden identifizieren (Lichtbildausweis)" style="ellipse;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="730" y="122" width="200" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="Neuen Kunden in VDB eintragen" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="730" y="202" width="200" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="Neuen Tierakt anlegen" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="730" y="372" width="200" height="56" as="geometry"/>
+        </mxCell>
+
+        <!-- Assoziationen Akteure -->
+        <mxCell id="a1" style="endArrow=none;html=1;" edge="1" parent="1" source="tb" target="l1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a2" style="endArrow=none;html=1;" edge="1" parent="1" source="tb" target="l2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a3" style="endArrow=none;html=1;" edge="1" parent="1" source="tb" target="main"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a4" style="endArrow=none;html=1;" edge="1" parent="1" source="ta" target="main"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Assoziationen VDB (waagrecht an den linken Rand der VDB-Box) -->
+        <mxCell id="v1" style="endArrow=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.243;" edge="1" parent="1" source="e3" target="vdb"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="v2" style="endArrow=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.386;" edge="1" parent="1" source="m2" target="vdb"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="v3" style="endArrow=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.486;" edge="1" parent="1" source="e4" target="vdb"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="v4" style="endArrow=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.714;" edge="1" parent="1" source="m4" target="vdb"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="v5" style="endArrow=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.829;" edge="1" parent="1" source="m5" target="vdb"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- include: Basis -> eingebundener UC -->
+        <mxCell id="i1" value="&amp;laquo;include&amp;raquo;" style="endArrow=open;dashed=1;html=1;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="main" target="m1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="i2" value="&amp;laquo;include&amp;raquo;" style="endArrow=open;dashed=1;html=1;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="main" target="m2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="i3" value="&amp;laquo;include&amp;raquo;" style="endArrow=open;dashed=1;html=1;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="main" target="m5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="i4" value="&amp;laquo;include&amp;raquo;" style="endArrow=open;dashed=1;html=1;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="main" target="m6"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="i5" value="&amp;laquo;include&amp;raquo;" style="endArrow=open;dashed=1;html=1;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="e2" target="e3"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- extend: erweiternder UC -> Basis -->
+        <mxCell id="x1" value="&amp;laquo;extend&amp;raquo;&lt;br&gt;[Hilfe per Video m&amp;ouml;glich]" style="endArrow=open;dashed=1;html=1;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="m3" target="main"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="x2" value="&amp;laquo;extend&amp;raquo;&lt;br&gt;[Hilfe nicht m&amp;ouml;glich]" style="endArrow=open;dashed=1;html=1;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="m4" target="main"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="x3" value="&amp;laquo;extend&amp;raquo;&lt;br&gt;[Tier noch nicht gespeichert]" style="endArrow=open;dashed=1;html=1;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="e4" target="m2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="x4" value="&amp;laquo;extend&amp;raquo;&lt;br&gt;[Kunde bekannt]" style="endArrow=open;dashed=1;html=1;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="e1" target="m1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="x5" value="&amp;laquo;extend&amp;raquo;&lt;br&gt;[Kunde neu]" style="endArrow=open;dashed=1;html=1;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="e2" target="m1"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
