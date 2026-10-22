@@ -1,0 +1,185 @@
+// UE4: Fiktive Testdaten, keine aktuellen Mondial-Werte.
+// Ausschließlich die neue Übungsdatenbank verwenden.
+db = db.getSiblingDB("mondial_ue4");
+// Erneutes Ausführen ersetzt nur diese drei Collections.
+db.countries.deleteMany({});
+db.countries.insertMany([
+  {
+    "code": "D",
+    "name": "Deutschland",
+    "population": 80000000,
+    "area": 400000,
+    "continents": [
+      {
+        "name": "Europe",
+        "percent": 100
+      }
+    ],
+    "organizations": [
+      "O1",
+      "O2"
+    ]
+  },
+  {
+    "code": "A",
+    "name": "Österreich",
+    "population": 9000000,
+    "area": 90000,
+    "continents": [
+      {
+        "name": "Europe",
+        "percent": 100
+      }
+    ],
+    "organizations": [
+      "O1",
+      "O2",
+      "O3"
+    ]
+  },
+  {
+    "code": "AND",
+    "name": "Andorra",
+    "population": 80000,
+    "area": 400,
+    "continents": [
+      {
+        "name": "Europe",
+        "percent": 100
+      }
+    ],
+    "organizations": [
+      "O2"
+    ]
+  },
+  {
+    "code": "TR",
+    "name": "Türkei",
+    "population": 80000000,
+    "area": 800000,
+    "continents": [
+      {
+        "name": "Europe",
+        "percent": 10
+      },
+      {
+        "name": "Asia",
+        "percent": 90
+      }
+    ],
+    "organizations": [
+      "O2",
+      "O3"
+    ]
+  },
+  {
+    "code": "J",
+    "name": "Japan",
+    "population": 120000000,
+    "area": 400000,
+    "continents": [
+      {
+        "name": "Asia",
+        "percent": 100
+      }
+    ],
+    "organizations": [
+      "O3"
+    ]
+  },
+  {
+    "code": "X",
+    "name": "Testland",
+    "population": null,
+    "area": 0,
+    "continents": [
+      {
+        "name": "Asia",
+        "percent": 100
+      }
+    ],
+    "organizations": []
+  }
+]);
+db.organizations.deleteMany({});
+db.organizations.insertMany([
+  {
+    "code": "O1",
+    "name": "Organisation Alpha"
+  },
+  {
+    "code": "O2",
+    "name": "Organisation Beta"
+  },
+  {
+    "code": "O3",
+    "name": "Organisation Gamma"
+  },
+  {
+    "code": "O4",
+    "name": "Organisation Delta"
+  }
+]);
+db.cities.deleteMany({});
+db.cities.insertMany([
+  {
+    "id": 1,
+    "country": "D",
+    "name": "Berlin",
+    "population": 4000000
+  },
+  {
+    "id": 2,
+    "country": "D",
+    "name": "Hamburg",
+    "population": 2000000
+  },
+  {
+    "id": 3,
+    "country": "A",
+    "name": "Wien",
+    "population": 2000000
+  },
+  {
+    "id": 4,
+    "country": "A",
+    "name": "Graz",
+    "population": 300000
+  },
+  {
+    "id": 5,
+    "country": "AND",
+    "name": "Andorra la Vella",
+    "population": 20000
+  },
+  {
+    "id": 6,
+    "country": "TR",
+    "name": "Istanbul",
+    "population": 15000000
+  },
+  {
+    "id": 7,
+    "country": "TR",
+    "name": "Ankara",
+    "population": 5000000
+  },
+  {
+    "id": 8,
+    "country": "J",
+    "name": "Tokyo",
+    "population": 14000000
+  },
+  {
+    "id": 9,
+    "country": "J",
+    "name": "Osaka",
+    "population": 3000000
+  },
+  {
+    "id": 10,
+    "country": "X",
+    "name": "Teststadt",
+    "population": null
+  }
+]);

@@ -1,0 +1,17 @@
+# Aufgabe 8b - depends_on
+services:
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: on-failure
+  redis:
+    image: redis:alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 10

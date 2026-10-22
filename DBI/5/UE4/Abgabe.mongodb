@@ -1,0 +1,142 @@
+use("mondial_ue4");
+
+const DE = { collation: { locale: "de" } };
+
+// 1
+db.countries.aggregate([
+  { $unwind: "$organizations" },
+  { $project: { _id: 0, land: "$name", organisation: "$organizations" } },
+  { $sort: { land: 1, organisation: 1 } }
+], DE);
+// land österreich organisation o1 9 zeilen
+
+// 2
+db.countries.aggregate([
+  { $unwind: { path: "$organizations", preserveNullAndEmptyArrays: true } },
+  { $group: {
+      _id: "$code",
+      land: { $first: "$name" },
+      anzahl: { $sum: { $cond: [{ $eq: [{ $type: "$organizations" }, "missing"] }, 0, 1] } }
+  } },
+  { $project: { _id: 0, land: 1, anzahl: 1 } },
+  { $sort: { anzahl: -1, land: 1 } }
+], DE);
+// land österreich anzahl 3 land testland anzahl 0
+// bei erhaltenem leerem array bleibt ein dokument ohne organizations übrig $sum 1 zählt es als 1
+
+// 3
+db.countries.aggregate([
+  { $unwind: "$organizations" },
+  { $lookup: { from: "organizations", localField: "organizations", foreignField: "code", as: "org" } },
+  { $project: { _id: 0, land: "$name", organisation: "$organizations", name: { $first: "$org.name" } } },
+  { $sort: { land: 1, organisation: 1 } }
+], DE);
+// land österreich organisation o1 name organisation alpha 9 zeilen
+// $lookup kann mehrere treffer liefern daher immer ein array
+
+// 4
+db.organizations.aggregate([
+  { $lookup: { from: "countries", localField: "code", foreignField: "organizations", as: "m" } },
+  { $addFields: {
+      pops: { $map: { input: { $filter: { input: "$m", cond: { $isNumber: "$$this.population" } } }, in: "$$this.population" } }
+  } },
+  { $project: {
+      _id: 0, name: 1,
+      mitglieder: { $size: "$m" },
+      bekannt: { $size: "$pops" },
+      summe: { $sum: "$pops" },
+      durchschnitt: { $cond: [{ $eq: [{ $size: "$pops" }, 0] }, null, { $avg: "$pops" }] }
+  } },
+  { $sort: { summe: -1, name: 1 } }
+], DE);
+// name organisation gamma mitglieder 3 bekannt 3 summe 209000000 durchschnitt 69666666 67
+// name organisation delta mitglieder 0 bekannt 0 summe 0 durchschnitt null
+
+// 5
+const dichte = [
+  { $match: { $expr: { $and: [
+      { $isNumber: "$population" }, { $gte: ["$population", 0] },
+      { $isNumber: "$area" }, { $gt: ["$area", 0] }
+  ] } } },
+  { $project: {
+      _id: 0, land: "$name", flaeche: "$area", bevoelkerung: "$population",
+      dichte: { $round: [{ $divide: ["$population", "$area"] }, 2] }
+  } },
+  { $sort: { dichte: -1, land: 1 } }
+];
+db.countries.aggregate(dichte, DE);
+// land japan flaeche 400000 bevoelkerung 120000000 dichte 300 5 zeilen
+
+// 6
+db.countries.aggregate([
+  { $unwind: "$continents" },
+  { $group: {
+      _id: "$continents.name",
+      laender: { $sum: 1 },
+      bekannt: { $sum: { $cond: [{ $isNumber: "$population" }, 1, 0] } },
+      summe: { $sum: { $cond: [{ $isNumber: "$population" }, "$population", 0] } },
+      durchschnitt: { $avg: "$population" }
+  } },
+  { $project: { _id: 0, kontinent: "$_id", laender: 1, bekannt: 1, summe: 1, durchschnitt: 1 } },
+  { $sort: { kontinent: 1 } }
+]);
+// kontinent asia laender 3 bekannt 2 summe 200000000 durchschnitt 100000000
+// kontinent europe laender 4 bekannt 4 summe 169080000 durchschnitt 42270000
+// die türkei wird auf beiden kontinenten voll gezählt die summen enthalten sie doppelt
+
+// 7
+db.countries.aggregate([
+  { $unwind: "$continents" },
+  { $group: { _id: "$continents.name", flaeche: { $sum: { $divide: [{ $multiply: ["$area", "$continents.percent"] }, 100] } } } },
+  { $project: { _id: 0, kontinent: "$_id", flaeche: 1 } },
+  { $sort: { kontinent: 1 } }
+]);
+// kontinent asia flaeche 1120000 kontinent europe flaeche 570400
+// der flächenanteil sagt nichts darüber wo die menschen leben zb städte in einem kleinen teil
+
+// 8
+db.cities.aggregate([
+  { $match: { population: { $type: "number" } } },
+  { $lookup: { from: "countries", localField: "country", foreignField: "code", as: "land" } },
+  { $unwind: "$land" },
+  { $unwind: "$land.continents" },
+  { $sort: { population: -1, name: 1, id: 1 } },
+  { $group: { _id: "$land.continents.name", top3: { $push: { stadt: "$name", land: "$land.name", bevoelkerung: "$population" } } } },
+  { $project: { _id: 0, kontinent: "$_id", top3: { $slice: ["$top3", 3] } } },
+  { $sort: { kontinent: 1 } }
+], DE);
+// kontinent asia top3 istanbul tokyo ankara
+// kontinent europe top3 istanbul ankara berlin
+
+// 9
+db.countries.aggregate([
+  { $facet: {
+      topDichte: [...dichte, { $limit: 3 }],
+      ohneMitgliedschaft: [
+        { $match: { organizations: { $size: 0 } } },
+        { $project: { _id: 0, land: "$name" } },
+        { $sort: { land: 1 } }
+      ]
+  } }
+], DE);
+// topdichte japan andorra deutschland ohnemitgliedschaft land testland
+
+// 10 fehlerhaft
+db.countries.aggregate([
+  { $unwind: "$continents" },
+  { $unwind: "$organizations" },
+  { $group: { _id: "$name", zeilen: { $sum: 1 } } },
+  { $sort: { _id: 1 } }
+], DE);
+// _id türkei zeilen 4
+// zwei $unwind ergeben das produkt der arrays türkei 2 x 2 = 4 zeilen testland hat kein element in organizations und entfällt
+
+// 10 korrigiert
+db.countries.aggregate([
+  { $unwind: "$continents" },
+  { $unwind: "$organizations" },
+  { $group: { _id: "$continents.name", orgs: { $addToSet: "$organizations" } } },
+  { $project: { _id: 0, kontinent: "$_id", organisationen: { $size: "$orgs" } } },
+  { $sort: { kontinent: 1 } }
+]);
+// kontinent asia organisationen 2 kontinent europe organisationen 3

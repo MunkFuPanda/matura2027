@@ -1,0 +1,8 @@
+Spring-Backend auf minikube deployen
+1) Minikube starten: minikube start
+2) Dashboard starten: minikube dashboard
+3) springapp.yaml aus Kursmaterialien holen und Image anpassen
+4) Deployen: kubectl apply -f springapp.yaml
+5) Pod in Dashboard suchen und Port forwarden: kubectl port forward springapp-9fb4f4cb4-m9vgb 8081:8081
+6) Zum Testen öffnen: http://localhost:8081/swagger-ui/index.html
+7) Minikube stoppen: „minikube stop”

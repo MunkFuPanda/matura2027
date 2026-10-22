@@ -1,0 +1,42 @@
+
+
+# Spring Application Server
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springapp
+
+spec:
+  replicas: 1 #2 erzeugt 2 Instanzen zur Skalierung
+  selector:
+    matchLabels:
+      component: springapp
+  template:
+    metadata:
+      labels:
+        component: springapp
+    spec:
+      containers:
+        - name: springapp
+          image: gitlab.htlwrn.ac.at:5050/sis/nvs-4jg-template:latest
+          # remove this when stable. Currently we do not take care of version numbers
+          imagePullPolicy: Always #Image immer neu ziehen
+          ports:
+            - containerPort: 8081
+#          command: ["tail", "-f", "/dev/null"]
+#3 Striche sind so wie ein neues File
+#kleine Files sind praktisch, wenn man nur wenige configs updaten möchte
+#will man alles auf einmal updaten, kann man mit --- zusammenfassen
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springapp
+
+spec:
+  ports:
+    - port: 8081
+      targetPort: 8081
+      protocol: TCP
+  selector:
+    component: springapp

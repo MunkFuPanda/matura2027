@@ -1,0 +1,25 @@
+# Aufgabe 8c - Volumes
+services:
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: on-failure
+  redis:
+    image: redis:alpine
+    # AOF an, damit der Zaehler auch nach "down" sicher erhalten bleibt
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 10
+    volumes:
+      - redis-data:/data          # Named Volume (Docker verwaltet den Ort)
+      # - ./redis-data:/data      # Alternative: Bind Mount an festem Ort (besser fuer Backups)
+
+volumes:
+  redis-data:

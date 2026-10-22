@@ -1,0 +1,10 @@
+# Aufgabe 8a - Internes Netzwerk
+# Beide Services landen automatisch im selben Default-Netzwerk,
+# der Service-Name "redis" ist dort der DNS-Name.
+services:
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+  redis:
+    image: redis:alpine
