@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<firma name="FH Hacmanufaktur" ort="Wien">
+    <abteilung leiter="Maier" bezeichnung="IT">
+        <mitarbeiter id="1" jahrgang="2004">
+            <name>Anna Berger</name>
+            <rolle>Lehrling</rolle>
+        </mitarbeiter>
+        <mitarbeiter id="2" jahrgang="1998">
+            <name>Peter Kainz</name>
+            <rolle>Developer</rolle>
+        </mitarbeiter>
+    </abteilung>
+    <abteilung leiter="Huber" bezeichnung="Buchhaltung">
+        <mitarbeiter id="3" jahrgang="1990">
+            <name>Lena Fuchs</name>
+            <rolle>Buchhalterin</rolle>
+        </mitarbeiter>
+    </abteilung>
+</firma>

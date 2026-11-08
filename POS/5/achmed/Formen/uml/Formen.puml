@@ -1,0 +1,122 @@
+@startuml Formen
+!pragma layout smetana
+skinparam classAttributeIconSize 0
+skinparam classFontSize 12
+title Formen - Klassenhierarchie (Factory + Plugins)
+
+package "Formen_Factory (Bibliothek)" {
+    abstract class Form {
+        # name : QString
+        # help : QString
+        # x : int
+        # y : int
+        + {abstract} draw(painter : QPainter&) : void
+        + {abstract} parseForm(data : QString) : Form*
+        + getName() : QString
+        + getHelp() : QString
+        + {abstract} ~Form()
+    }
+    class Factory {
+        - forms : QMap<QString, Form*>
+        - formNameList : QStringList
+        + registerForm(form : Form*) : void
+        + createForm(form : QString, data : QString) : Form*
+        + getFormList() : QStringList&
+        + getHelpText(form : QString) : QString&
+    }
+    Factory o--> "0..*" Form : Prototypen
+    Factory ..> Form : createForm() ueber\nparseForm() (Factory-Pattern)
+}
+
+package "Formen_Plugin (Beispiel, aus Angabe)" {
+    class Circle {
+        # radius : int
+        + draw() / parseForm()
+    }
+    class Square {
+        # width : int
+        + draw() / parseForm()
+    }
+}
+
+package "Formen_Plugin_Eigen" {
+    abstract class Vieleck {
+        + {abstract} points() : QPolygonF
+        + draw() (Polygon zeichnen)
+    }
+    abstract class RundForm {
+        # rx : double
+        # ry : double
+        + draw() (Ellipse-Rechteck)
+    }
+    class Rechteck {
+        # w : double
+        # h : double
+    }
+    class Quadrat {
+        + (seite = w = h)
+    }
+    class Parallelogramm {
+        # w : double
+        # h : double
+        # verschiebung : double
+    }
+    class Raute {
+        # d1 : double
+        # d2 : double
+    }
+    class Trapez {
+        # oben : double
+        # unten : double
+        # h : double
+    }
+    class Dreieck {
+        # basis : double
+        # h : double
+    }
+    class RegulieresPolygon {
+        # ecken : int
+        # radius : double
+    }
+    class Sechseck {
+        + (ecken = 6)
+    }
+    class Stern {
+        # spitzen : int
+        # radiusInnen : double
+    }
+    class Ellipse
+    class Kreis {
+        + (r = rx = ry)
+    }
+
+    Vieleck <|-- Rechteck
+    Vieleck <|-- Parallelogramm
+    Vieleck <|-- Trapez
+    Vieleck <|-- Dreieck
+    Vieleck <|-- RegulieresPolygon
+    Rechteck <|-- Quadrat
+    Parallelogramm <|-- Raute
+    RegulieresPolygon <|-- Sechseck
+    RegulieresPolygon <|-- Stern
+    RundForm <|-- Ellipse
+    Ellipse <|-- Kreis
+}
+
+Form <|-- Vieleck
+Form <|-- RundForm
+Form <|-- Circle
+Form <|-- Square
+
+note right of Vieleck
+  Alle Polygonformen teilen sich
+  das Zeichnen ueber drawPolygon(points())
+end note
+
+note bottom of Factory
+  Die App (Projekt "Formen") kennt nur Form
+  und Factory. Plugins melden sich beim Start
+  ueber die exportierte Funktion
+  registerForm(Factory*) an.
+end note
+@enduml
